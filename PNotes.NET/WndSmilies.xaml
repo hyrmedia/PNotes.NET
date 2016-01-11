@@ -1,0 +1,21 @@
+﻿<Window x:Class="PNotes.NET.WndSmilies"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Name="DlgSmilies"
+        Title="WndSmilies" 
+        Height="300" 
+        Width="300"
+        Style="{DynamicResource CustomWindowStyle}"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}"
+        SizeToContent="WidthAndHeight"
+        Loaded="DlgSmilies_Loaded"
+        PreviewKeyDown="DlgSmilies_PreviewKeyDown">
+    <UniformGrid Grid.Row="0" Name="grdSmilies" Margin="4" Rows="11" Columns="11"/>
+</Window>

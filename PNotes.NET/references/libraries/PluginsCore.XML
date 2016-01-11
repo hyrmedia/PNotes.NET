@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PluginsCore</name>
+    </assembly>
+    <members>
+        <member name="T:PluginsCore.SyncResult">
+            <summary>
+            Represents syncronization result
+            </summary>
+        </member>
+        <member name="F:PluginsCore.SyncResult.None">
+            <summary>
+            Default value, no further interaction needed
+            </summary>
+        </member>
+        <member name="F:PluginsCore.SyncResult.Reload">
+            <summary>
+            Host application should reload notes
+            </summary>
+        </member>
+        <member name="F:PluginsCore.SyncResult.AbortVersion">
+            <summary>
+            Different versions of databases on host and remote machines, syncronization aborted
+            </summary>
+        </member>
+        <member name="F:PluginsCore.SyncResult.Error">
+            <summary>
+            An error occured during synchronization
+            </summary>
+        </member>
+        <member name="T:PluginsCore.IPluginsHost">
+            <summary>
+            Provides functionality for plugins interaction with host application
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPluginsHost.ActiveTextBox">
+            <summary>
+            Active RichTextBox of host application
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPluginsHost.ActiveCulture">
+            <summary>
+            Active culture of host application
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPluginsHost.ActiveNoteName">
+            <summary>
+            Active note name of hoast application
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPluginsHost.LimitToGet">
+            <summary>
+            Max limit of posts to get from social network
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPluginsHost.SyncParameters">
+            <summary>
+            Set of data needed for synchronization
+            </summary>
+        </member>
+        <member name="T:PluginsCore.IPlugin">
+            <summary>
+            Provides basic plugin functionality
+            </summary>
+        </member>
+        <member name="M:PluginsCore.IPlugin.Init(PluginsCore.IPluginsHost)">
+            <summary>
+            Initialize plugin
+            </summary>
+            <param name="host">Host application</param>
+        </member>
+        <member name="P:PluginsCore.IPlugin.Name">
+            <summary>
+            Plugin's name - must be unique
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPlugin.Author">
+            <summary>
+            Author of plugin
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPlugin.Version">
+            <summary>
+            Version of plugin
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPlugin.ProductName">
+            <summary>
+            Product name of plugin
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPlugin.AdditionalInfo">
+            <summary>
+            Provides any additional information about plugin
+            </summary>
+        </member>
+        <member name="T:PluginsCore.IPluginsFactory">
+            <summary>
+            Provides functionality for handling IPlugin classes
+            </summary>
+        </member>
+        <member name="M:PluginsCore.IPluginsFactory.GetPlugins">
+            <summary>
+            Gets list of available plugins
+            </summary>
+            <returns>List of available plugins</returns>
+        </member>
+        <member name="T:PluginsCore.ISyncPlugin">
+            <summary>
+            Provides functionality for synchronization
+            </summary>
+        </member>
+        <member name="M:PluginsCore.ISyncPlugin.Synchronize">
+            <summary>
+            Performs silent synchronization
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:PluginsCore.ISyncPlugin.MenuSync">
+            <summary>
+            Menu item for synchronization
+            </summary>
+        </member>
+        <member name="E:PluginsCore.ISyncPlugin.SyncComplete">
+            <summary>
+            Fires when syncronization completes
+            </summary>
+        </member>
+        <member name="E:PluginsCore.ISyncPlugin.BeforeSync">
+            <summary>
+            Fires before synchronization, allowing to complete remained jobs or cancel synchronization
+            </summary>
+        </member>
+        <member name="T:PluginsCore.IPostPlugin">
+            <summary>
+            Provides functionality for posting messages
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPostPlugin.MenuPostPartial">
+            <summary>
+            Menu item for posting selected text
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPostPlugin.MenuPostFull">
+            <summary>
+            Menu item for posting entire text
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPostPlugin.MenuGetPartial">
+            <summary>
+            Menu item for geting posts and further replacing selected text
+            </summary>
+        </member>
+        <member name="P:PluginsCore.IPostPlugin.MenuGetFull">
+            <summary>
+            Menu item for geting posts and further replacing entire text
+            </summary>
+        </member>
+        <member name="E:PluginsCore.IPostPlugin.GotPostsPartial">
+            <summary>
+            Fires while receiving posts for further replacing selected text
+            </summary>
+        </member>
+        <member name="E:PluginsCore.IPostPlugin.GotPostsFull">
+            <summary>
+            Fires while receiving posts for further replacing entire text
+            </summary>
+        </member>
+        <member name="E:PluginsCore.IPostPlugin.PostPerformed">
+            <summary>
+            Fires after posting on social network
+            </summary>
+        </member>
+        <member name="T:PluginsCore.PostDetails">
+            <summary>
+            Represents object which stores details of social network post
+            </summary>
+        </member>
+        <member name="M:PluginsCore.PostDetails.#ctor(System.DateTime,System.String)">
+            <summary>
+            Creates new instance of PostDetails
+            </summary>
+            <param name="date">Post date</param>
+            <param name="text">Post text</param>
+        </member>
+        <member name="P:PluginsCore.PostDetails.PostDate">
+            <summary>
+            Gets the post date
+            </summary>
+        </member>
+        <member name="P:PluginsCore.PostDetails.PostText">
+            <summary>
+            Gets the post text
+            </summary>
+        </member>
+        <member name="T:PluginsCore.GotPostsEventArgs">
+            <summary>
+            Represents object which stores information about received posts
+            </summary>
+        </member>
+        <member name="M:PluginsCore.GotPostsEventArgs.#ctor(System.Collections.Generic.List{PluginsCore.PostDetails})">
+            <summary>
+            Creates new instance of GotPostsEventArgs
+            </summary>
+            <param name="details">List of received posts</param>
+        </member>
+        <member name="P:PluginsCore.GotPostsEventArgs.Details">
+            <summary>
+            List of received posts
+            </summary>
+        </member>
+        <member name="T:PluginsCore.PostPerformedEventArgs">
+            <summary>
+            Represents object which stores information about post attempt
+            </summary>
+        </member>
+        <member name="M:PluginsCore.PostPerformedEventArgs.#ctor(System.Boolean)">
+            <summary>
+            Creates new instance of PostPerformedEventArgs
+            </summary>
+            <param name="result">Result of post attempt</param>
+        </member>
+        <member name="P:PluginsCore.PostPerformedEventArgs.Result">
+            <summary>
+            Result of post attempt
+            </summary>
+        </member>
+        <member name="T:PluginsCore.SyncCompleteEventArgs">
+            <summary>
+            Represents object which stores information about synchronization result
+            </summary>
+        </member>
+        <member name="M:PluginsCore.SyncCompleteEventArgs.#ctor(PluginsCore.SyncResult)">
+            <summary>
+            Creates new instance of SyncCompleteEventArgs
+            </summary>
+            <param name="result">Result of synchronization</param>
+        </member>
+        <member name="P:PluginsCore.SyncCompleteEventArgs.Result">
+            <summary>
+            Result of synchronization
+            </summary>
+        </member>
+        <member name="T:PluginsCore.BeforeSyncEventArgs">
+            <summary>
+            Represents object which can receive host feedback before synchronization occurs and cancel it if needed
+            </summary>
+        </member>
+        <member name="P:PluginsCore.BeforeSyncEventArgs.Cancel">
+            <summary>
+            Specifies whether synchronization should be cancelled
+            </summary>
+        </member>
+    </members>
+</doc>

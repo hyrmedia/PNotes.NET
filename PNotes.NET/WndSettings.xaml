@@ -1,0 +1,1181 @@
+﻿<Window x:Class="PNotes.NET.WndSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:net="clr-namespace:PNotes.NET"
+        xmlns:pnNumericUpDown="clr-namespace:PNNumericUpDown;assembly=PNNumericUpDown"
+        xmlns:pnColorPicker="clr-namespace:PNColorPicker;assembly=PNColorPicker"
+        xmlns:pnDateTimePicker="clr-namespace:PNDateTimePicker;assembly=PNDateTimePicker"
+        Title="WndSettings" 
+        Name="DlgSettings"
+        Height="650" 
+        Width="780"
+        Style="{DynamicResource CustomWindowStyle}"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="Width"
+        Icon="{DynamicResource note_pinned}"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}"
+        Loaded="DlgSettings_Loaded"
+        Closed="DlgSettings_Closed"
+        PreviewKeyDown="DlgSettings_PreviewKeyDown"
+        Activated="DlgSettings_Activated">
+    <Window.Resources>
+        <x:Array Type="sys:Int32" x:Key="PostCount">
+            <sys:Int32>5</sys:Int32>
+            <sys:Int32>10</sys:Int32>
+            <sys:Int32>20</sys:Int32>
+            <sys:Int32>30</sys:Int32>
+            <sys:Int32>40</sys:Int32>
+            <sys:Int32>50</sys:Int32>
+            <sys:Int32>100</sys:Int32>
+            <sys:Int32>150</sys:Int32>
+            <sys:Int32>200</sys:Int32>
+            <sys:Int32>250</sys:Int32>
+        </x:Array>
+        <x:Array Type="sys:Int32" x:Key="Indents">
+            <sys:Int32>100</sys:Int32>
+            <sys:Int32>200</sys:Int32>
+            <sys:Int32>300</sys:Int32>
+            <sys:Int32>400</sys:Int32>
+            <sys:Int32>500</sys:Int32>
+        </x:Array>
+        <x:Array Type="sys:Int32" x:Key="Margins">
+            <sys:Int32>0</sys:Int32>
+            <sys:Int32>1</sys:Int32>
+            <sys:Int32>2</sys:Int32>
+            <sys:Int32>3</sys:Int32>
+            <sys:Int32>4</sys:Int32>
+            <sys:Int32>5</sys:Int32>
+            <sys:Int32>6</sys:Int32>
+            <sys:Int32>7</sys:Int32>
+            <sys:Int32>8</sys:Int32>
+            <sys:Int32>9</sys:Int32>
+            <sys:Int32>10</sys:Int32>
+        </x:Array>
+        <x:Array Type="sys:Int32" x:Key="Pars">
+            <sys:Int32>100</sys:Int32>
+            <sys:Int32>200</sys:Int32>
+            <sys:Int32>300</sys:Int32>
+            <sys:Int32>400</sys:Int32>
+            <sys:Int32>500</sys:Int32>
+        </x:Array>
+        <x:Array Type="sys:Int32" x:Key="Days">
+            <sys:Int32>1</sys:Int32>
+            <sys:Int32>2</sys:Int32>
+            <sys:Int32>3</sys:Int32>
+            <sys:Int32>4</sys:Int32>
+            <sys:Int32>5</sys:Int32>
+            <sys:Int32>6</sys:Int32>
+            <sys:Int32>7</sys:Int32>
+            <sys:Int32>8</sys:Int32>
+            <sys:Int32>9</sys:Int32>
+            <sys:Int32>10</sys:Int32>
+            <sys:Int32>11</sys:Int32>
+            <sys:Int32>12</sys:Int32>
+            <sys:Int32>13</sys:Int32>
+            <sys:Int32>14</sys:Int32>
+            <sys:Int32>15</sys:Int32>
+            <sys:Int32>16</sys:Int32>
+            <sys:Int32>17</sys:Int32>
+            <sys:Int32>18</sys:Int32>
+            <sys:Int32>19</sys:Int32>
+            <sys:Int32>20</sys:Int32>
+            <sys:Int32>21</sys:Int32>
+            <sys:Int32>22</sys:Int32>
+            <sys:Int32>23</sys:Int32>
+            <sys:Int32>24</sys:Int32>
+            <sys:Int32>25</sys:Int32>
+            <sys:Int32>26</sys:Int32>
+            <sys:Int32>27</sys:Int32>
+            <sys:Int32>28</sys:Int32>
+            <sys:Int32>29</sys:Int32>
+            <sys:Int32>30</sys:Int32>
+            <sys:Int32>31</sys:Int32>
+        </x:Array>
+        <x:Array Type="sys:String" x:Key="Formats">
+            <sys:String>MMMM dd, yyyy</sys:String>
+            <sys:String>MMMM dd yyyy</sys:String>
+            <sys:String>MMMM dd yy</sys:String>
+            <sys:String>MMM dd yyyy</sys:String>
+            <sys:String>MMM dd yy</sys:String>
+            <sys:String>MM dd yyyy</sys:String>
+            <sys:String>MM dd yy</sys:String>
+            <sys:String>MMM-dd-yyyy</sys:String>
+            <sys:String>MMM-dd-yy</sys:String>
+            <sys:String>MM-dd-yyyy</sys:String>
+            <sys:String>MM-dd-yy</sys:String>
+            <sys:String>MM/dd/yy</sys:String>
+            <sys:String>MM/dd/yyyy</sys:String>
+            <sys:String>MM.dd.yyyy</sys:String>
+            <sys:String>MM.dd.yy</sys:String>
+            <sys:String>yyyy-MM-dd</sys:String>
+            <sys:String>yy-MM-dd</sys:String>
+            <sys:String>yyyy.MM.dd</sys:String>
+            <sys:String>yy.MM.dd</sys:String>
+            <sys:String>yyyy/MM/dd</sys:String>
+            <sys:String>yy/MM/dd</sys:String>
+            <sys:String>dd/MM/yyyy</sys:String>
+            <sys:String>dd/MM/yy</sys:String>
+            <sys:String>dd.MM.yyyy</sys:String>
+            <sys:String>dd.MM.yy</sys:String>
+            <sys:String>dd-MM-yyyy</sys:String>
+            <sys:String>dd-MM-yy</sys:String>
+            <sys:String>dd MMMM yyyy</sys:String>
+            <sys:String>dd MMM yyyy</sys:String>
+            <sys:String>dd MMMM yy</sys:String>
+            <sys:String>dd MMM yy</sys:String>
+        </x:Array>
+        <x:Array Type="sys:Int32" x:Key="Sizes">
+            <sys:Int32>8</sys:Int32>
+            <sys:Int32>9</sys:Int32>
+            <sys:Int32>10</sys:Int32>
+            <sys:Int32>11</sys:Int32>
+            <sys:Int32>12</sys:Int32>
+            <sys:Int32>14</sys:Int32>
+            <sys:Int32>16</sys:Int32>
+            <sys:Int32>18</sys:Int32>
+            <sys:Int32>20</sys:Int32>
+            <sys:Int32>22</sys:Int32>
+            <sys:Int32>24</sys:Int32>
+            <sys:Int32>26</sys:Int32>
+            <sys:Int32>28</sys:Int32>
+            <sys:Int32>36</sys:Int32>
+            <sys:Int32>48</sys:Int32>
+            <sys:Int32>72</sys:Int32>
+        </x:Array>
+        <x:Array Type="sys:Double" x:Key="PanelDelays">
+            <sys:Double>0.0</sys:Double>
+            <sys:Double>0.5</sys:Double>
+            <sys:Double>1.0</sys:Double>
+            <sys:Double>1.5</sys:Double>
+            <sys:Double>2.0</sys:Double>
+        </x:Array>
+
+        <net:CheckedToEnableOppsiteConverter x:Key="CheckToEnableOppositeConverter"/>
+
+        <Storyboard x:Key="FadeInOut" x:Shared="False">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.3"/>
+            <!--<DoubleAnimation Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.3"/>-->
+            <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.3" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Hidden</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.3" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation BeginTime="0:0:0.3" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.3"/>
+            <!--<DoubleAnimation Storyboard.TargetProperty="Width" From="0" Duration="0:0:0.3"/>-->
+        </Storyboard>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{DynamicResource ToolbarBackgrounsBrush}">
+            <StackPanel Name="navBar" Orientation="Horizontal">
+                <RadioButton Style="{StaticResource OptionButton}" Name="cmdGeneralSettings" Margin="1" Padding="2" MinHeight="78" Checked="OptionButton_Checked">
+                    <StackPanel>
+                        <Image Source="{DynamicResource set_gen}" Margin="2"/>
+                        <TextBlock Name="cmdGeneral" Text="General settings" Margin="2" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource OptionButton}" Name="cmdScheduleSettings" Margin="1" Padding="2" MinHeight="78" Checked="OptionButton_Checked">
+                    <StackPanel>
+                        <Image Source="{DynamicResource set_sch}" Margin="2"/>
+                        <TextBlock Name="cmdSchedule" Text="Schedule" Margin="2" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource OptionButton}" Name="cmdAppearanceSettings" Margin="1" Padding="2" MinHeight="78" Checked="OptionButton_Checked">
+                    <StackPanel>
+                        <Image Source="{DynamicResource set_app}" Margin="2"/>
+                        <TextBlock Name="cmdAppearance" Text="Appearance" Margin="2" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource OptionButton}" Name="cmdBehaviorSettings" Margin="1" Padding="2" MinHeight="78" Checked="OptionButton_Checked">
+                    <StackPanel>
+                        <Image Source="{DynamicResource set_beh}" Margin="2"/>
+                        <TextBlock Name="cmdBehavior" Text="Behavior" Margin="2" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource OptionButton}" Name="cmdNetworkSettings" Margin="1" Padding="2" MinHeight="78" Checked="OptionButton_Checked">
+                    <StackPanel>
+                        <Image Source="{DynamicResource set_net}" Margin="2"/>
+                        <TextBlock Name="cmdNetwork" Text="Network" Margin="2" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource OptionButton}" Name="cmdProtectionSettings" Margin="1" Padding="2" IsChecked="True" MinHeight="78" Checked="OptionButton_Checked">
+                    <StackPanel>
+                        <Image Source="{DynamicResource set_pro}" Margin="2"/>
+                        <TextBlock Name="cmdProtection" Text="Protection" Margin="2" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+        </Border>
+        <ScrollViewer Grid.Row="1" Name="pnlGeneral" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Visibility="Hidden">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Name="pnsLanguage" Header="Language" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Name="cboLanguage" Margin="4" SelectionChanged="cboLanguage_SelectionChanged"/>
+                            <net:SmallButton x:Name="cmdAddLang" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4" Click="cmdAddLang_Click"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Name="cmdFontUI" Header="Font of windows and menus" Grid.Column="1" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="cmdSetFontUI" Grid.Column="0" Content="Change" Margin="4" Height="{Binding Path=ActualHeight, ElementName=cboLanguage}" Click="cmdSetFontUI_Click"/>
+                            <Button Name="cmdRestoreFontUI" Grid.Column="1" Content="Restore" Margin="4" Height="{Binding Path=ActualHeight, ElementName=cboLanguage}" Click="cmdRestoreFontUI_Click"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <GroupBox Name="pnsStartup" Header="Startup options" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkRunOnStart" Content="Run on system start" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkNoSplash" Content="Do not show splash screen on program start" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkShowCPOnStart" Content="Show Control Panel on program start" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkShowPriority" Content="Always show notes marked as 'High Priority' on program start" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="grpUpdate" Header="Update options" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkCheckNewVersionOnStart" Content="Check for new version on program start" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <Button Name="cmdNewVersion" Content="Check now" MinHeight="23" MinWidth="75" Padding="8,0,8,0" Margin="24,4,4,4" HorizontalAlignment="Left" Click="cmdNewVersion_Click"/>
+                        <CheckBox Name="chkCheckCriticalOnStart" Content="Check for critical updates on program start" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkCheckCriticalPeriodically" Content="Check for critical updates during program's work" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsAppearance" Header="Appearance" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkHideToolbar" Content="Hide note's toolbar" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkCustomFont" Content="Use custom fonts" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkHideDelete" Content="Hide 'Delete' button ( * )" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkChangeHideToDelete" Content="Change appearance of 'Hide' button to 'Delete' button ( * )" Margin="24,4,4,4" IsEnabled="{Binding Path=IsChecked, ElementName=chkHideDelete}" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkHideHide" Content="Hide 'Hide' button ( * )" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="chkShowScrollbar" Grid.Column="0" Text="Show scrollbars ( * )" Margin="4" VerticalAlignment="Center" IsEnabled="{Binding Path=IsChecked, ElementName=chkAutoHeight, Converter={StaticResource CheckToEnableOppositeConverter}}"/>
+                            <ComboBox Name="cboScrollBars" Grid.Column="1" Margin="4" HorizontalAlignment="Right" MinWidth="300" IsEnabled="{Binding Path=IsChecked, ElementName=chkAutoHeight, Converter={StaticResource CheckToEnableOppositeConverter}}" SelectionChanged="cboScrollBars_SelectionChanged"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsSkinlessGeneral" Header="Skinless notes" Margin="4">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <pnNumericUpDown:NumericUpDown Name="txtWidthSknlsDef" MinValue="100" MaxValue="999" MinWidth="72" Margin="4" ValueChanged="txtWidthSknlsDef_ValueChanged"/>
+                            <TextBlock Name="lblWidthSknlsDef" Text="Width" Grid.Row="0" Grid.Column="1" Margin="4" VerticalAlignment="Center"/>
+                            <pnNumericUpDown:NumericUpDown Name="txtHeightSknlsDef" Grid.Row="1" Grid.Column="0" MinValue="72" MaxValue="999" MinWidth="72" Margin="4" ValueChanged="txtHeightSknlsDef_ValueChanged"/>
+                            <TextBlock Name="lblHeightSknlsDef" Text="Height" Grid.Row="1" Grid.Column="1" Margin="4" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="lblButtonsSize" Text="Toolbar buttons size" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                            <ComboBox Name="cboButtonsSize" Grid.Column="1" MinWidth="150" HorizontalAlignment="Right" Margin="4" SelectionChanged="cboButtonsSize_SelectionChanged"/>
+                        </Grid>
+                        <CheckBox Name="chkAutoHeight" Content="Automatically adjust note's height depending on it's content" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsEditArea" Header="Edit area" Margin="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Name="lblIndent" Text="Bullets indent (in twips) ( ** )" Grid.Row="0" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <ComboBox Name="cboIndent" Grid.Row="0" Grid.Column="1" Margin="4" HorizontalAlignment="Right" MinWidth="80" ItemsSource="{StaticResource Indents}" SelectionChanged="cboIndent_SelectionChanged"/>
+                        <TextBlock Name="lblMargins" Text="Left and right margin width - for skinless notes" Grid.Row="1" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <ComboBox Name="cboMargins" Grid.Row="1" Grid.Column="1" Margin="4" HorizontalAlignment="Right" MinWidth="80" ItemsSource="{StaticResource Margins}" SelectionChanged="cboMargins_SelectionChanged"/>
+                        <TextBlock Name="lblParIndent" Text="Step of paragraph indent's increasing/decreasing (in twips)" Grid.Row="2" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <ComboBox Name="cboParIndent" Grid.Row="2" Grid.Column="1" Margin="4" HorizontalAlignment="Right" MinWidth="80" ItemsSource="{StaticResource Pars}" SelectionChanged="cboParIndent_SelectionChanged"/>
+                        <TextBlock Name="lblSpellColor" Text="Underlining color of spell checker" Grid.Row="3" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <pnColorPicker:ColorPicker Name="pckSpell" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="4" MinWidth="80" SelectedColor="Red" SelectedColorChanged="pckSpell_SelectedColorChanged"/>
+                        <CheckBox Name="chkAutomaticSmilies" Content="Automatically insert smilies while typing ':)' or ':('" Grid.Row="4" Grid.Column="0" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <TextBlock Name="lblParagraphSpace" Text="Points to be applied when user choses to add space before/after paragraph" Grid.Row="5" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <pnNumericUpDown:NumericUpDown Name="updSpace" MaxValue="1584" Grid.Row="5" Grid.Column="1" Margin="4" HorizontalAlignment="Right" MinWidth="80" ValueChanged="updSpace_ValueChanged"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Name="pnsSaveDelete" Header="Saving/Deletion" Margin="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <CheckBox Name="chkSaveOnExit" Content="Save all on program exit" Grid.Row="0" Grid.Column="0" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkConfirmSave" Content="Confirm saving" Grid.Row="1" Grid.Column="0" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkConfirmDelete" Content="Confirmation before note deletion" Grid.Row="2" Grid.Column="0" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkSaveWithoutConfirm" Content="Save notes without confirmation while hiding" Grid.Row="3" Grid.Column="0" Margin="4" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkAutosave" Content="Autosave every (minutes):" Grid.Row="4" Grid.Column="0" Margin="4" VerticalAlignment="Center" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <pnNumericUpDown:NumericUpDown Name="updAutosave" MinValue="1" MaxValue="99" Grid.Row="4" Grid.Column="1" Margin="4" HorizontalAlignment="Right" MinWidth="80" IsEnabled="{Binding Path=IsChecked, ElementName=chkAutosave}" ValueChanged="updAutosave_ValueChanged"/>
+                        <CheckBox Name="chkRestoreAutomatically" Content="Restore auto-saved notes automatically" Grid.Row="5" Grid.Column="0" Margin="24,4,4,4" VerticalAlignment="Center" IsEnabled="{Binding Path=IsChecked, ElementName=chkAutosave}" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <TextBlock Name="lblDeleBin" Text="Delete note from Recycle Bin after selected period (days)" Grid.Row="6" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <ComboBox Name="cboDeleteBin" Grid.Row="6" Grid.Column="1" Margin="4" MinWidth="80" HorizontalAlignment="Right" SelectionChanged="cboDeleteBin_SelectionChanged"/>
+                        <CheckBox Name="chkWarnBeforeEmptyBin" Content="Warn when note is deleted automatically from Recycle Bin" Grid.Row="7" Grid.Column="0" Margin="24,4,4,4" VerticalAlignment="Center" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkDeleteShortExit" Content="Delete desktop shortcuts on program exit" Grid.Row="8" Grid.Column="0" Margin="4" VerticalAlignment="Center" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkRestoreShortStart" Content="Restore desktop shortcuts on program start" Grid.Row="9" Grid.Column="0" Margin="24,4,4,4" IsEnabled="{Binding IsChecked, ElementName=chkDeleteShortExit}" VerticalAlignment="Center" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                        <CheckBox Name="chkCloseOnShortcut" Content="Close note after desktop shortcut creation" Grid.Row="10" Grid.Column="0" Margin="4" VerticalAlignment="Center" Checked="CheckGeneral_Checked" Unchecked="CheckGeneral_Checked"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Name="pnsDTFormat" Header="Date/Time formats" Margin="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Name="lblDTFormat" Text="Date format" Grid.Row="0" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+                            <TextBox Name="txtDTFShort" MinWidth="200" Margin="4" TextAlignment="Center" VerticalAlignment="Center" TextChanged="txtDTFShort_TextChanged" PreviewKeyDown="txtDTFShort_PreviewKeyDown"/>
+                            <Button Name="cmdDTFShort" Content="?" Padding="8,0,8,0" Margin="0,4,4,4" Click="cmdDTFShort_Click"/>
+                        </StackPanel>
+                        <TextBlock Name="lblDTSample" Text="Date sample" Grid.Row="1" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <Border BorderBrush="{DynamicResource CommonControlBorderBrush}" Height="{Binding Path=ActualHeight, ElementName=txtDTFShort, Mode=OneWay}" BorderThickness="1" Grid.Row="1" Grid.Column="2" Margin="4">
+                            <TextBlock Name="lblDTShort" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+
+                        <TextBlock Name="lblTFormat" Text="Time format" Grid.Row="2" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right">
+                            <TextBox Name="txtTFLong" MinWidth="200" Margin="4" TextAlignment="Center" VerticalAlignment="Center" TextChanged="txtTFLong_TextChanged" PreviewKeyDown="txtTFLong_PreviewKeyDown"/>
+                            <Button Name="cmdTFLong" Content="?" Padding="8,0,8,0" Margin="0,4,4,4" Click="cmdTFLong_Click"/>
+                        </StackPanel>
+                        <TextBlock Name="lblTSample" Text="Time sample" Grid.Row="3" Grid.Column="0" Margin="4" VerticalAlignment="Center"/>
+                        <Border BorderBrush="{DynamicResource CommonControlBorderBrush}" Height="{Binding Path=ActualHeight, ElementName=txtTFLong, Mode=OneWay}" BorderThickness="1" Grid.Row="3" Grid.Column="2" Margin="4">
+                            <TextBlock Name="lblTFLong" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Name="pnsMiscMisc" Header="Miscellaneous" Margin="4">
+                    <TabControl Name="tabMisc" Margin="4">
+                        <TabItem Name="lblSearchProvs" Header="Search providers">
+                            <Grid Height="120">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ListView Name="grdSearchProvs" net:PNGridViewHelper.AutoSort="True" net:PNGridViewHelper.ShowGridLines="true" Grid.Row="0" Margin="4,4,4,0" SelectionMode="Single" SelectionChanged="grdSearchProvs_SelectionChanged" MouseDoubleClick="grdSearchProvs_MouseDoubleClick">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn net:PNGridViewHelper.ColumnName="SP_Name" Header="Name" Width="180" DisplayMemberBinding="{Binding Name}"/>
+                                            <GridViewColumn net:PNGridViewHelper.ColumnName="SP_Query_Line" Header="Query line" Width="300" DisplayMemberBinding="{Binding Query}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Grid.Row="1" Margin="4,0,4,4">
+                                    <StackPanel Orientation="Horizontal">
+                                        <net:SmallButton x:Name="cmdAddProv" Margin="4" Click="cmdAddProv_Click"/>
+                                        <net:SmallButton x:Name="cmdEditProv" net:PNUtils.SmallButtonType="Edit" Margin="4" IsEnabled="False" Click="cmdEditProv_Click"/>
+                                        <net:SmallButton x:Name="cmdDeleteProv" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdDeleteProv_Click"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Name="lblExternals" Header="External programs">
+                            <Grid Height="120">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ListView Name="grdExternals" net:PNGridViewHelper.AutoSort="True" net:PNGridViewHelper.ShowGridLines="true" Grid.Row="0" Margin="4,4,4,0" SelectionMode="Single" SelectionChanged="grdExternals_SelectionChanged" MouseDoubleClick="grdExternals_MouseDoubleClick">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn net:PNGridViewHelper.ColumnName="Ext_Name" Header="Name" Width="140" DisplayMemberBinding="{Binding Name}"/>
+                                            <GridViewColumn net:PNGridViewHelper.ColumnName="Ext_Program" Header="Program" Width="180" DisplayMemberBinding="{Binding Prog}"/>
+                                            <GridViewColumn net:PNGridViewHelper.ColumnName="Ext_Command_Line" Header="Command line" Width="180" DisplayMemberBinding="{Binding CommLine}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Grid.Row="1" Margin="4,0,4,4">
+                                    <StackPanel Orientation="Horizontal">
+                                        <net:SmallButton x:Name="cmdAddExt" Margin="4" Click="cmdAddExt_Click"/>
+                                        <net:SmallButton x:Name="cmdEditExt" net:PNUtils.SmallButtonType="Edit" Margin="4" IsEnabled="False" Click="cmdEditExt_Click"/>
+                                        <net:SmallButton x:Name="cmdDeleteExt" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdDeleteExt_Click"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Name="lblPreTags" Header="Predefined tags">
+                            <Grid Height="120">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+                                <ListBox Name="lstTags" Grid.Row="0" Grid.Column="0" Margin="4" SelectionChanged="lstTags_SelectionChanged"/>
+                                <StackPanel Grid.Row="0" Grid.Column="1">
+                                    <TextBlock Name="lblTag" Text="Tag" Margin="4"/>
+                                    <TextBox Name="txtTag" Margin="4" TextChanged="txtTag_TextChanged"/>
+                                </StackPanel>
+                                <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0,4,4">
+                                    <StackPanel Orientation="Horizontal">
+                                        <net:SmallButton x:Name="cmdAddTag" Margin="4" IsEnabled="False" Click="cmdAddTag_Click"/>
+                                        <net:SmallButton x:Name="cmdDeleteTag" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdDeleteTag_Click"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Name="pnlSchedule" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Visibility="Hidden">
+            <StackPanel>
+                <GroupBox Name="pnsConduct" Header="Conduct" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkAllowSound" Content="Allow sound alert" Margin="4" Checked="CheckSchedule_Checked" Unchecked="CheckSchedule_Checked"/>
+                        <CheckBox Name="chkTrackOverdue" Content="Track overdue reminders" Margin="4" Checked="CheckSchedule_Checked" Unchecked="CheckSchedule_Checked"/>
+                        <CheckBox Name="chkVisualNotify" Content="Enable visual notification" Margin="4" Checked="CheckSchedule_Checked" Unchecked="CheckSchedule_Checked"/>
+                        <CheckBox Name="chkCenterScreen" Content="Move notes to the center of screen" Margin="4" Checked="CheckSchedule_Checked" Unchecked="CheckSchedule_Checked"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsSounds" Header="Sound alert" Margin="4">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ListBox Name="clbSounds" Grid.Row="0" Margin="4,4,4,0" Width="220" Height="120" HorizontalAlignment="Left" SelectionChanged="clbSounds_SelectionChanged"/>
+                        <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Grid.Row="1" Margin="4,0,4,4" HorizontalAlignment="Left" Width="{Binding Path=ActualWidth, ElementName=clbSounds}">
+                            <StackPanel Orientation="Horizontal">
+                                <net:SmallButton x:Name="cmdAddSound" Margin="4" Click="cmdAddSound_Click"/>
+                                <net:SmallButton x:Name="cmdRemoveSound" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdRemoveSound_Click"/>
+                                <net:SmallButton x:Name="cmdListenSound" net:PNUtils.SmallButtonType="Run" Margin="4" IsEnabled="False" Click="cmdListenSound_Click"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </GroupBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Name="pnsVoices" Header="Available voices" Grid.Column="0" Margin="4">
+                        <ListBox Name="lstVoices" Margin="4" Width="{Binding Path=ActualWidth, ElementName=clbSounds}" Height="140" SelectionChanged="lstVoices_SelectionChanged"/>
+                    </GroupBox>
+                    <GroupBox Name="pnsTTS" Header="Text-to-speech settings" Grid.Column="1" Margin="4">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="cmdDefVoice" Grid.Row="0" Grid.Column="0" Content="Default voice" Margin="4" Click="cmdDefVoice_Click"/>
+                            <Button Name="cmdVoiceSample" Grid.Row="0" Grid.Column="1" Content="Listen sample" Margin="4" IsEnabled="False" Click="cmdVoiceSample_Click"/>
+                            <TextBlock Name="lblVoiceSample" Text="Enter sample text:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="4"/>
+                            <TextBox Name="txtVoiceSample" Grid.Row="1" Grid.Column="1" Margin="4" VerticalAlignment="Center" TextChanged="txtVoiceSample_TextChanged"/>
+                            <TextBlock Name="lblVolume" Text="Volume" Grid.Row="2" Grid.Column="0" Margin="4"/>
+                            <Grid Grid.Row="2" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="0%" Grid.Column="0" Margin="4" HorizontalAlignment="Right" Width="{Binding Path=ActualWidth, ElementName=tb1}"/>
+                                <Slider Name="trkVolume" Grid.Column="1" TickFrequency="10" SmallChange="1" LargeChange="10" Maximum="100" TickPlacement="BottomRight" IsSelectionRangeEnabled="True" Margin="4" ValueChanged="trkVolume_ValueChanged"/>
+                                <TextBlock Name="tb2" Text="100%" Grid.Column="2" Margin="4" HorizontalAlignment="Left"/>
+                            </Grid>
+                            <TextBlock Name="lblSpeed" Text="Speed" Grid.Row="3" Grid.Column="0" Margin="4"/>
+                            <Grid Grid.Row="3" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Name="tb1" Text="-10" Grid.Column="0" Margin="4" HorizontalAlignment="Right"/>
+                                <Slider Name="trkSpeed" Grid.Column="1" TickFrequency="1" SmallChange="1" LargeChange="1" Minimum="-10" Maximum="10" TickPlacement="BottomRight" IsSelectionRangeEnabled="True" Margin="4" ValueChanged="trkSpeed_ValueChanged"/>
+                                <TextBlock Text="+10" Grid.Column="2" Margin="4" HorizontalAlignment="Left" Width="{Binding Path=ActualWidth, ElementName=tb2}"/>
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Name="pnlAppearance" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Visibility="Hidden">
+            <StackPanel>
+                <GroupBox Name="pnsInterface" Header="User interface" Margin="4">
+                    <StackPanel>
+                        <RadioButton Name="optSkinless" Content="Skinless" Margin="4" Checked="OptionAppearance_Checked" Unchecked="OptionAppearance_Checked"/>
+                        <RadioButton Name="optSkinnable" Content="Skinnable" Margin="4" Checked="OptionAppearance_Checked" Unchecked="OptionAppearance_Checked"/>
+                        <GroupBox Name="grpThemes" Header="Color themes ( *** )" Margin="4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <ListBox Name="lstThemes" Grid.Column="0" Margin="4" SelectionChanged="lstThemes_SelectionChanged"/>
+                                <net:SmallButton x:Name="cmdAddTheme" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="4" Click="cmdAddTheme_Click"/>
+                                <Border Grid.Column="2">
+                                    <Image Name="imgTheme" Stretch="None" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </GroupBox>
+                    </StackPanel>
+                </GroupBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Name="pnsGroups" Header="Groups" Grid.Column="0" Margin="4">
+                        <net:PNTreeView x:Name="tvwGroups" Margin="4" SelectedItemChanged="tvwGroups_SelectedItemChanged" Height="240"/>
+                    </GroupBox>
+                    <GroupBox Name="pnsGroupSettings" Header="Settings" Grid.Column="1" Margin="4">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Name="cmdChangeFont" Text="Change font (*)" Grid.Row="0" Margin="4"/>
+                            <ComboBox Name="cboFonts" Grid.Row="1" Margin="4" SelectionChanged="cboFonts_SelectionChanged"/>
+                            <Grid Grid.Row="2" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Name="tbFontColor" Grid.Column="0" Text="Font color" HorizontalAlignment="Right" Margin="4" VerticalAlignment="Center"/>
+                                <ComboBox Name="cboFontColor" Grid.Column="1" Margin="4" Width="72" SelectionChanged="cboColor_SelectionChanged">
+                                    <ComboBox.Items>
+                                        <Rectangle Fill="Black" Height="16"/>
+                                        <Rectangle Fill="Navy" Height="16"/>
+                                        <Rectangle Fill="Green" Height="16"/>
+                                        <Rectangle Fill="Teal" Height="16"/>
+                                        <Rectangle Fill="Maroon" Height="16"/>
+                                        <Rectangle Fill="Purple" Height="16"/>
+                                        <Rectangle Fill="Olive" Height="16"/>
+                                        <Rectangle Fill="Silver" Height="16"/>
+                                        <Rectangle Fill="Gray" Height="16"/>
+                                        <Rectangle Fill="Blue" Height="16"/>
+                                        <Rectangle Fill="Lime" Height="16"/>
+                                        <Rectangle Fill="Cyan" Height="16"/>
+                                        <Rectangle Fill="Red" Height="16"/>
+                                        <Rectangle Fill="Magenta" Height="16"/>
+                                        <Rectangle Fill="Yellow" Height="16"/>
+                                        <Rectangle Fill="White" Height="16"/>
+                                    </ComboBox.Items>
+                                </ComboBox>
+                                <TextBlock Name="tbFontSize" Grid.Column="2" Text="Font size" Margin="4" VerticalAlignment="Center"/>
+                                <ComboBox Name="cboFontSize" Grid.Column="3" Margin="4" ItemsSource="{StaticResource Sizes}" Width="72" SelectionChanged="cboFontSize_SelectionChanged"/>
+                            </Grid>
+                            <TabControl Name="tabGroups" Grid.Row="3" Margin="4">
+                                <TabItem Name="tbpSkinless" Header="Skinless notes">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Name="brdFrame" Grid.Column="0" BorderThickness="1" Margin="4" Width="120" Height="120">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Name="blkCaption" Text="Caption" Grid.Row="0" MinHeight="16" HorizontalAlignment="Stretch" TextAlignment="Center" VerticalAlignment="Center"/>
+                                                <Border Name="brdBody" Grid.Row="1">
+                                                    <TextBlock Name="blkBody" TextWrapping="Wrap" Margin="4"/>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Name="lblBackSknls" Text="Background" Margin="4"/>
+                                            <pnColorPicker:ColorPicker Name="pckBGSknls" Margin="4" SelectedColorChanged="pckBGSknls_SelectedColorChanged"/>
+                                            <Button Name="cmdFontSknls" Content="Caption font" Margin="4" Click="cmdFontSknls_Click"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="tbpSkinnable" Header="Skinnable notes">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Name="brdSkin" Grid.Column="0" BorderThickness="1" Margin="4" Width="120" Height="120">
+                                            <Canvas>
+                                                <Image Name="imgSkin" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                                            </Canvas>
+                                        </Border>
+                                        <TextBlock Name="lblMoreSkins" Text="Get more skins" Grid.Column="1" HorizontalAlignment="Center" TextDecorations="Underline" Cursor="Hand" Foreground="{DynamicResource LinkBrush}" MouseLeftButtonDown="lblMoreSkins_MouseLeftButtonDown"/>
+                                        <ListBox Name="lstSkins" Grid.Column="2" Margin="4" Width="120" Height="120" SelectionChanged="lstSkins_SelectionChanged"/>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Name="pnsDiaryCust" Header="Miscellaneous (Diary)" Grid.Column="0" Margin="4">
+                        <StackPanel Name="stkDiaryCust">
+                            <CheckBox Name="chkAddWeekdayName" Content="Add weekday name to note's name" Margin="4" Checked="CheckAppearance_Checked" Unchecked="CheckAppearance_Checked"/>
+                            <CheckBox Name="chkFullWeekdayName" Content="Full weekday name" Margin="24,4,4,4" Checked="CheckAppearance_Checked" Unchecked="CheckAppearance_Checked"/>
+                            <CheckBox Name="chkWeekdayAtTheEnd" Content="Add weekday name at the end of note's name" Margin="24,4,4,4" Checked="CheckAppearance_Checked" Unchecked="CheckAppearance_Checked"/>
+                            <CheckBox Name="chkNoPreviousDiary" Content="Do not show diary 'pages' from previous dates in 'Diary' menu" Margin="4" Checked="CheckAppearance_Checked" Unchecked="CheckAppearance_Checked"/>
+                            <CheckBox Name="chkDiaryAscOrder" Content="Ascending sort of 'pages' in 'Diary' menu (starting from earliest)" Margin="4" Checked="CheckAppearance_Checked" Unchecked="CheckAppearance_Checked"/>
+                            <TextBlock Name="lblNumberOfDiaries" Text="Number of diary 'pages' shown in 'Diary' menu" Margin="4"/>
+                            <ComboBox Name="cboNumberOfDiaries" Margin="4" ItemsSource="{StaticResource Days}" Width="70" HorizontalAlignment="Left"  SelectionChanged="cboNumberOfDiaries_SelectionChanged"/>
+                            <TextBlock Name="lblDiaryNaming" Text="Date format used for naming of notes belong to 'Diary' group" Margin="4"/>
+                            <ComboBox Name="cboDiaryNaming" Margin="4" ItemsSource="{StaticResource Formats}" SelectionChanged="cboDiaryNaming_SelectionChanged"/>
+                            <TextBlock Name="lblDiaryExample" Margin="4"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Name="pnsMiscDocking" Header="Miscellaneous (Docking)" Grid.Column="1" Margin="4">
+                        <StackPanel Name="stkDockCust">
+                            <TextBlock Name="lblDockWidth" Text="Width" Margin="4"/>
+                            <pnNumericUpDown:NumericUpDown Name="txtDockWidth" MinValue="100" MaxValue="999" Width="72" Margin="4" HorizontalAlignment="Left" ValueChanged="txtDockWidth_ValueChanged"/>
+                            <TextBlock Name="lblDockHeight" Text="Height" Margin="4"/>
+                            <pnNumericUpDown:NumericUpDown Name="txtDockHeight" MinValue="100" MaxValue="999" Width="72" Margin="4" HorizontalAlignment="Left" ValueChanged="txtDockHeight_ValueChanged"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Name="pnlBehavior" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Visibility="Hidden">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Name="pnsHotkeys" Header="Hot keys" Grid.Column="0" Margin="4">
+                        <Button Name="cmdHotkeys" Content="Hot keys management" Margin="4" Click="cmdHotkeys_Click"/>
+                    </GroupBox>
+                    <GroupBox Name="pnsMenus" Header="Menus" Grid.Column="1" Margin="4">
+                        <Button Name="cmdMenus" Content="Menus management" Margin="4" Click="cmdMenus_Click"/>
+                    </GroupBox>
+                </Grid>
+                <GroupBox Name="pnsSkinless" Header="Skinless notes" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkRandBack" Content="Use random background color" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkInvertText" Content="Invert text color" Margin="24,4,4,4" IsEnabled="{Binding Path=IsChecked, ElementName=chkRandBack}" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkRoll" Content="Roll/unroll note by double click on caption" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkFitRolled" Content="Fit to caption when rolled" Margin="24,4,4,4" IsEnabled="{Binding Path=IsChecked, ElementName=chkRoll}" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsBehaviorMisc" Header="Miscellaneous" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkNewOnTop" Content="New note always on top" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkRelationalPosition" Content="Relational notes positioning" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkShowSeparateNotes" Content="Show separate notes under each group in Show/Hide menus" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkHideCompleted" Content="Hide notes marked as 'Completed'" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkShowBigIcons" Content="Show big icons on PNotes Control Panel's toolbar" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkDontShowList" Content="Do not show notes in the list of opened windows (Alt+Tab) ( * )" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkHideMainWindow" Content="Do not show main program window in the list of opened windows (Alt+Tab) ( ** )" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkKeepVisibleOnShowdesktop" Content="Keep notes visible while hovering over 'Show Desktop' button ( ** )" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkPreventResizing" Content="Prevent notes from being automatically arranged when moved to the edge of the screen ( ** )" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="lblDblAction" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Action after double click on system tray icon" Margin="4"/>
+                            <TextBlock Name="lblSingleAction" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Action after single click on system tray icon" Margin="4"/>
+                            <TextBlock Name="lblDefName" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Use following as default name of new note" Margin="4"/>
+                            <TextBlock Name="lblLengthOfName" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Text="Length of note's text used as default name for new note" Margin="4"/>
+                            <TextBlock Name="lblLengthOfContent" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Length of note's text shown in 'Content' column at Control Panel" Margin="4"/>
+                            <TextBlock Name="lblPinClick" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Action after click on 'Pin' icon" Margin="4"/>
+                            <TextBlock Name="lblNoteStartPosition" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="New note initial position" Margin="4"/>
+                            <ComboBox Name="cboDblAction" Grid.Row="0" Grid.Column="1" Margin="4" SelectionChanged="cboDblAction_SelectionChanged"/>
+                            <ComboBox Name="cboSingleAction" Grid.Row="1" Grid.Column="1" Margin="4" SelectionChanged="cboSingleAction_SelectionChanged"/>
+                            <ComboBox Name="cboDefName" Grid.Row="2" Grid.Column="1" Margin="4" SelectionChanged="cboDefName_SelectionChanged"/>
+                            <ComboBox Name="cboLengthOfName" Grid.Row="3" Grid.Column="1" Margin="4" Width="82" HorizontalAlignment="Right" SelectionChanged="cboLengthOfName_SelectionChanged"/>
+                            <ComboBox Name="cboLengthOfContent" Grid.Row="4" Grid.Column="1" Margin="4" Width="82" HorizontalAlignment="Right" SelectionChanged="cboLengthOfContent_SelectionChanged"/>
+                            <ComboBox Name="cboPinClick" Grid.Row="5" Grid.Column="1" Margin="4" SelectionChanged="cboPinClick_SelectionChanged"/>
+                            <ComboBox Name="cboNoteStartPosition" Grid.Row="6" Grid.Column="1" Margin="4" SelectionChanged="cboNoteStartPosition_SelectionChanged"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="grpDockPanel" Header="Notes panel" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkShowPanel" Content="Show notes panel" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <Grid IsEnabled="{Binding IsChecked, ElementName=chkShowPanel}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="lblPanelDock" Text="Panel placement" Margin="24,4,4,4" VerticalAlignment="Center"/>
+                            <ComboBox Name="cboPanelDock" Grid.Column="1" Margin="4" HorizontalAlignment="Right" Width="{Binding ActualWidth, ElementName=cboNoteStartPosition}" SelectionChanged="cboPanelDock_SelectionChanged"/>
+                        </Grid>
+                        <CheckBox Name="chkPanelAutoHide" Content="Hide notes panel automatically" IsEnabled="{Binding IsChecked, ElementName=chkShowPanel}" Margin="24,4,4,4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkPanelSwitchOffAnimation" Content="Switch off animation" IsEnabled="{Binding IsChecked, ElementName=chkShowPanel}" Margin="24,4,4,4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <Grid IsEnabled="{Binding IsChecked, ElementName=chkShowPanel}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="lblPanelRemove" Text="Action to remove note from panel" Margin="24,4,4,4" VerticalAlignment="Center"/>
+                            <ComboBox Name="cboPanelRemove" Grid.Column="1" Margin="4" HorizontalAlignment="Right" Width="{Binding ActualWidth, ElementName=cboNoteStartPosition}" SelectionChanged="cboPanelRemove_SelectionChanged"/>
+                        </Grid>
+                        <Grid IsEnabled="{Binding IsChecked, ElementName=chkShowPanel}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="tbPanelDelay" Text="Delay of automatic panel appearance (in seconds)" Margin="24,4,4,4" VerticalAlignment="Center"/>
+                            <ComboBox Name="cboPanelDelay" Grid.Column="1" Margin="4" HorizontalAlignment="Right" Width="82" SelectionChanged="cboPanelDelay_SelectionChanged" ItemsSource="{StaticResource PanelDelays}"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsEffects" Header="Effects" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkHideFluently" Content="Hide notes fluently" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <CheckBox Name="chkPlaySoundOnHide" Content="Play sound when hide note" Margin="4" Checked="CheckBehavior_Checked" Unchecked="CheckBehavior_Checked"/>
+                        <GroupBox Name="grpTransparency" Header="Transparency" Margin="4">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Name="lblTransPerc" Text="0%" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="4" VerticalAlignment="Center"/>
+                                <TextBlock Text="0%" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="4" VerticalAlignment="Center"/>
+                                <Slider Name="trkTrans" Grid.Row="1" Grid.Column="1" Margin="4" TickPlacement="BottomRight" ValueChanged="trkTrans_ValueChanged" SmallChange="1" Maximum="100"/>
+                                <TextBlock Text="100%" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="4" VerticalAlignment="Center"/>
+                                <TextBlock Name="lblTransWarning" Text="Value of 100% will result in fully transparent window!" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Margin="4" Foreground="{DynamicResource WarningTextBrush}" TextWrapping="Wrap"/>
+                            </Grid>
+                        </GroupBox>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Name="pnlNetwork" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Visibility="Hidden">
+            <StackPanel>
+                <GroupBox Name="pnsExchange" Header="Notes exchange" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkEnableExchange" Content="Enable exchange" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                        <StackPanel IsEnabled="{Binding Path=IsChecked, ElementName=chkEnableExchange}">
+                            <CheckBox Name="chkAllowPing" Content="Allow checking of connection with contact's computer (ping)" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkSaveBeforeSending" Content="Save note before sending" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkNoNotifyOnArrive" Content="Do not show notification when new note arrives" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkShowRecOnClick" Content="Show received note after click on notification message" Margin="24,4,4,4" IsEnabled="{Binding Path=IsChecked, ElementName=chkNoNotifyOnArrive, Converter={StaticResource CheckToEnableOppositeConverter}}" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkShowIncomingOnClick" Content="Show 'Incoming' group after click on notification message" Margin="24,4,4,4" IsEnabled="{Binding Path=IsChecked, ElementName=chkNoNotifyOnArrive, Converter={StaticResource CheckToEnableOppositeConverter}}" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkNoSoundOnArrive" Content="Do not play sound when new note arrives" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkNoNotifyOnSend" Content="Do not show notification when note is sending" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkShowAfterReceiving" Content="Show note after receiving" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkRecOnTop" Content="Received note always on top" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkHideAfterSending" Content="Hide note after sending" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkNoContInContextMenu" Content="Do not show contacts in context menu" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <TabControl Name="tabNetwork" Margin="4">
+                    <TabItem Name="pnsContacts" Header="Contacts details">
+                        <StackPanel IsEnabled="{Binding Path=IsChecked, ElementName=chkEnableExchange}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Name="lblGroups" Text="Groups" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="4"/>
+                                <net:PNTreeView x:Name="tvwContactsGroups" Grid.Row="1" Grid.Column="0" Margin="4,4,0,4" Width="194" Height="164" HorizontalAlignment="Left" SelectedItemChanged="tvwContactsGroups_SelectedItemChanged" PNTreeViewLeftMouseDoubleClick="tvwContactsGroups_MouseDoubleClick"/>
+                                <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Grid.Row="1" Grid.Column="1" Margin="0,4,4,4">
+                                    <StackPanel>
+                                        <net:SmallButton x:Name="cmdAddContactGroup" Margin="4" Click="cmdAddContactGroup_Click"/>
+                                        <net:SmallButton x:Name="cmdEditContactGroup" net:PNUtils.SmallButtonType="Edit" Margin="4" IsEnabled="False" Click="cmdEditContactGroup_Click"/>
+                                        <net:SmallButton x:Name="cmdDeleteContactGroup" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdDeleteContactGroup_Click"/>
+                                    </StackPanel>
+                                </Border>
+                                <TextBlock Name="lblContacts" Text="Contacts" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="4"/>
+                                <ListView Name="grdContacts" net:PNGridViewHelper.AutoSort="True" net:PNGridViewHelper.ShowGridLines="true"  Grid.Row="1" Grid.Column="2" Margin="4,4,0,4" Height="{Binding Path=ActualHeight, ElementName=tvwContactsGroups}" SelectionChanged="grdContacts_SelectionChanged" MouseDoubleClick="grdContacts_MouseDoubleClick">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn net:PNGridViewHelper.PropertyName="ConnectionStatus" Width="30">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Border>
+                                                            <Path Stroke="{Binding IsEnabled, ElementName=grdContacts, Converter={StaticResource EnabledToSmallButtonColorConverter}}" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding Path=ConnectionStatus, Converter={StaticResource ConnectionStatusConverter}}"/>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn net:PNGridViewHelper.ColumnName="Cont_Name" net:PNGridViewHelper.PropertyName="Name" Header="Name" Width="152">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="{Binding Icon}" Margin="2,0,2,0" VerticalAlignment="Center"/>
+                                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn net:PNGridViewHelper.ColumnName="Cont_Comp" Header="Computer name" Width="152" DisplayMemberBinding="{Binding CompName}"/>
+                                            <GridViewColumn net:PNGridViewHelper.ColumnName="Cont_IP" Header="IP address" Width="152" DisplayMemberBinding="{Binding IpAddress}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Grid.Row="1" Grid.Column="3" Margin="0,4,4,4">
+                                    <StackPanel>
+                                        <net:SmallButton x:Name="cmdAddContact" Margin="4" Click="cmdAddContact_Click"/>
+                                        <net:SmallButton x:Name="cmdEditContact" net:PNUtils.SmallButtonType="Edit" Margin="4" IsEnabled="False" Click="cmdEditContact_Click"/>
+                                        <net:SmallButton x:Name="cmdDeleteContact" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdDeleteContact_Click"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                            <TextBlock Name="lblExchPort" Text="Port" Margin="4"/>
+                            <pnNumericUpDown:NumericUpDown Name="txtExchPort" MaxValue="65535" MinValue="1" Margin="4" Width="92" HorizontalAlignment="Left" ValueChanged="txtExchPort_ValueChanged"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Name="pnsPlugins" Header="Social networks">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="pnsSocialNetworks" Text="Social networks plugins" Grid.Row="0" Grid.Column="0" Margin="4"/>
+                            <ListBox Name="lstSocial" Grid.Row="1" Grid.Column="0" Height="{Binding Path=ActualHeight, ElementName=tvwContactsGroups}" Margin="4" SelectionChanged="lstSocial_SelectionChanged"/>
+                            <Button Name="cmdCheckSocPlugUpdate" Content="Check for new versions and new plugins" Grid.Row="2" Grid.Column="0" Margin="4" Click="cmdCheckSocPlugUpdate_Click"/>
+                            <Button Name="cmdRemovePostPlugin" Content="Remove plugin" Grid.Row="3" Grid.Column="0" Margin="4" IsEnabled="False" Click="cmdRemovePostPlugin_Click"/>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+                                <TextBlock Name="lblPostCount" Text="Count of posts to receive" Margin="4"/>
+                                <ComboBox Name="cboPostCount" Margin="4" Width="82" HorizontalAlignment="Left" ItemsSource="{StaticResource PostCount}" SelectionChanged="cboPostCount_SelectionChanged"/>
+                            </StackPanel>
+                            <GroupBox Name="pnsSocPluginDetails" Header="Plugin details" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Margin="4">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Name="lblSocPluginAuthor" Text="Author:" Grid.Row="0" Grid.Column="0" Margin="4"/>
+                                    <TextBlock Name="lblSocPluginVersion" Text="Version:" Grid.Row="1" Grid.Column="0" Margin="4"/>
+                                    <TextBlock Name="lblSocPluginInfo" Text="Info:" Grid.Row="2" Grid.Column="0" Margin="4"/>
+                                    <TextBlock Name="lblSocPAuthor" Grid.Row="0" Grid.Column="1" Margin="4"/>
+                                    <TextBlock Name="lblSocPVersion" Grid.Row="1" Grid.Column="1" Margin="4"/>
+                                    <TextBlock Name="lblSocPInfo" Grid.Row="2" Grid.Column="1" Margin="4" TextWrapping="Wrap"/>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Name="tbpSyncPlugins" Header="Synchronization">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="pnsSyncPlugins" Text="Synchronization plugins" Grid.Row="0" Grid.Column="0" Margin="4"/>
+                            <ListBox Name="lstSyncPlugins" Grid.Row="1" Grid.Column="0" Height="{Binding Path=ActualHeight, ElementName=tvwContactsGroups}" Margin="4" SelectionChanged="lstSyncPlugins_SelectionChanged"/>
+                            <Button Name="cmdCheckSyncPlugUpdate" Content="Check for new versions and new plugins" Grid.Row="2" Grid.Column="0" Margin="4" Click="cmdCheckSyncPlugUpdate_Click"/>
+                            <Button Name="cmdRemoveSyncPlugin" Content="Remove plugin" Grid.Row="3" Grid.Column="0" Margin="4" IsEnabled="False" Click="cmdRemoveSyncPlugin_Click"/>
+                            <Button Name="cmdSyncNow" Content="Synchronize now" Grid.Row="4" Grid.Column="0" Margin="4" IsEnabled="False" Click="cmdSyncNow_Click"/>
+                            <CheckBox Name="chkIncludeBinInSync" Content="Include notes from Recycle Bin in synchronization" Grid.Row="2" Grid.Column="1" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkSaveBeforeSync" Content="Save notes before synchronization" Grid.Row="3" Grid.Column="1" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <CheckBox Name="chkSyncOnStart" Content="Synchronize notes on program start" Grid.Row="4" Grid.Column="1" Margin="4" Checked="CheckNetwork_Checked" Unchecked="CheckNetwork_Checked"/>
+                            <GroupBox Name="pnsSyncPluginDetails" Header="Plugin details" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="4">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Name="lblSyncPluginAuthor" Text="Author:" Grid.Row="0" Grid.Column="0" Margin="4"/>
+                                    <TextBlock Name="lblSyncPluginVersion" Text="Version:" Grid.Row="1" Grid.Column="0" Margin="4"/>
+                                    <TextBlock Name="lblSyncPluginInfo" Text="Info:" Grid.Row="2" Grid.Column="0" Margin="4"/>
+                                    <TextBlock Name="lblSyncPAuthor" Grid.Row="0" Grid.Column="1" Margin="4"/>
+                                    <TextBlock Name="lblSyncPVersion" Grid.Row="1" Grid.Column="1" Margin="4"/>
+                                    <TextBlock Name="lblSyncPInfo" Grid.Row="2" Grid.Column="1" Margin="4" TextWrapping="Wrap"/>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Name="tbpSmtp" Header="SMTP mail">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="pnsSmtp" Text="SMTP profiles" Grid.Row="0" Grid.Column="0" Margin="4"/>
+                            <TextBlock Name="pnsMailContacts" Text="Mail contacts" Grid.Row="0" Grid.Column="1" Margin="4"/>
+                            <ListView Name="grdSmtp" net:PNGridViewHelper.AutoSort="True" net:PNGridViewHelper.ShowGridLines="true" Grid.Row="1" Grid.Column="0" Margin="4,4,4,0" Height="{Binding ActualHeight, ElementName=tvwContactsGroups}" SelectionChanged="grdSmtp_SelectionChanged" MouseDoubleClick="grdSmtp_MouseDoubleClick">
+                                <ListView.View>
+                                    <GridView>
+                                        <net:FixedWidthColumn Header="" FixedWidth="30">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Selected}" Tag="{Binding Id}" Checked="grdSmtpCheck_Checked" Unchecked="grdSmtpCheck_Checked"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </net:FixedWidthColumn>
+                                        <GridViewColumn net:PNGridViewHelper.ColumnName="HostName" Header="Host name" Width="136" DisplayMemberBinding="{Binding Name}"/>
+                                        <GridViewColumn net:PNGridViewHelper.ColumnName="SenderAddress" Header="Sender address" Width="136" DisplayMemberBinding="{Binding Address}"/>
+                                        <GridViewColumn net:PNGridViewHelper.ColumnName="DisplayName" Header="Display name" Width="136" DisplayMemberBinding="{Binding DispName}"/>
+                                        <GridViewColumn net:PNGridViewHelper.ColumnName="SmtpPort" Header="Port" Width="52" DisplayMemberBinding="{Binding Port}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Grid.Row="2" Grid.Column="0" Margin="4,0,4,4">
+                                <StackPanel Orientation="Horizontal">
+                                    <net:SmallButton x:Name="cmdAddSmtp" Margin="4" Click="cmdAddSmtp_Click"/>
+                                    <net:SmallButton x:Name="cmdEditSmtp" net:PNUtils.SmallButtonType="Edit" Margin="4" IsEnabled="False" Click="cmdEditSmtp_Click"/>
+                                    <net:SmallButton x:Name="cmdDeleteSmtp" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdDeleteSmtp_Click"/>
+                                </StackPanel>
+                            </Border>
+                            <ListView Name="grdMailContacts" net:PNGridViewHelper.AutoSort="True" net:PNGridViewHelper.ShowGridLines="true" Grid.Row="1" Grid.Column="1" Margin="4,4,4,0" Height="{Binding Path=ActualHeight, ElementName=tvwContactsGroups}" SelectionChanged="grdMailContacts_SelectionChanged" MouseDoubleClick="grdMailContacts_MouseDoubleClick">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn net:PNGridViewHelper.ColumnName="DispName" Header="Display name" Width="100" DisplayMemberBinding="{Binding DispName}"/>
+                                        <GridViewColumn net:PNGridViewHelper.ColumnName="MailAddress" Header="Mail address" Width="100" DisplayMemberBinding="{Binding Address}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Grid.Row="2" Grid.Column="1" Margin="4,0,4,4">
+                                <StackPanel Orientation="Horizontal">
+                                    <net:SmallButton x:Name="cmdAddMailContact" Margin="4" Click="cmdAddMailContact_Click"/>
+                                    <net:SmallButton x:Name="cmdEditMailContact" net:PNUtils.SmallButtonType="Edit" Margin="4" IsEnabled="False" Click="cmdEditMailContact_Click"/>
+                                    <net:SmallButton x:Name="cmdDeleteMailContact" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdDeleteMailContact_Click"/>
+                                    <net:SmallButton x:Name="cmdClearMailContacts" net:PNUtils.SmallButtonType="Clean" Margin="4" IsEnabled="False" Click="cmdClearMailContacts_Click"/>
+                                    <net:SmallButton x:Name="cmdImportMailContact" net:PNUtils.SmallButtonType="User" Margin="4" Click="cmdImportMailContact_Click"/>
+                                    <Border Visibility="Hidden">
+                                        <Border.ContextMenu>
+                                            <ContextMenu Name="ctmImpContacts" Opened="ctmImpContacts_Opened">
+                                                <MenuItem Name="mnuImpOutlook" Header="MS Outlook" Click="mnuImpOutlook_Click">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="{DynamicResource outlook}"/>
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Name="mnuImpGmail" Header="GMail" Click="mnuImpGmail_Click">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="{DynamicResource gmail}"/>
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Name="mnuImpLotus" Header="IBM Notes" Click="mnuImpLotus_Click">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="{DynamicResource lotus}"/>
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </Border.ContextMenu>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                            <TextBlock Name="lblSmtp" Text="Select profile in order to use it for sending mails instead of standard e-mail program" Grid.Row="3" Grid.Column="0" Margin="4" TextWrapping="Wrap"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Name="pnlProtection" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Visibility="Hidden">
+            <StackPanel>
+                <GroupBox Name="pnsPassword" Header="Password" Margin="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.33*"/>
+                            <ColumnDefinition Width="0.33*"/>
+                            <ColumnDefinition Width="0.33*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="cmdCreatePwrd" Content="Create password" Grid.Column="0"  Margin="4" MinWidth="75" MinHeight="23" Padding="4,0,4,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cmdCreatePwrd_Click"/>
+                        <Button Name="cmdChangePwrd" Content="Change password" Grid.Column="1"  Margin="4" MinWidth="75" MinHeight="23" Padding="4,0,4,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cmdChangePwrd_Click"/>
+                        <Button Name="cmdRemovePwrd" Content="Remove password" Grid.Column="2"  Margin="4" MinWidth="75" MinHeight="23" Padding="4,0,4,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cmdRemovePwrd_Click"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Name="pnsPasswordSet" Header="If password set" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkStoreEncrypted" Content="Store notes as encrypted files" Margin="4" Checked="CheckProtection_Checked" Unchecked="CheckProtection_Checked"/>
+                        <CheckBox Name="chkHideTrayIcon" Content="Hide icon from system tray when program is locked" Margin="4" Checked="CheckProtection_Checked" Unchecked="CheckProtection_Checked"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsBackup" Header="Backup" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkBackupBeforeSaving" Content="Backup notes before saving" Margin="4" Checked="CheckProtection_Checked" Unchecked="CheckProtection_Checked"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="lblBackupDeepness" Text="Backup deepness (amount of copies for each note)" VerticalAlignment="Center" Grid.Column="0" IsEnabled="{Binding Path=IsChecked, ElementName=chkBackupBeforeSaving}" Margin="24,4,4,4"/>
+                            <pnNumericUpDown:NumericUpDown Name="updBackup" MinWidth="82" Grid.Column="1" HorizontalAlignment="Right" MinValue="1" MaxValue="99" IsEnabled="{Binding Path=IsChecked, ElementName=chkBackupBeforeSaving}" Margin="4" ValueChanged="updBackup_ValueChanged"/>
+                        </Grid>
+                        <CheckBox Name="chkSilentFullBackup" Content="Silent manual full backup" Margin="4" Checked="CheckProtection_Checked" Unchecked="CheckProtection_Checked"/>
+                        <GroupBox Name="grpFullBackup" Header="Automatic full backup" Margin="4">
+                            <StackPanel>
+                                <StackPanel Name="stkFullBackup" Orientation="Horizontal">
+                                    <CheckBox Name="chkW0" Margin="4" Content="Sun" Tag="0" Checked="chkW0_Checked" Unchecked="chkW0_Checked"/>
+                                    <CheckBox Name="chkW1" Margin="8,4,4,4" Content="Sun" Tag="1" Checked="chkW0_Checked" Unchecked="chkW0_Checked"/>
+                                    <CheckBox Name="chkW2" Margin="8,4,4,4" Content="Sun" Tag="2" Checked="chkW0_Checked" Unchecked="chkW0_Checked"/>
+                                    <CheckBox Name="chkW3" Margin="8,4,4,4" Content="Sun" Tag="3" Checked="chkW0_Checked" Unchecked="chkW0_Checked"/>
+                                    <CheckBox Name="chkW4" Margin="8,4,4,4" Content="Sun" Tag="4" Checked="chkW0_Checked" Unchecked="chkW0_Checked"/>
+                                    <CheckBox Name="chkW5" Margin="8,4,4,4" Content="Sun" Tag="5" Checked="chkW0_Checked" Unchecked="chkW0_Checked"/>
+                                    <CheckBox Name="chkW6" Margin="8,4,4,4" Content="Sun" Tag="6" Checked="chkW0_Checked" Unchecked="chkW0_Checked"/>
+                                </StackPanel>
+                                <TextBlock Name="lblFullBackup" Text="At:" Margin="4"/>
+                                <pnDateTimePicker:DateTimePicker Name="dtpFullBackup" Format="LongTime" Margin="4" Width="100" HorizontalAlignment="Left" DateValueChanged="dtpFullBackup_DateValueChanged"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsBackupMisc" Header="Miscellaneous" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkDonotShowProtected" Content="Do not show note's content at Control Panel if note or its group is password protected" Margin="4" Checked="CheckProtection_Checked" Unchecked="CheckProtection_Checked"/>
+                        <CheckBox Name="chkPromptForPassword" Content="Prompt for password on attempts to save as text file/copy text from/send password protected note" Margin="4" Checked="CheckProtection_Checked" Unchecked="CheckProtection_Checked"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="pnsLocalSync" Header="Local synchronization" Margin="4">
+                    <StackPanel>
+                        <CheckBox Name="chkIncludeBinInLocalSync" Content="Include notes from Recycle Bin in local synchronization" Margin="4" Checked="CheckProtection_Checked" Unchecked="CheckProtection_Checked"/>
+                        <TextBlock Name="lblLocalSyncCompList" Text="Automatically synchronize with following computers when started from USB drive" Margin="4"/>
+                        <ListView Name="grdLocalSync" net:PNGridViewHelper.AutoSort="True" net:PNGridViewHelper.ShowGridLines="true" Margin="4,4,4,0" Height="{Binding Path=ActualHeight, ElementName=grdSearchProvs}" SelectionChanged="grdLocalSync_SelectionChanged" MouseDoubleClick="grdLocalSync_MouseDoubleClick">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn net:PNGridViewHelper.ColumnName="Sync_Name" Header="Compute name" Width="200" DisplayMemberBinding="{Binding CompName}"/>
+                                    <GridViewColumn net:PNGridViewHelper.ColumnName="Sync_File_Location" Header="Notes file location" Width="200" DisplayMemberBinding="{Binding NotesFile}"/>
+                                    <GridViewColumn net:PNGridViewHelper.ColumnName="DB_Location" Header="DB file location" Width="200" DisplayMemberBinding="{Binding DbFile}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Border Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}}" Margin="4,0,4,4">
+                            <StackPanel Orientation="Horizontal">
+                                <net:SmallButton x:Name="cmdAddComp" Margin="4" Click="cmdAddComp_Click"/>
+                                <net:SmallButton x:Name="cmdEditComp" net:PNUtils.SmallButtonType="Edit" Margin="4" IsEnabled="False" Click="cmdEditComp_Click"/>
+                                <net:SmallButton x:Name="cmdRemoveComp" net:PNUtils.SmallButtonType="Remove" Margin="4" IsEnabled="False" Click="cmdRemoveComp_Click"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Name="navWarnings" Grid.Row="2">
+            <TextBlock Name="lblWarn1" Text="( * ) - New value will be used in newly created notes only" Margin="4"/>
+            <TextBlock Name="lblWarn3" Text="( ** ) - Requires Windows Vista or above" Margin="4"/>
+            <TextBlock Name="lblWarn2" Text="( *** ) - Requires program restart" Margin="4"/>
+        </StackPanel>
+        <Grid Name="navButtons" Grid.Row="3" Margin="0,4,0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="cmdDef" Margin="4" MinHeight="23" MinWidth="75" Content="Default settings" HorizontalAlignment="Left" Click="cmdDef_Click"/>
+            <Button Name="cmdSave" Margin="4" Grid.Column="1" MinHeight="23" MinWidth="75" Content="Save" Click="cmdSave_Click"/>
+            <Button Name="cmdCancel" Margin="4" Grid.Column="2" IsCancel="True" MinHeight="23" MinWidth="75" Content="Cancel" Click="cmdCancel_Click"/>
+            <Button Name="cmdApply" Margin="4" Grid.Column="3" MinHeight="23" MinWidth="75" Content="Apply" Click="cmdApply_Click"/>
+        </Grid>
+    </Grid>
+</Window>

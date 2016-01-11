@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="PNotes.NET.SkinnableToolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:net="clr-namespace:PNotes.NET"
+             Height="{Binding ActualHeight, ElementName=FontFamilyButton}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Focusable="False"
+             Initialized="UserControl_Initialized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="FontFamilyButton" Grid.Column="0" net:PNUtils.FormatType="FontFamily" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="FontSizeButton" Grid.Column="1" net:PNUtils.FormatType="FontSize" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="FontColorButton" Grid.Column="2" net:PNUtils.FormatType="FontColor" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="FontBoldButton" Grid.Column="3" net:PNUtils.FormatType="FontBold" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="FontItalicButton" Grid.Column="4" net:PNUtils.FormatType="FontItalic" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="FontUnderlineButton" Grid.Column="5" net:PNUtils.FormatType="FontUnderline" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="FontStrikethroughButton" Grid.Column="6" net:PNUtils.FormatType="FontStrikethrough" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="HighlightButton" Grid.Column="7" net:PNUtils.FormatType="Highlight" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="LeftButton" Grid.Column="8" net:PNUtils.FormatType="Left" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="CenterButton" Grid.Column="9" net:PNUtils.FormatType="Center" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="RightButton" Grid.Column="10" net:PNUtils.FormatType="Right" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Image x:Name="BulletsButton" Grid.Column="11" net:PNUtils.FormatType="Bullets" Stretch="None" Cursor="Hand" MouseLeftButtonDown="FormatButton_MouseLeftButtonDown" MouseLeftButtonUp="FormatButton_MouseLeftButtonUp"/>
+        <Popup x:Name="PopUpFont" Grid.Column="0" AllowsTransparency="True" IsOpen="False" StaysOpen="False" Placement="Bottom" PlacementRectangle="{Binding ElementName=FontFamilyButton}" PopupAnimation="Slide">
+            <ComboBox x:Name="cboFonts" DropDownClosed="cboFonts_DropDownClosed"/>
+        </Popup>
+    </Grid>
+</UserControl>

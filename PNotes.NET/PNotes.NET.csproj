@@ -1,0 +1,1398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12E86FC5-C7A4-47FF-92FA-0011D56A4A1E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PNotes.NET</RootNamespace>
+    <AssemblyName>PNotes.NET</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>note_pinned.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PNotes.NET.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
+      <HintPath>packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net40-client\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Domino">
+      <HintPath>packages\interop.domino.dll.1.0.0\lib\Interop.Domino.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\..\..\VSReferences\libraries\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="PluginsCore">
+      <HintPath>..\..\..\..\VSReferences\libraries\PluginsCore.dll</HintPath>
+    </Reference>
+    <Reference Include="PNColorPicker">
+      <HintPath>..\..\..\..\VSReferences\wpf\PNColorPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="PNContacts">
+      <HintPath>..\..\..\..\VSReferences\libraries\PNContacts.dll</HintPath>
+    </Reference>
+    <Reference Include="PNDateTimePicker">
+      <HintPath>..\..\..\..\VSReferences\wpf\PNDateTimePicker.dll</HintPath>
+    </Reference>
+    <Reference Include="PNEncryption">
+      <HintPath>..\..\..\..\VSReferences\libraries\PNEncryption.dll</HintPath>
+    </Reference>
+    <Reference Include="PNIPBox">
+      <HintPath>..\..\..\..\VSReferences\wpf\PNIPBox.dll</HintPath>
+    </Reference>
+    <Reference Include="PNNumericUpDown, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\VSReferences\wpf\PNNumericUpDown.dll</HintPath>
+    </Reference>
+    <Reference Include="PNPalette">
+      <HintPath>..\..\..\..\VSReferences\wpf\PNPalette.dll</HintPath>
+    </Reference>
+    <Reference Include="PNRichEditControl, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\VSReferences\wpf\PNRichEditControl.dll</HintPath>
+    </Reference>
+    <Reference Include="PNScrollPanel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\VSReferences\wpf\PNScrollPanel.dll</HintPath>
+    </Reference>
+    <Reference Include="PNStaticFonts">
+      <HintPath>..\..\..\..\VSReferences\libraries\PNStaticFonts.dll</HintPath>
+    </Reference>
+    <Reference Include="PNWCFLib">
+      <HintPath>..\..\..\..\VSReferences\libraries\PNWCFLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLiteWrapper">
+      <HintPath>..\..\..\..\VSReferences\libraries\SQLite\SQLiteWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AboutControl.xaml.cs">
+      <DependentUpon>AboutControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Baloon.xaml.cs">
+      <DependentUpon>Baloon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DropDownButton.cs" />
+    <Compile Include="FolderButton.cs" />
+    <Compile Include="IFooter.cs" />
+    <Compile Include="IHeader.cs" />
+    <Compile Include="IToolbar.cs" />
+    <Compile Include="PasswordHelper.cs" />
+    <Compile Include="PNCommands.cs" />
+    <Compile Include="PNConnections.cs" />
+    <Compile Include="PNGoogle.cs" />
+    <Compile Include="PNGridViewHelper.cs" />
+    <Compile Include="PNKeys.cs" />
+    <Compile Include="PNLotus.cs" />
+    <Compile Include="PNMessageBox.cs" />
+    <Compile Include="PNOffice.cs" />
+    <Compile Include="PNSkinOperations.cs" />
+    <Compile Include="PNSync.cs" />
+    <Compile Include="PNUtils.cs" />
+    <Compile Include="SkinlessToolbar.xaml.cs">
+      <DependentUpon>SkinlessToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SkinnableFooter.xaml.cs">
+      <DependentUpon>SkinnableFooter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SkinnableHeader.xaml.cs">
+      <DependentUpon>SkinnableHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SkinnableToolbar.xaml.cs">
+      <DependentUpon>SkinnableToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SmallButton.cs" />
+    <Compile Include="styles\CustomWindowStyle.cs" />
+    <Compile Include="ThumbnailButton.cs" />
+    <Compile Include="ToolbarButton.cs" />
+    <Compile Include="ToolbarToggleButton.cs" />
+    <Compile Include="WndAbout.xaml.cs">
+      <DependentUpon>WndAbout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndAddTable.xaml.cs">
+      <DependentUpon>WndAddTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndAdjustAppearance.xaml.cs">
+      <DependentUpon>WndAdjustAppearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndAdjustSchedule.xaml.cs">
+      <DependentUpon>WndAdjustSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndAlarm.xaml.cs">
+      <DependentUpon>WndAlarm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndArchName.xaml.cs">
+      <DependentUpon>WndArchName.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndArrow.xaml.cs">
+      <DependentUpon>WndArrow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndCanvas.xaml.cs">
+      <DependentUpon>WndCanvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndChooseMailContacts.xaml.cs">
+      <DependentUpon>WndChooseMailContacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndColorChooser.xaml.cs">
+      <DependentUpon>WndColorChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndContacts.xaml.cs">
+      <DependentUpon>WndContacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndCP.xaml.cs">
+      <DependentUpon>WndCP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndDeleteContactsGroup.xaml.cs">
+      <DependentUpon>WndDeleteContactsGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndExternals.xaml.cs">
+      <DependentUpon>WndExternals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndFolderIcons.xaml.cs">
+      <DependentUpon>WndFolderIcons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndFontChooser.xaml.cs">
+      <DependentUpon>WndFontChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndGetPlugins.xaml.cs">
+      <DependentUpon>WndGetPlugins.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndGetThemes.xaml.cs">
+      <DependentUpon>WndGetThemes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndGroups.xaml.cs">
+      <DependentUpon>WndGroups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndHelpChooser.xaml.cs">
+      <DependentUpon>WndHelpChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndHotkeys.xaml.cs">
+      <DependentUpon>WndHotkeys.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndImportMailContacts.xaml.cs">
+      <DependentUpon>WndImportMailContacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndImportNotes.xaml.cs">
+      <DependentUpon>WndImportNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndImportSettings.xaml.cs">
+      <DependentUpon>WndImportSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndLocalSync.xaml.cs">
+      <DependentUpon>WndLocalSync.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndLotusCredentials.xaml.cs">
+      <DependentUpon>WndLotusCredentials.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndMailContact.xaml.cs">
+      <DependentUpon>WndMailContact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndMenusManager.xaml.cs">
+      <DependentUpon>WndMenusManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndMessageBox.xaml.cs">
+      <DependentUpon>WndMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndNewGroup.xaml.cs">
+      <DependentUpon>WndNewGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndNewInGroup.xaml.cs">
+      <DependentUpon>WndNewInGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndNote.xaml.cs">
+      <DependentUpon>WndNote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndOverdue.xaml.cs">
+      <DependentUpon>WndOverdue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndPanel.xaml.cs">
+      <DependentUpon>WndPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndPasswordChange.xaml.cs">
+      <DependentUpon>WndPasswordChange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndPasswordCreate.xaml.cs">
+      <DependentUpon>WndPasswordCreate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndPasswordDelete.xaml.cs">
+      <DependentUpon>WndPasswordDelete.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndPin.xaml.cs">
+      <DependentUpon>WndPin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndPosts.xaml.cs">
+      <DependentUpon>WndPosts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSaveAs.xaml.cs">
+      <DependentUpon>WndSaveAs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndScramble.xaml.cs">
+      <DependentUpon>WndScramble.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSearchByDates.xaml.cs">
+      <DependentUpon>WndSearchByDates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSearchByTags.xaml.cs">
+      <DependentUpon>WndSearchByTags.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSearchInNotes.xaml.cs">
+      <DependentUpon>WndSearchInNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSearchReplace.xaml.cs">
+      <DependentUpon>WndSearchReplace.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSelectContacts.xaml.cs">
+      <DependentUpon>WndSelectContacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSelectGroups.xaml.cs">
+      <DependentUpon>WndSelectGroups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSendSmtp.xaml.cs">
+      <DependentUpon>WndSendSmtp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSettings.xaml.cs">
+      <DependentUpon>WndSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSmilies.xaml.cs">
+      <DependentUpon>WndSmilies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSmtp.xaml.cs">
+      <DependentUpon>WndSmtp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSP.xaml.cs">
+      <DependentUpon>WndSP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSpecialSymbols.xaml.cs">
+      <DependentUpon>WndSpecialSymbols.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSplash.xaml.cs">
+      <DependentUpon>WndSplash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditControl.cs" />
+    <Compile Include="SkinlessFooter.xaml.cs">
+      <DependentUpon>SkinlessFooter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FormatButton.cs" />
+    <Compile Include="SkinlessHeader.xaml.cs">
+      <DependentUpon>SkinlessHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HeaderButton.cs" />
+    <Compile Include="HSLColor.cs" />
+    <Compile Include="MarkButton.cs" />
+    <Compile Include="PNLang.cs" />
+    <Compile Include="PNClasses.cs" />
+    <Compile Include="PNConverters.cs" />
+    <Compile Include="PNData.cs" />
+    <Compile Include="PNEnumerations.cs" />
+    <Compile Include="PNEvents.cs" />
+    <Compile Include="PNExtensions.cs" />
+    <Compile Include="PNHotKeys.cs" />
+    <Compile Include="PNInterop.cs" />
+    <Compile Include="PNMAPI.cs" />
+    <Compile Include="PNMenus.cs" />
+    <Compile Include="PNNotesOperations.cs" />
+    <Compile Include="PNote.cs" />
+    <Compile Include="PNPaths.cs" />
+    <Compile Include="PNPlugins.cs" />
+    <Compile Include="PNRegistry.cs" />
+    <Compile Include="PNSettings.cs" />
+    <Compile Include="PNShellLink.cs" />
+    <Compile Include="PNSingleton.cs" />
+    <Compile Include="PNSound.cs" />
+    <Compile Include="PNStatic.cs" />
+    <Compile Include="PNStrings.cs" />
+    <Compile Include="PNUpdateChecker.cs" />
+    <Compile Include="PNWCFClientRunner.cs" />
+    <Compile Include="PNWCFHostRunner.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="WndExchangeLists.xaml.cs">
+      <DependentUpon>WndExchangeLists.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSync.xaml.cs">
+      <DependentUpon>WndSync.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndSyncComps.xaml.cs">
+      <DependentUpon>WndSyncComps.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AboutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Baloon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkinlessToolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkinnableFooter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkinnableHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkinnableToolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Calendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\ColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\DateTimePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Expander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\GroupBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\IpBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Label.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\ListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\NumericUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Palette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\RadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\RepeatButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\ScrollBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\ScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Slider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\StatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\TabItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\ToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WndAbout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndAddTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndAdjustAppearance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndAdjustSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndAlarm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndArchName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndArrow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndChooseMailContacts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndColorChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndContacts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndCP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndDeleteContactsGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndExternals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndFolderIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndFontChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndGetPlugins.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndGetThemes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndGroups.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndHelpChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndHotkeys.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndImportMailContacts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndImportNotes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndImportSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndLocalSync.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndLotusCredentials.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndMailContact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WndMain.xaml.cs">
+      <DependentUpon>WndMain.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="WndMenusManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndNewGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndNewInGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndNote.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndOverdue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndPasswordChange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndPasswordCreate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndPasswordDelete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndPin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndPosts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSaveAs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndScramble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSearchByDates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSearchByTags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSearchInNotes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSearchReplace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSelectContacts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSelectGroups.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSendSmtp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSmilies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSmtp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSpecialSymbols.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSplash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkinlessFooter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkinlessHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndExchangeLists.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSync.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WndSyncComps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="fonts\l_10646.ttf" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Google.GData.Apps.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Google.GData.Client.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Google.GData.Contacts.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Google.GData.Extensions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Hunspellx86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NHunspell.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Resource Include="fonts\segoesc.ttf" />
+    <None Include="SQLite.Interop.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="System.Data.SQLite.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\about.png" />
+    <Resource Include="images\about_dialog.png" />
+    <Resource Include="images\adjustapp.png" />
+    <Resource Include="images\adjustsch.png" />
+    <Resource Include="images\back.png" />
+    <Resource Include="images\bigimages\sendattach.png" />
+    <Resource Include="images\bigimages\bin_empty.png" />
+    <Resource Include="images\bigimages\bin_restore.png" />
+    <Resource Include="images\bigimages\check.png" />
+    <Resource Include="images\bigimages\coleven.png" />
+    <Resource Include="images\bigimages\note_copy.png" />
+    <Resource Include="images\bigimages\deletenote.png" />
+    <Resource Include="images\bigimages\diary.png" />
+    <Resource Include="images\bigimages\search.png" />
+    <Resource Include="images\bigimages\gr_view.png" />
+    <Resource Include="images\bigimages\help.png" />
+    <Resource Include="images\bigimages\hotkeys.png" />
+    <Resource Include="images\bigimages\load.png" />
+    <Resource Include="images\bigimages\sendmail.png" />
+    <Resource Include="images\bigimages\mailzip.png" />
+    <Resource Include="images\bigimages\menus.png" />
+    <Resource Include="images\bigimages\sendnetwork.png" />
+    <Resource Include="images\bigimages\new_note.png" />
+    <Resource Include="images\bigimages\fromcp.png" />
+    <Resource Include="images\bigimages\back.png" />
+    <Resource Include="images\bigimages\password.png" />
+    <Resource Include="images\bigimages\prefs.png" />
+    <Resource Include="images\bigimages\previewright.png" />
+    <Resource Include="images\bigimages\print.png" />
+    <Resource Include="images\bigimages\preview.png" />
+    <Resource Include="images\bigimages\preview_sett.png" />
+    <Resource Include="images\bigimages\restore.png" />
+    <Resource Include="images\bigimages\run.png" />
+    <Resource Include="images\bigimages\save.png" />
+    <Resource Include="images\bigimages\saveall.png" />
+    <Resource Include="images\bigimages\saveas.png" />
+    <Resource Include="images\bigimages\saveastext.png" />
+    <Resource Include="images\bigimages\searchweb.png" />
+    <Resource Include="images\bigimages\support.png" />
+    <Resource Include="images\bigimages\tags.png" />
+    <Resource Include="images\bigimages\placevis.png" />
+    <Resource Include="images\bin_empty.png" />
+    <Resource Include="images\bin_restore.png" />
+    <Resource Include="images\bold.png" />
+    <Resource Include="images\bullets.png" />
+    <Resource Include="images\calendar.png" />
+    <Resource Include="images\capsent.png" />
+    <Resource Include="images\capword.png" />
+    <Resource Include="images\center.png" />
+    <Resource Include="images\check.png" />
+    <Resource Include="images\clear.png" />
+    <Resource Include="images\cntgroup.png" />
+    <Resource Include="images\coleven.png" />
+    <Resource Include="images\colorpicker.png" />
+    <Resource Include="images\computer.png" />
+    <Resource Include="images\contact.png" />
+    <Resource Include="images\contactadd.png" />
+    <Resource Include="images\contacts.png" />
+    <Resource Include="images\contactselect.png" />
+    <Resource Include="images\controlp.png" />
+    <Resource Include="images\copy.png" />
+    <Resource Include="images\cross.png" />
+    <Resource Include="cursors\cur_group_move.cur" />
+    <Resource Include="cursors\cur_notes_move.cur" />
+    <Resource Include="cursors\cur_note_move.cur" />
+    <Resource Include="images\cut.png" />
+    <Resource Include="images\deletenote.png" />
+    <Resource Include="images\diary.png" />
+    <Resource Include="images\dockall.png" />
+    <Resource Include="images\dockbottom.png" />
+    <Resource Include="images\dockleft.png" />
+    <Resource Include="images\dockright.png" />
+    <Resource Include="images\docktop.png" />
+    <Resource Include="images\down.png" />
+    <Resource Include="images\edit.png" />
+    <Resource Include="images\exit.png" />
+    <Resource Include="images\favadd.png" />
+    <Resource Include="images\favorites.png" />
+    <Resource Include="images\favremove.png" />
+    <Resource Include="images\find.png" />
+    <Resource Include="images\findnext.png" />
+    <Resource Include="images\folder.png" />
+    <Resource Include="images\folders\folders_00001.png" />
+    <Resource Include="images\folders\folders_00002.png" />
+    <Resource Include="images\folders\folders_00003.png" />
+    <Resource Include="images\folders\folders_00004.png" />
+    <Resource Include="images\folders\folders_00005.png" />
+    <Resource Include="images\folders\folders_00006.png" />
+    <Resource Include="images\folders\folders_00007.png" />
+    <Resource Include="images\folders\folders_00008.png" />
+    <Resource Include="images\folders\folders_00009.png" />
+    <Resource Include="images\folders\folders_00010.png" />
+    <Resource Include="images\folders\folders_00011.png" />
+    <Resource Include="images\folders\folders_00012.png" />
+    <Resource Include="images\folders\folders_00013.png" />
+    <Resource Include="images\folders\folders_00014.png" />
+    <Resource Include="images\folders\folders_00015.png" />
+    <Resource Include="images\folders\folders_00016.png" />
+    <Resource Include="images\folders\folders_00017.png" />
+    <Resource Include="images\folders\folders_00018.png" />
+    <Resource Include="images\folders\folders_00019.png" />
+    <Resource Include="images\folders\folders_00020.png" />
+    <Resource Include="images\folders\folders_00021.png" />
+    <Resource Include="images\folders\folders_00022.png" />
+    <Resource Include="images\folders\folders_00023.png" />
+    <Resource Include="images\folders\folders_00024.png" />
+    <Resource Include="images\folders\folders_00025.png" />
+    <Resource Include="images\folders\folders_00026.png" />
+    <Resource Include="images\folders\folders_00027.png" />
+    <Resource Include="images\folders\folders_00028.png" />
+    <Resource Include="images\folders\folders_00029.png" />
+    <Resource Include="images\folders\folders_00030.png" />
+    <Resource Include="images\folders\folders_00031.png" />
+    <Resource Include="images\folders\folders_00032.png" />
+    <Resource Include="images\folders\folders_00033.png" />
+    <Resource Include="images\folders\folders_00034.png" />
+    <Resource Include="images\folders\folders_00035.png" />
+    <Resource Include="images\folders\folders_00036.png" />
+    <Resource Include="images\folders\folders_00037.png" />
+    <Resource Include="images\folders\folders_00038.png" />
+    <Resource Include="images\folders\folders_00039.png" />
+    <Resource Include="images\folders\folders_00040.png" />
+    <Resource Include="images\folders\folders_00041.png" />
+    <Resource Include="images\folders\folders_00042.png" />
+    <Resource Include="images\folders\folders_00043.png" />
+    <Resource Include="images\folders\folders_00044.png" />
+    <Resource Include="images\folders\folders_00045.png" />
+    <Resource Include="images\folders\folders_00046.png" />
+    <Resource Include="images\folders\folders_00047.png" />
+    <Resource Include="images\folders\folders_00048.png" />
+    <Resource Include="images\folders\folders_00049.png" />
+    <Resource Include="images\folders\folders_00050.png" />
+    <Resource Include="images\folders\folders_00051.png" />
+    <Resource Include="images\folders\folders_00052.png" />
+    <Resource Include="images\folders\folders_00053.png" />
+    <Resource Include="images\folders\folders_00054.png" />
+    <Resource Include="images\folders\folders_00055.png" />
+    <Resource Include="images\folders\folders_00056.png" />
+    <Resource Include="images\folders\folders_00057.png" />
+    <Resource Include="images\folders\folders_00058.png" />
+    <Resource Include="images\folders\folders_00059.png" />
+    <Resource Include="images\folders\folders_00060.png" />
+    <Resource Include="images\folders\folders_00061.png" />
+    <Resource Include="images\folders\folders_00062.png" />
+    <Resource Include="images\folders\folders_00063.png" />
+    <Resource Include="images\folders\folders_00064.png" />
+    <Resource Include="images\folders\folders_00065.png" />
+    <Resource Include="images\folders\folders_00066.png" />
+    <Resource Include="images\folders\folders_00067.png" />
+    <Resource Include="images\folders\folders_00068.png" />
+    <Resource Include="images\folders\folders_00069.png" />
+    <Resource Include="images\folders\folders_00070.png" />
+    <Resource Include="images\folders\folders_00071.png" />
+    <Resource Include="images\folders\folders_00072.png" />
+    <Resource Include="images\folders\folders_00073.png" />
+    <Resource Include="images\folders\folders_00074.png" />
+    <Resource Include="images\folders\folders_00075.png" />
+    <Resource Include="images\folders\folders_00076.png" />
+    <Resource Include="images\folders\folders_00077.png" />
+    <Resource Include="images\folders\folders_00078.png" />
+    <Resource Include="images\folders\folders_00079.png" />
+    <Resource Include="images\folders\folders_00080.png" />
+    <Resource Include="images\folders\folders_00081.png" />
+    <Resource Include="images\folders\folders_00082.png" />
+    <Resource Include="images\folders\folders_00083.png" />
+    <Resource Include="images\folders\folders_00084.png" />
+    <Resource Include="images\folders\folders_00085.png" />
+    <Resource Include="images\folders\folders_00086.png" />
+    <Resource Include="images\folders\folders_00087.png" />
+    <Resource Include="images\folders\folders_00088.png" />
+    <Resource Include="images\folders\folders_00089.png" />
+    <Resource Include="images\folders\folders_00090.png" />
+    <Resource Include="images\folders\folders_00091.png" />
+    <Resource Include="images\folders\folders_00092.png" />
+    <Resource Include="images\folders\folders_00093.png" />
+    <Resource Include="images\folders\folders_00094.png" />
+    <Resource Include="images\folders\folders_00095.png" />
+    <Resource Include="images\folders\folders_00096.png" />
+    <Resource Include="images\folders\folders_00097.png" />
+    <Resource Include="images\folders\folders_00098.png" />
+    <Resource Include="images\folders\folders_00099.png" />
+    <Resource Include="images\folders\folders_00100.png" />
+    <Resource Include="images\folders\folders_00101.png" />
+    <Resource Include="images\folders\folders_00102.png" />
+    <Resource Include="images\folders\folders_00103.png" />
+    <Resource Include="images\folders\folders_00104.png" />
+    <Resource Include="images\folders\folders_00105.png" />
+    <Resource Include="images\folders\folders_00106.png" />
+    <Resource Include="images\folders\folders_00107.png" />
+    <Resource Include="images\folders\folders_00108.png" />
+    <Resource Include="images\folders\folders_00109.png" />
+    <Resource Include="images\folders\folders_00110.png" />
+    <Resource Include="images\folders\folders_00111.png" />
+    <Resource Include="images\folders\folders_00112.png" />
+    <Resource Include="images\folders\folders_00113.png" />
+    <Resource Include="images\folders\folders_00114.png" />
+    <Resource Include="images\folders\folders_00115.png" />
+    <Resource Include="images\folders\folders_00116.png" />
+    <Resource Include="images\folders\folders_00117.png" />
+    <Resource Include="images\folders\folders_00118.png" />
+    <Resource Include="images\folders\folders_00119.png" />
+    <Resource Include="images\folders\folders_00120.png" />
+    <Resource Include="images\folders\folders_00121.png" />
+    <Resource Include="images\font.png" />
+    <Resource Include="images\fontcolor.png" />
+    <Resource Include="images\fontsize.png" />
+    <Resource Include="images\fromcp.png" />
+    <Resource Include="images\front.png" />
+    <Resource Include="images\gmail.png" />
+    <Resource Include="images\gr.png" />
+    <Resource Include="images\group.png" />
+    <Resource Include="images\groupadd.png" />
+    <Resource Include="images\groupselect.png" />
+    <Resource Include="images\gr_add.png" />
+    <Resource Include="images\gr_all.png" />
+    <Resource Include="images\gr_back.png" />
+    <Resource Include="images\gr_bin.png" />
+    <Resource Include="images\gr_diary.png" />
+    <Resource Include="images\gr_edit.png" />
+    <Resource Include="images\gr_fav.png" />
+    <Resource Include="images\gr_hide.png" />
+    <Resource Include="images\gr_hide_all.png" />
+    <Resource Include="images\gr_inc.png" />
+    <Resource Include="images\gr_remove.png" />
+    <Resource Include="images\gr_search.png" />
+    <Resource Include="images\gr_show.png" />
+    <Resource Include="images\gr_show_all.png" />
+    <Resource Include="images\gr_sub_add.png" />
+    <Resource Include="images\gr_view.png" />
+    <Resource Include="images\happy.png" />
+    <Resource Include="images\help.png" />
+    <Resource Include="images\hide.png" />
+    <Resource Include="images\hidegroups.png" />
+    <Resource Include="images\hidenote.png" />
+    <Resource Include="images\hidetag.png" />
+    <Resource Include="images\highlight.png" />
+    <Resource Include="images\hotkeys.png" />
+    <Resource Include="images\insertpost.png" />
+    <Resource Include="images\italic.png" />
+    <Resource Include="images\lastmod.png" />
+    <Resource Include="images\left.png" />
+    <Resource Include="images\lineaddafter.png" />
+    <Resource Include="images\lineaddbefore.png" />
+    <Resource Include="images\lineremoveafter.png" />
+    <Resource Include="images\lineremovebefore.png" />
+    <Resource Include="images\linespacing.png" />
+    <Resource Include="images\link.png" />
+    <Resource Include="images\load.png" />
+    <Resource Include="images\lockprogram.png" />
+    <Resource Include="images\loudspeaker.png" />
+    <Resource Include="images\lower.png" />
+    <Resource Include="images\lsback.png" />
+    <Resource Include="images\lscomplete.png" />
+    <Resource Include="images\lsfav.png" />
+    <Resource Include="images\lshnew.png" />
+    <Resource Include="images\lshnew_change.png" />
+    <Resource Include="images\lshnew_change_sch.png" />
+    <Resource Include="images\lshnew_sch.png" />
+    <Resource Include="images\lshord.png" />
+    <Resource Include="images\lshord_change.png" />
+    <Resource Include="images\lshord_change_sch.png" />
+    <Resource Include="images\lshord_sch.png" />
+    <Resource Include="images\lspass.png" />
+    <Resource Include="images\lspassgroup.png" />
+    <Resource Include="images\lspin.png" />
+    <Resource Include="images\lspriority.png" />
+    <Resource Include="images\lsprotect.png" />
+    <Resource Include="images\lsrec.png" />
+    <Resource Include="images\lssend.png" />
+    <Resource Include="images\lssendrec.png" />
+    <Resource Include="images\lsvnew.png" />
+    <Resource Include="images\lsvnew_change.png" />
+    <Resource Include="images\lsvnew_change_sch.png" />
+    <Resource Include="images\lsvnew_sch.png" />
+    <Resource Include="images\lsvord.png" />
+    <Resource Include="images\lsvord_change.png" />
+    <Resource Include="images\lsvord_change_sch.png" />
+    <Resource Include="images\lsvord_sch.png" />
+    <Resource Include="images\mailzip.png" />
+    <Resource Include="images\menus.png" />
+    <Resource Include="images\mnu.png" />
+    <Resource Include="images\msoffice.png" />
+    <Resource Include="images\new_note.png" />
+    <Resource Include="images\new_note_in_group.png" />
+    <Resource Include="images\note_copy.png" />
+    <Resource Include="images\note_pinned.png" />
+    <Resource Include="images\outlook.png" />
+    <Resource Include="images\outlooknote.png" />
+    <Resource Include="images\passadd.png" />
+    <Resource Include="images\passedit.png" />
+    <Resource Include="images\passremove.png" />
+    <Resource Include="images\password.png" />
+    <Resource Include="images\paste.png" />
+    <Resource Include="images\picture.png" />
+    <Resource Include="images\pinadd.png" />
+    <Resource Include="images\pinremove.png" />
+    <Resource Include="images\placevis.png" />
+    <Resource Include="images\plus.png" />
+    <Resource Include="images\post.png" />
+    <Resource Include="images\prefs.png" />
+    <Resource Include="images\preview.png" />
+    <Resource Include="images\previewright.png" />
+    <Resource Include="images\preview_sett.png" />
+    <Resource Include="images\print.png" />
+    <Resource Include="images\redo.png" />
+    <Resource Include="images\reload.png" />
+    <Resource Include="images\replace.png" />
+    <Resource Include="images\reply.png" />
+    <Resource Include="images\restore.png" />
+    <Resource Include="images\right.png" />
+    <Resource Include="images\rollunroll.png" />
+    <Resource Include="images\run.png" />
+    <Resource Include="images\sad.png" />
+    <Resource Include="images\save.png" />
+    <Resource Include="images\saveall.png" />
+    <Resource Include="images\saveas.png" />
+    <Resource Include="images\saveastext.png" />
+    <Resource Include="images\scramble.png" />
+    <Resource Include="images\search.png" />
+    <Resource Include="images\searchweb.png" />
+    <Resource Include="images\selectall.png" />
+    <Resource Include="images\sendattach.png" />
+    <Resource Include="images\sendmail.png" />
+    <Resource Include="images\sendnetwork.png" />
+    <Resource Include="images\showgroups.png" />
+    <Resource Include="images\showhide.png" />
+    <Resource Include="images\shownote.png" />
+    <Resource Include="images\showtag.png" />
+    <Resource Include="images\smilie.png" />
+    <Resource Include="images\smilies\1.png" />
+    <Resource Include="images\smilies\10.png" />
+    <Resource Include="images\smilies\100.png" />
+    <Resource Include="images\smilies\101.png" />
+    <Resource Include="images\smilies\102.png" />
+    <Resource Include="images\smilies\103.png" />
+    <Resource Include="images\smilies\104.png" />
+    <Resource Include="images\smilies\105.png" />
+    <Resource Include="images\smilies\106.png" />
+    <Resource Include="images\smilies\107.png" />
+    <Resource Include="images\smilies\108.png" />
+    <Resource Include="images\smilies\109.png" />
+    <Resource Include="images\smilies\11.png" />
+    <Resource Include="images\smilies\110.png" />
+    <Resource Include="images\smilies\111.png" />
+    <Resource Include="images\smilies\112.png" />
+    <Resource Include="images\smilies\113.png" />
+    <Resource Include="images\smilies\114.png" />
+    <Resource Include="images\smilies\115.png" />
+    <Resource Include="images\smilies\116.png" />
+    <Resource Include="images\smilies\117.png" />
+    <Resource Include="images\smilies\118.png" />
+    <Resource Include="images\smilies\119.png" />
+    <Resource Include="images\smilies\12.png" />
+    <Resource Include="images\smilies\120.png" />
+    <Resource Include="images\smilies\121.png" />
+    <Resource Include="images\smilies\13.png" />
+    <Resource Include="images\smilies\14.png" />
+    <Resource Include="images\smilies\15.png" />
+    <Resource Include="images\smilies\16.png" />
+    <Resource Include="images\smilies\17.png" />
+    <Resource Include="images\smilies\18.png" />
+    <Resource Include="images\smilies\19.png" />
+    <Resource Include="images\smilies\2.png" />
+    <Resource Include="images\smilies\20.png" />
+    <Resource Include="images\smilies\21.png" />
+    <Resource Include="images\smilies\22.png" />
+    <Resource Include="images\smilies\23.png" />
+    <Resource Include="images\smilies\24.png" />
+    <Resource Include="images\smilies\25.png" />
+    <Resource Include="images\smilies\26.png" />
+    <Resource Include="images\smilies\27.png" />
+    <Resource Include="images\smilies\28.png" />
+    <Resource Include="images\smilies\29.png" />
+    <Resource Include="images\smilies\3.png" />
+    <Resource Include="images\smilies\30.png" />
+    <Resource Include="images\smilies\31.png" />
+    <Resource Include="images\smilies\32.png" />
+    <Resource Include="images\smilies\33.png" />
+    <Resource Include="images\smilies\34.png" />
+    <Resource Include="images\smilies\35.png" />
+    <Resource Include="images\smilies\36.png" />
+    <Resource Include="images\smilies\37.png" />
+    <Resource Include="images\smilies\38.png" />
+    <Resource Include="images\smilies\39.png" />
+    <Resource Include="images\smilies\4.png" />
+    <Resource Include="images\smilies\40.png" />
+    <Resource Include="images\smilies\41.png" />
+    <Resource Include="images\smilies\42.png" />
+    <Resource Include="images\smilies\43.png" />
+    <Resource Include="images\smilies\44.png" />
+    <Resource Include="images\smilies\45.png" />
+    <Resource Include="images\smilies\46.png" />
+    <Resource Include="images\smilies\47.png" />
+    <Resource Include="images\smilies\48.png" />
+    <Resource Include="images\smilies\49.png" />
+    <Resource Include="images\smilies\5.png" />
+    <Resource Include="images\smilies\50.png" />
+    <Resource Include="images\smilies\51.png" />
+    <Resource Include="images\smilies\52.png" />
+    <Resource Include="images\smilies\53.png" />
+    <Resource Include="images\smilies\54.png" />
+    <Resource Include="images\smilies\55.png" />
+    <Resource Include="images\smilies\56.png" />
+    <Resource Include="images\smilies\57.png" />
+    <Resource Include="images\smilies\58.png" />
+    <Resource Include="images\smilies\59.png" />
+    <Resource Include="images\smilies\6.png" />
+    <Resource Include="images\smilies\60.png" />
+    <Resource Include="images\smilies\61.png" />
+    <Resource Include="images\smilies\62.png" />
+    <Resource Include="images\smilies\63.png" />
+    <Resource Include="images\smilies\64.png" />
+    <Resource Include="images\smilies\65.png" />
+    <Resource Include="images\smilies\66.png" />
+    <Resource Include="images\smilies\67.png" />
+    <Resource Include="images\smilies\68.png" />
+    <Resource Include="images\smilies\69.png" />
+    <Resource Include="images\smilies\7.png" />
+    <Resource Include="images\smilies\70.png" />
+    <Resource Include="images\smilies\71.png" />
+    <Resource Include="images\smilies\72.png" />
+    <Resource Include="images\smilies\73.png" />
+    <Resource Include="images\smilies\74.png" />
+    <Resource Include="images\smilies\75.png" />
+    <Resource Include="images\smilies\76.png" />
+    <Resource Include="images\smilies\77.png" />
+    <Resource Include="images\smilies\78.png" />
+    <Resource Include="images\smilies\79.png" />
+    <Resource Include="images\smilies\8.png" />
+    <Resource Include="images\smilies\80.png" />
+    <Resource Include="images\smilies\81.png" />
+    <Resource Include="images\smilies\82.png" />
+    <Resource Include="images\smilies\83.png" />
+    <Resource Include="images\smilies\84.png" />
+    <Resource Include="images\smilies\85.png" />
+    <Resource Include="images\smilies\86.png" />
+    <Resource Include="images\smilies\87.png" />
+    <Resource Include="images\smilies\88.png" />
+    <Resource Include="images\smilies\89.png" />
+    <Resource Include="images\smilies\9.png" />
+    <Resource Include="images\smilies\90.png" />
+    <Resource Include="images\smilies\91.png" />
+    <Resource Include="images\smilies\92.png" />
+    <Resource Include="images\smilies\93.png" />
+    <Resource Include="images\smilies\94.png" />
+    <Resource Include="images\smilies\95.png" />
+    <Resource Include="images\smilies\96.png" />
+    <Resource Include="images\smilies\97.png" />
+    <Resource Include="images\smilies\98.png" />
+    <Resource Include="images\smilies\99.png" />
+    <Resource Include="images\sortasc.png" />
+    <Resource Include="images\sortdesc.png" />
+    <Resource Include="images\spell.png" />
+    <Resource Include="images\splash.png" />
+    <Resource Include="images\strike.png" />
+    <Resource Include="images\sub.png" />
+    <Resource Include="images\submnu.png" />
+    <Resource Include="images\sum.png" />
+    <Resource Include="images\super.png" />
+    <Resource Include="images\support.png" />
+    <Resource Include="images\switchoff.png" />
+    <Resource Include="images\switchon.png" />
+    <Resource Include="images\table.png" />
+    <Resource Include="images\tags.png" />
+    <Resource Include="images\thumbs_up.png" />
+    <Resource Include="images\under.png" />
+    <Resource Include="images\undo.png" />
+    <Resource Include="images\unscramble.png" />
+    <Resource Include="images\updown.png" />
+    <Resource Include="images\upper.png" />
+    <Resource Include="images\web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="note_pinned.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\easeaccess.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\keyboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\zoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="sounds\receive.wav" />
+    <Resource Include="sounds\type.wav" />
+    <Resource Include="xml\dictionaries.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\indentdec.png" />
+    <Resource Include="images\indentinc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="cursors\dropper.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Debug\lang\english_us.xml" />
+    <Resource Include="bin\Debug\lang\russian.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\line1.png" />
+    <Resource Include="images\line2.png" />
+    <Resource Include="images\line4.png" />
+    <Resource Include="images\line6.png" />
+    <Resource Include="images\line8.png" />
+    <Resource Include="images\set_app.png" />
+    <Resource Include="images\set_beh.png" />
+    <Resource Include="images\set_gen.png" />
+    <Resource Include="images\set_net.png" />
+    <Resource Include="images\set_pro.png" />
+    <Resource Include="images\set_sch.png" />
+    <Resource Include="images\recyclebin.png" />
+    <Resource Include="images\w48.png" />
+    <Resource Include="images\centralize.png" />
+    <Resource Include="images\lsscrambled.png" />
+    <Resource Include="images\bigimages\favadd.png" />
+    <Resource Include="images\bigimages\favremove.png" />
+    <Resource Include="images\control.png" />
+    <Resource Include="images\bigimages\control.png" />
+    <Resource Include="images\bigimages\gr_add.png" />
+    <Resource Include="images\bigimages\gr_edit.png" />
+    <Resource Include="images\bigimages\gr_hide.png" />
+    <Resource Include="images\bigimages\gr_hide_all.png" />
+    <Resource Include="images\bigimages\gr_remove.png" />
+    <Resource Include="images\bigimages\gr_show.png" />
+    <Resource Include="images\bigimages\gr_show_all.png" />
+    <Resource Include="images\bigimages\gr_sub_add.png" />
+    <Resource Include="images\bigimages\passadd.png" />
+    <Resource Include="images\bigimages\passremove.png" />
+    <Resource Include="images\skins.png" />
+    <Resource Include="images\package_new.png" />
+    <Resource Include="images\outbox_out.png" />
+    <Resource Include="images\inbox_into.png" />
+    <Resource Include="images\error.png" />
+    <Resource Include="images\information.png" />
+    <Resource Include="images\sample.png" />
+    <Resource Include="images\lsdel.png" />
+    <None Include="reimaging.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Resource Include="images\smallpin.png" />
+    <Resource Include="images\topanel.png" />
+    <Resource Include="images\paneltop.png" />
+    <Resource Include="images\frompanel.png" />
+    <Resource Include="images\panel.png" />
+    <Resource Include="images\searchloc.png" />
+    <Resource Include="images\bigimages\about.png" />
+    <Resource Include="images\lotus.png" />
+    <Content Include="sounds\dice.wav" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

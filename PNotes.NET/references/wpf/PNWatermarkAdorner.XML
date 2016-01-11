@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNWatermarkAdorner</name>
+    </assembly>
+    <members>
+        <member name="T:PNWatermarkAdorner.WatermarkAdorner">
+            <summary>
+            Adorner for the watermark
+            </summary>
+        </member>
+        <member name="F:PNWatermarkAdorner.WatermarkAdorner._ContentPresenter">
+            <summary>
+            <see cref="T:System.Windows.Controls.ContentPresenter"/> that holds the watermark
+            </summary>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkAdorner.#ctor(System.Windows.UIElement,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PNWatermarkAdorner.WatermarkAdorner"/> class
+            </summary>
+            <param name="adornedElement"><see cref="T:System.Windows.UIElement"/> to be adorned</param>
+            <param name="watermark">The watermark</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkAdorner.GetVisualChild(System.Int32)">
+            <summary>
+            Returns a specified child <see cref="T:System.Windows.Media.Visual"/> for the parent <see cref="T:System.Windows.Media.ContainerVisual"/>.
+            </summary>
+            <param name="index">A 32-bit signed integer that represents the index value of the child <see cref="T:System.Windows.Media.Visual"/>. The value of index must be between 0 and <see cref="P:PNWatermarkAdorner.WatermarkAdorner.VisualChildrenCount"/> - 1.</param>
+            <returns>The child <see cref="T:System.Windows.Media.Visual"/>.</returns>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkAdorner.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Implements any custom measuring behavior for the adorner.
+            </summary>
+            <param name="constraint">A size to constrain the adorner to.</param>
+            <returns>A <see cref="T:System.Windows.Size"/> object representing the amount of layout space needed by the adorner.</returns>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkAdorner.ArrangeOverride(System.Windows.Size)">
+            <summary>
+            When overridden in a derived class, positions child elements and determines a size for a <see cref="T:System.Windows.FrameworkElement"/> derived class. 
+            </summary>
+            <param name="finalSize">The final area within the parent that this element should use to arrange itself and its children.</param>
+            <returns>The actual size used.</returns>
+        </member>
+        <member name="P:PNWatermarkAdorner.WatermarkAdorner.VisualChildrenCount">
+            <summary>
+            Gets the number of children for the <see cref="T:System.Windows.Media.ContainerVisual"/>.
+            </summary>
+        </member>
+        <member name="P:PNWatermarkAdorner.WatermarkAdorner.Control">
+            <summary>
+            Gets the control that is being adorned
+            </summary>
+        </member>
+        <member name="T:PNWatermarkAdorner.WatermarkService">
+            <summary>
+            Class that provides the Watermark attached property
+            </summary>
+        </member>
+        <member name="F:PNWatermarkAdorner.WatermarkService.WatermarkProperty">
+            <summary>
+            Watermark Attached Dependency Property
+            </summary>
+        </member>
+        <member name="F:PNWatermarkAdorner.WatermarkService.itemsControls">
+            <summary>
+            Dictionary of ItemsControls
+            </summary>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.GetWatermark(System.Windows.DependencyObject)">
+            <summary>
+            Gets the Watermark property.  This dependency property indicates the watermark for the control.
+            </summary>
+            <param name="d"><see cref="T:System.Windows.DependencyObject"/> to get the property from</param>
+            <returns>The value of the Watermark property</returns>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.SetWatermark(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Sets the Watermark property.  This dependency property indicates the watermark for the control.
+            </summary>
+            <param name="d"><see cref="T:System.Windows.DependencyObject"/> to set the property on</param>
+            <param name="value">value of the property</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.OnWatermarkChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Watermark property.
+            </summary>
+            <param name="d"><see cref="T:System.Windows.DependencyObject"/> that fired the event</param>
+            <param name="e">A <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.Control_GotKeyboardFocus(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Handle the GotFocus event on the control
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">A <see cref="T:System.Windows.RoutedEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.Control_Loaded(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Handle the Loaded and LostFocus event on the control
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">A <see cref="T:System.Windows.RoutedEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.ItemsSourceChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the items source changed event
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">A <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.ItemsChanged(System.Object,System.Windows.Controls.Primitives.ItemsChangedEventArgs)">
+            <summary>
+            Event handler for the items changed event
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">A <see cref="T:System.Windows.Controls.Primitives.ItemsChangedEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.RemoveWatermark(System.Windows.UIElement)">
+            <summary>
+            Remove the watermark from the specified element
+            </summary>
+            <param name="control">Element to remove the watermark from</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.ShowWatermark(System.Windows.Controls.Control)">
+            <summary>
+            Show the watermark on the specified control
+            </summary>
+            <param name="control">Control to show the watermark on</param>
+        </member>
+        <member name="M:PNWatermarkAdorner.WatermarkService.ShouldShowWatermark(System.Windows.Controls.Control)">
+            <summary>
+            Indicates whether or not the watermark should be shown on the specified control
+            </summary>
+            <param name="c"><see cref="T:System.Windows.Controls.Control"/> to test</param>
+            <returns>true if the watermark should be shown; false otherwise</returns>
+        </member>
+        <member name="T:PNWatermarkAdorner.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PNWatermarkAdorner.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PNWatermarkAdorner.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

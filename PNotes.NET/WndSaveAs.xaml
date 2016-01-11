@@ -1,0 +1,38 @@
+﻿<Window x:Class="PNotes.NET.WndSaveAs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:net="clr-namespace:PNotes.NET"
+        Name="DlgSaveAs"
+        Title="WndSaveAs" 
+        Height="240" 
+        Width="320" 
+        Style="{DynamicResource CustomWindowStyle}"
+        ShowInTaskbar="False" 
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Loaded="DlgSaveAs_Loaded"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Name="lblNoteName" Margin="4" Text="Note name" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <TextBox Name="txtName" Margin="4" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextChanged="txtName_TextChanged"/>
+        <TextBlock Name="lblInGroup" Margin="4" Text="Save in group" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <net:PNTreeView x:Name="tvwGroups" Margin="4" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" PNTreeViewLeftMouseDoubleClick="tvwGroups_PNTreeViewLeftMouseDoubleClick" SelectedItemChanged="tvwGroups_SelectedItemChanged"/>
+        <Button Name="cmdOK" Content="OK" Margin="4" MinWidth="75" IsDefault="True" IsEnabled="False" MinHeight="23" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Click="cmdOK_Click"/>
+        <Button Name="cmdCancel" Content="Cancel" Margin="4" MinWidth="75" IsCancel="True" MinHeight="23" Grid.Row="4" Grid.Column="1"/>
+    </Grid>
+</Window>

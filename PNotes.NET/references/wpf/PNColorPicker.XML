@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNColorPicker</name>
+    </assembly>
+    <members>
+        <member name="T:PNColorPicker.ColorPicker">
+            <summary>
+            Represents custom control that allows users to choose color
+            </summary>
+        </member>
+        <member name="F:PNColorPicker.ColorPicker.SelectedColorProperty">
+            <summary>
+            The identifier of the <see cref="P:PNColorPicker.ColorPicker.SelectedColor"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:PNColorPicker.ColorPicker.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
+            </summary>
+        </member>
+        <member name="M:PNColorPicker.ColorPicker.OnSelectedColorChanged(System.Windows.Media.Color,System.Windows.Media.Color)">
+            <summary>
+            Invoked just before the <see cref="E:PNColorPicker.ColorPicker.SelectedColorChanged"/> event is raised on NumericUpdown
+            </summary>
+            <param name="oldValue">Old color value</param>
+            <param name="newValue">New color value</param>
+        </member>
+        <member name="F:PNColorPicker.ColorPicker.SelectedColorChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNColorPicker.ColorPicker.SelectedColorChanged"/> routed event
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.ColorPicker.SelectedColor">
+            <summary>
+            Gets or sets the color selected in control
+            </summary>
+        </member>
+        <member name="E:PNColorPicker.ColorPicker.SelectedColorChanged">
+            <summary>
+            Occurs when the <see cref="P:PNColorPicker.ColorPicker.SelectedColor"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="T:PNColorPicker.InvertColorConverter">
+            <summary>
+            Represents class for inverting color of solid brush
+            </summary>
+        </member>
+        <member name="M:PNColorPicker.InvertColorConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Inverts color of solid brush
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PNColorPicker.InvertColorConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PNColorPicker.WebItem">
+            <summary>
+            Represents listbox item for web colors
+            </summary>
+        </member>
+        <member name="M:PNColorPicker.WebItem.#ctor(System.String)">
+            <summary>
+            Creates new instance of WebItem
+            </summary>
+            <param name="colorName">Color name</param>
+        </member>
+        <member name="P:PNColorPicker.WebItem.Color">
+            <summary>
+            Gets the color of item
+            </summary>
+        </member>
+        <member name="T:PNColorPicker.CustomColors">
+            <summary>
+            Interaction logic for CustomColors.xaml
+            </summary>
+            <summary>
+            CustomColors
+            </summary>
+        </member>
+        <member name="F:PNColorPicker.CustomColors.CustomColorProperty">
+            <summary>
+            The identifier of the <see cref="P:PNColorPicker.CustomColors.CustomColor"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNColorPicker.CustomColors.RedProperty">
+            <summary>
+            The identifier of the <see cref="P:PNColorPicker.CustomColors.Red"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNColorPicker.CustomColors.GreenProperty">
+            <summary>
+            The identifier of the <see cref="P:PNColorPicker.CustomColors.Green"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNColorPicker.CustomColors.BlueProperty">
+            <summary>
+            The identifier of the <see cref="P:PNColorPicker.CustomColors.Blue"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNColorPicker.CustomColors.HueProperty">
+            <summary>
+            The identifier of the <see cref="P:PNColorPicker.CustomColors.Hue"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNColorPicker.CustomColors.SaturationProperty">
+            <summary>
+            The identifier of the <see cref="P:PNColorPicker.CustomColors.Saturation"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNColorPicker.CustomColors.LuminanceProperty">
+            <summary>
+            The identifier of the <see cref="P:PNColorPicker.CustomColors.Luminance"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:PNColorPicker.CustomColors.#ctor">
+            <summary>
+            Creates new instance of CustomColors control
+            </summary>
+        </member>
+        <member name="M:PNColorPicker.CustomColors.OnCustomColorChanged(System.Windows.Media.Color,System.Windows.Media.Color)">
+            <summary>
+            Invoked just before the <see cref="E:PNColorPicker.CustomColors.CustomColorChanged"/> event is raised on NumericUpdown
+            </summary>
+            <param name="oldValue">Old color value</param>
+            <param name="newValue">New color value</param>
+        </member>
+        <member name="F:PNColorPicker.CustomColors.CustomColorChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNColorPicker.CustomColors.CustomColorChanged"/> routed event
+            </summary>
+        </member>
+        <member name="M:PNColorPicker.CustomColors.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.CustomColors.CustomColor">
+            <summary>
+            Gets or sets the color selected in control
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.CustomColors.Red">
+            <summary>
+            Gets or sets the Red component of color
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.CustomColors.Green">
+            <summary>
+            Gets or sets the Green component of color
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.CustomColors.Blue">
+            <summary>
+            Gets or sets the Blue component of color
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.CustomColors.Hue">
+            <summary>
+            Gets or sets the color hue
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.CustomColors.Saturation">
+            <summary>
+            Gets or sets the color satureation
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.CustomColors.Luminance">
+            <summary>
+            Gets or sets the color luminance
+            </summary>
+        </member>
+        <member name="E:PNColorPicker.CustomColors.CustomColorChanged">
+            <summary>
+            Occurs when the <see cref="P:PNColorPicker.CustomColors.CustomColor"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="T:PNColorPicker.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PNColorPicker.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

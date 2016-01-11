@@ -1,0 +1,33 @@
+﻿<Window x:Class="PNotes.NET.WndNewInGroup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WndNewInGroup" 
+        Height="240" 
+        Width="320" 
+        Name="DlgNewInGroup"
+        Style="{DynamicResource CustomWindowStyle}" 
+        ShowInTaskbar="False" 
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Name="lblNewInGroup" Margin="4" Text="Create note in group" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <TreeView Name="tvwGroups" Margin="4" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" MouseDoubleClick="tvwGroups_MouseDoubleClick" SelectedItemChanged="tvwGroups_SelectedItemChanged"/>
+        <Button Name="cmdOK" Content="OK" Margin="4" MinWidth="75" IsDefault="True" IsEnabled="False" MinHeight="23" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Click="cmdOK_Click"/>
+        <Button Name="cmdCancel" Content="Cancel" Margin="4" MinWidth="75" IsCancel="True" MinHeight="23" Grid.Row="2" Grid.Column="1"/>
+    </Grid>
+</Window>

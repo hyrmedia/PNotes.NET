@@ -1,0 +1,19 @@
+﻿<Window x:Class="PNotes.NET.WndSplash"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Name="DlgSplash"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        Background="Transparent"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Width="387"
+        Height="421"
+        Loaded="Window_Loaded">
+    <Canvas>
+        <Image Name="imgSplash" Source="images/splash.png"/>
+        <TextBlock Name="tbVersion" Canvas.Left="4" Canvas.Top="349"/>
+        <TextBlock Name="tbSplash" Canvas.Left="4" Canvas.Top="49" Width="161" Height="131" TextWrapping="Wrap" Text="{Binding SplashText}"/>
+    </Canvas>
+</Window>

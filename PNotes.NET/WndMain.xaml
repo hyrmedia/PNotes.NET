@@ -1,0 +1,294 @@
+﻿<Window x:Class="PNotes.NET.WndMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:taskbarNotification="http://www.hardcodet.net/taskbar"
+        Height="1" 
+        Width="1" 
+        Background="Transparent" 
+        Left="-100" 
+        Top="-100" 
+        Title="PNotes.NET Main Window" 
+        ShowInTaskbar="False" 
+        WindowStyle="None" 
+        Loaded="Window_Loaded" 
+        Closing="Window_Closing" 
+        Closed="Window_Closed"
+        SourceInitialized="Window_SourceInitialized">
+    <taskbarNotification:TaskbarIcon Name="ntfPN" 
+                                     IconSource="note_pinned.ico" 
+                                     Visibility="Collapsed"
+                                     TrayMouseDoubleClick="ntfPN_TrayMouseDoubleClick"
+                                     TrayContextMenuOpen="ntfPN_TrayContextMenuOpen"
+                                     TrayLeftMouseUp="ntfPN_TrayLeftMouseUp"
+                                     TrayRightMouseDown="ntfPN_TrayRightMouseDown">
+        <taskbarNotification:TaskbarIcon.ContextMenu>
+            <ContextMenu Name="ctmPN" 
+                             TextElement.FontFamily="{Binding FontFamily}"
+                             TextElement.FontSize="{Binding FontSize}"
+                             TextElement.FontStretch="{Binding FontStretch}"
+                             TextElement.FontStyle="{Binding FontStyle}"
+                             TextElement.FontWeight="{Binding FontWeight}">
+                <MenuItem Name="mnuNewNote" Header="New Note" Click="mnuNewNote_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource new_note}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuNewNoteInGroup" Header="New Note In Group" Click="mnuNewNoteInGroup_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource new_note_in_group}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuLoadNote" Header="Load Note" Click="mnuLoadNote_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource load}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuNoteFromClipboard" Header="New Note From Clipboard" Click="mnuNoteFromClipboard_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource fromcp}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuDiary" Header="Diary">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource diary}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuTodayDiary" Header="Today" Click="mnuTodayDiary_Click"/>
+                </MenuItem>
+                <Separator Name="toolStripSeparator1"/>
+                <MenuItem Name="mnuPrefs" Header="Preferences" Click="mnuPrefs_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource prefs}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuCP" Header="Control Panel" Click="mnuCP_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource controlp}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuHotkeys" Header="Hot Keys Management" Click="mnuHotkeys_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource hotkeys}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuMenusManagement" Header="Menus Management" Click="mnuMenusManagement_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource menus}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Name="toolStripSeparator27"/>
+                <MenuItem Name="mnuPanelAll" Header="Panel">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource panel}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuToPanelAll" Header="Move To Panel (All Notes)" Click="mnuToPanelAll_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource topanel}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="mnuFromPanelAll" Header="Remove From Panel (All Notes)" Click="mnuFromPanelAll_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource frompanel}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <Separator Name="toolStripSeparator2"/>
+                <MenuItem Name="mnuShowHide" Header="Show/Hide">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource showhide}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuShowGroups" Header="Show Groups">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource showgroups}"/>
+                        </MenuItem.Icon>
+                        <MenuItem Name="mnuShowAll" Header="Show All" Click="mnuShowAll_Click"/>
+                        <Separator Name="toolStripSeparator5"/>
+                        <MenuItem Name="mnuShowIncoming" Header="Show Incoming" Click="mnuShowIncoming_Click"/>
+                    </MenuItem>
+                    <MenuItem Name="mnuHideGroups" Header="Hide Groups">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource hidegroups}"/>
+                        </MenuItem.Icon>
+                        <MenuItem Name="mnuHideAll" Header="Hide All" Click="mnuHideAll_Click"/>
+                        <Separator Name="toolStripSeparator6"/>
+                        <MenuItem Name="mnuHideIncoming" Header="Hide Incoming" Click="mnuHideIncoming_Click"/>
+                    </MenuItem>
+                    <MenuItem Name="mnuShowByTag" Header="Show By Tag">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource showtag}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="mnuHideByTag" Header="Hide By Tag">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource hidetag}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator Name="toolStripSeparator18"/>
+                    <MenuItem Name="mnuLastModified" Header="Last Modified Notes">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource lastmod}"/>
+                        </MenuItem.Icon>
+                        <MenuItem Name="mnuTodayLast" Header="Today" Click="mnuTodayLast_Click"/>
+                        <MenuItem Name="mnu1DayAgo" Header="1 Day Ago" Click="mnu1DayAgo_Click"/>
+                        <MenuItem Name="mnu2DaysAgo" Header="2 Days Ago" Click="mnu2DaysAgo_Click"/>
+                        <MenuItem Name="mnu3DaysAgo" Header="3 Days Ago" Click="mnu3DaysAgo_Click"/>
+                        <MenuItem Name="mnu4DaysAgo" Header="4 Days Ago" Click="mnu4DaysAgo_Click"/>
+                        <MenuItem Name="mnu5DaysAgo" Header="5 Days Ago" Click="mnu5DaysAgo_Click"/>
+                        <MenuItem Name="mnu6DaysAgo" Header="6 Days Ago" Click="mnu6DaysAgo_Click"/>
+                        <MenuItem Name="mnu7DaysAgo" Header="7 Days Ago" Click="mnu7DaysAgo_Click"/>
+                    </MenuItem>
+                    <MenuItem Name="mnuAllToFront" Header="Bring All To Front" Click="mnuAllToFront_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource front}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <Separator Name="toolStripSeparator7"/>
+                <MenuItem Name="mnuSaveAll" Header="Save All" Click="mnuSaveAll_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource saveall}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuBackup" Header="Backup/Synchronization">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource back}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuBackupCreate" Header="Create Full Backup" Click="mnuBackupCreate_Click"/>
+                    <MenuItem Name="mnuBackupRestore" Header="Restore From Full Backup" Click="mnuBackupRestore_Click"/>
+                    <MenuItem Name="mnuSyncLocal" Header="Manual Local Synchronization" Click="mnuSyncLocal_Click"/>
+                    <Separator Name="sepBackup" />
+                    <MenuItem Name="mnuImportNotes" Header="Import Notes From PNotes" Click="mnuImportNotes_Click"/>
+                    <MenuItem Name="mnuImportSettings" Header="Import Settings from PNotes" Click="mnuImportSettings_Click"/>
+                    <MenuItem Name="mnuImportFonts" Header="Import Fonts From PNotes" Click="mnuImportFonts_Click"/>
+                    <MenuItem Name="mnuImportDictionaries" Header="Import Dictionaries From PNotes" Click="mnuImportDictionaries_Click"/>
+                </MenuItem>
+                <Separator Name="toolStripSeparator8"/>
+                <MenuItem Name="mnuReloadAll" Header="Reload All" Click="mnuReloadAll_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource reload}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Name="toolStripSeparator9"/>
+                <MenuItem Name="mnuDockAll" Header="Docking (All Notes)">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource dockall}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuDAllNone" Header="None" Click="mnuDAllNone_Click"/>
+                    <MenuItem Name="mnuDAllLeft" Header="Left" Click="mnuDAllLeft_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource dockleft}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="mnuDAllTop" Header="Top" Click="mnuDAllTop_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource docktop}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="mnuDAllRight" Header="Right" Click="mnuDAllRight_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource dockright}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="mnuDAllBottom" Header="Bottom" Click="mnuDAllBottom_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource dockbottom}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Name="mnuSwitchOnAll" Header="Switch On (All Notes)">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource switchon}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuSOnHighPriority" Header="Set High Priority" Click="mnuSOnHighPriority_Click"/>
+                    <MenuItem Name="mnuSOnProtection" Header="Switch On Protection Mode" Click="mnuSOnProtection_Click"/>
+                    <MenuItem Name="mnuSOnComplete" Header="Set Complete Mark" Click="mnuSOnComplete_Click"/>
+                    <MenuItem Name="mnuSOnRoll" Header="Roll" Click="mnuSOnRoll_Click"/>
+                    <MenuItem Name="mnuSOnOnTop" Header="'On Top' Status" Click="mnuSOnOnTop_Click"/>
+                </MenuItem>
+                <MenuItem Name="mnuSwitchOffAll" Header="Switch Off (All Notes)">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource switchoff}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuSOffHighPriority" Header="Remove High Priority" Click="mnuSOffHighPriority_Click"/>
+                    <MenuItem Name="mnuSOffProtection" Header="Switch Off Protection Mode" Click="mnuSOffProtection_Click"/>
+                    <MenuItem Name="mnuSOffComplete" Header="Remove Complete Mark" Click="mnuSOffComplete_Click"/>
+                    <MenuItem Name="mnuSOffUnroll" Header="Unroll" Click="mnuSOffUnroll_Click"/>
+                    <MenuItem Name="mnuSOffOnTop" Header="'On Top' Status" Click="mnuSOffOnTop_Click"/>
+                </MenuItem>
+                <Separator Name="toolStripSeparator19"/>
+                <MenuItem Name="mnuSpecialOptions" Header="Special Options">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource easeaccess}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuOnScreenKbrd" Header="Toggle On-Screen Keyboard" Click="mnuOnScreenKbrd_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource keyboard}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="mnuMagnifier" Header="Toggle Magnifier" Click="mnuMagnifier_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource zoom}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <Separator Name="toolStripSeparator10"/>
+                <MenuItem Name="mnuSearch" Header="Search">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource search}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuSearchInNotes" Header="Search In Notes" Click="mnuSearchInNotes_Click"/>
+                    <Separator Name="toolStripSeparator11"/>
+                    <MenuItem Name="mnuSearchByTags" Header="Search By Tags" Click="mnuSearchByTags_Click"/>
+                    <Separator Name="toolStripSeparator12"/>
+                    <MenuItem Name="mnuSearchByDates" Header="Search By Dates" Click="mnuSearchByDates_Click"/>
+                </MenuItem>
+                <Separator Name="toolStripSeparator13"/>
+                <MenuItem Name="mnuFavorites" Header="Favorites">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource favorites}"/>
+                    </MenuItem.Icon>
+                    <MenuItem Name="mnuShowAllFavorites" Header="Show All Favorites" Click="mnuShowAllFavorites_Click"/>
+                </MenuItem>
+                <Separator Name="toolStripSeparator14"/>
+                <MenuItem Name="mnuLockProg" Header="Lock Program" Click="mnuLockProg_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource lockprogram}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Name="toolStripSeparator15"/>
+                <MenuItem Name="mnuRun" Header="Run">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource run}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Name="toolStripSeparator16"/>
+                <MenuItem Name="mnuHelp" Header="Help" Click="mnuHelp_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource help}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuAbout" Header="About" Click="mnuAbout_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource about}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuSupport" Header="Support PNotes Project" Click="mnuSupport_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource support}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuHomepage" Header="PNotes.NET Homepage" Click="mnuHomepage_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource web}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Name="toolStripSeparator17"/>
+                <MenuItem Name="mnuExit" Header="Exit" Click="mnuExit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource exit}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </ContextMenu>
+        </taskbarNotification:TaskbarIcon.ContextMenu>
+
+    </taskbarNotification:TaskbarIcon>
+</Window>

@@ -1,0 +1,67 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PNIPBox;assembly=PNIPBox">
+    <Style TargetType="{x:Type local:IpBox}">
+        <Setter Property="MinHeight" Value="21"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Once"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource IpBoxBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource IpBoxBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:IpBox}">
+                    <Border x:Name="Border"
+                            CornerRadius="{DynamicResource CommonCornerRadius}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            TextBlock.Foreground="{TemplateBinding Foreground}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid x:Name="PART_Grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="text1" Grid.Column="0" VerticalContentAlignment="Bottom" TextAlignment="Center" BorderThickness="0" MaxLength="3"/>
+                            <TextBlock Grid.Column="1" Text="." VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="text2" Grid.Column="2" VerticalContentAlignment="Bottom" TextAlignment="Center" BorderThickness="0" MaxLength="3"/>
+                            <TextBlock Grid.Column="3" Text="." VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="text3" Grid.Column="4" VerticalContentAlignment="Bottom" TextAlignment="Center" BorderThickness="0" MaxLength="3"/>
+                            <TextBlock Grid.Column="5" Text="." VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="text4" Grid.Column="6" VerticalContentAlignment="Bottom" TextAlignment="Center" BorderThickness="0" MaxLength="3"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="text1" Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="BorderBrush" 
+                                    Value="{DynamicResource IpBoxBorderFocusedBrush}"/>
+                        </Trigger>
+                        <Trigger SourceName="text2" Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="BorderBrush" 
+                                    Value="{DynamicResource IpBoxBorderFocusedBrush}"/>
+                        </Trigger>
+                        <Trigger SourceName="text3" Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="BorderBrush" 
+                                    Value="{DynamicResource IpBoxBorderFocusedBrush}"/>
+                        </Trigger>
+                        <Trigger SourceName="text4" Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="BorderBrush" 
+                                    Value="{DynamicResource IpBoxBorderFocusedBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

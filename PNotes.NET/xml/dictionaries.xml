@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<names>
+  <af>Afrikaans</af>
+  <af_ZA>Afrikaans (Suid Afrika)</af_ZA>
+  <am>አማርኛ</am>
+  <am_ET>አማርኛ (ኢትዮጵያ)</am_ET>
+  <ar>العربية</ar>
+  <ar_AE>العربية (الإمارات العربية المتحدة)</ar_AE>
+  <ar_BH>العربية (البحرين)</ar_BH>
+  <ar_DZ>العربية (الجزائر)</ar_DZ>
+  <ar_EG>العربية (مصر)</ar_EG>
+  <ar_IQ>العربية (العراق)</ar_IQ>
+  <ar_JO>العربية (الأردن)</ar_JO>
+  <ar_KW>العربية (الكويت)</ar_KW>
+  <ar_LB>العربية (لبنان)</ar_LB>
+  <ar_LY>العربية (ليبيا)</ar_LY>
+  <ar_MA>العربية (المملكة المغربية)</ar_MA>
+  <arn>Mapudungun</arn>
+  <arn_CL>Mapudungun (Chile)</arn_CL>
+  <ar_OM>العربية (عمان)</ar_OM>
+  <ar_QA>العربية (قطر)</ar_QA>
+  <ar_SA>العربية (المملكة العربية السعودية)</ar_SA>
+  <ar_SY>العربية (سوريا)</ar_SY>
+  <ar_TN>العربية (تونس)</ar_TN>
+  <ar_YE>العربية (اليمن)</ar_YE>
+  <as>অসমীয়া</as>
+  <as_IN>অসমীয়া (ভাৰত)</as_IN>
+  <az>Azərbaycan­ılı</az>
+  <az_Cyrl>Азәрбајҹан дили</az_Cyrl>
+  <az_Cyrl_AZ>Азәрбајҹан (Азәрбајҹан)</az_Cyrl_AZ>
+  <az_Latn>Azərbaycan­ılı</az_Latn>
+  <az_Latn_AZ>Azərbaycan­ılı (Azərbaycan)</az_Latn_AZ>
+  <ba>Башҡорт</ba>
+  <ba_RU>Башҡорт (Россия)</ba_RU>
+  <be>Беларускі</be>
+  <be_BY>Беларускі (Беларусь)</be_BY>
+  <bg>български</bg>
+  <bg_BG>български (България)</bg_BG>
+  <bn>বাংলা</bn>
+  <bn_BD>বাংলা (বাংলাদেশ)</bn_BD>
+  <bn_IN>বাংলা (ভারত)</bn_IN>
+  <bo>བོད་ཡིག</bo>
+  <bo_CN>བོད་ཡིག (ཀྲུང་ཧྭ་མི་དམངས་སྤྱི་མཐུན་རྒྱལ་ཁབ།)</bo_CN>
+  <br>brezhoneg</br>
+  <br_FR>brezhoneg (Frañs)</br_FR>
+  <bs>bosanski</bs>
+  <bs_Cyrl>босански</bs_Cyrl>
+  <bs_Cyrl_BA>босански (Босна и Херцеговина)</bs_Cyrl_BA>
+  <bs_Latn>bosanski</bs_Latn>
+  <bs_Latn_BA>bosanski (Bosna i Hercegovina)</bs_Latn_BA>
+  <ca>català</ca>
+  <ca_ES>català (català)</ca_ES>
+  <co>Corsu</co>
+  <co_FR>Corsu (France)</co_FR>
+  <cs>čeština</cs>
+  <cs_CZ>čeština (Česká republika)</cs_CZ>
+  <cy>Cymraeg</cy>
+  <cy_GB>Cymraeg (y Deyrnas Unedig)</cy_GB>
+  <da>dansk</da>
+  <da_DK>dansk (Danmark)</da_DK>
+  <de>Deutsch</de>
+  <de_AT>Deutsch (Österreich)</de_AT>
+  <de_CH>Deutsch (Schweiz)</de_CH>
+  <de_DE>Deutsch (Deutschland)</de_DE>
+  <de_LI>Deutsch (Liechtenstein)</de_LI>
+  <de_LU>Deutsch (Luxemburg)</de_LU>
+  <dsb>dolnoserbšćina</dsb>
+  <dsb_DE>dolnoserbšćina (Nimska)</dsb_DE>
+  <dv>ދިވެހިބަސް</dv>
+  <dv_MV>ދިވެހިބަސް (ދިވެހި ރާއްޖެ)</dv_MV>
+  <el>Ελληνικά</el>
+  <el_GR>Ελληνικά (Ελλάδα)</el_GR>
+  <en>English</en>
+  <en_029>English (Caribbean)</en_029>
+  <en_AU>English (Australia)</en_AU>
+  <en_BZ>English (Belize)</en_BZ>
+  <en_CA>English (Canada)</en_CA>
+  <en_GB>English (United Kingdom)</en_GB>
+  <en_IE>English (Ireland)</en_IE>
+  <en_IN>English (India)</en_IN>
+  <en_JM>English (Jamaica)</en_JM>
+  <en_MY>English (Malaysia)</en_MY>
+  <en_NZ>English (New Zealand)</en_NZ>
+  <en_PH>English (Philippines)</en_PH>
+  <en_SG>English (Singapore)</en_SG>
+  <en_TT>English (Trinidad y Tobago)</en_TT>
+  <en_US>English (United States)</en_US>
+  <en_ZA>English (South Africa)</en_ZA>
+  <en_ZW>English (Zimbabwe)</en_ZW>
+  <es>español</es>
+  <es_AR>Español (Argentina)</es_AR>
+  <es_BO>Español (Bolivia)</es_BO>
+  <es_CL>Español (Chile)</es_CL>
+  <es_CO>Español (Colombia)</es_CO>
+  <es_CR>Español (Costa Rica)</es_CR>
+  <es_DO>Español (República Dominicana)</es_DO>
+  <es_EC>Español (Ecuador)</es_EC>
+  <es_ES>Español (España, alfabetización internacional)</es_ES>
+  <es_GT>Español (Guatemala)</es_GT>
+  <es_HN>Español (Honduras)</es_HN>
+  <es_MX>Español (México)</es_MX>
+  <es_NI>Español (Nicaragua)</es_NI>
+  <es_PA>Español (Panamá)</es_PA>
+  <es_PE>Español (Perú)</es_PE>
+  <es_PR>Español (Puerto Rico)</es_PR>
+  <es_PY>Español (Paraguay)</es_PY>
+  <es_SV>Español (El Salvador)</es_SV>
+  <es_US>Español (Estados Unidos)</es_US>
+  <es_UY>Español (Uruguay)</es_UY>
+  <es_VE>Español (Republica Bolivariana de Venezuela)</es_VE>
+  <et>eesti</et>
+  <et_EE>eesti (Eesti)</et_EE>
+  <eu>euskara</eu>
+  <eu_ES>euskara (euskara)</eu_ES>
+  <fa>فارسى</fa>
+  <fa_IR>فارسى (ایران)</fa_IR>
+  <fi>suomi</fi>
+  <fi_FI>suomi (Suomi)</fi_FI>
+  <fil>Filipino</fil>
+  <fil_PH>Filipino (Pilipinas)</fil_PH>
+  <fo>føroyskt</fo>
+  <fo_FO>føroyskt (Føroyar)</fo_FO>
+  <fr>français</fr>
+  <fr-classique>français (classique)</fr-classique>
+  <fr-reforme1990>français (reforme1990)</fr-reforme1990>
+  <fr-moderne>français (moderne)</fr-moderne>
+  <fr_BE>français (Belgique)</fr_BE>
+  <fr_CA>français (Canada)</fr_CA>
+  <fr_CH>français (Suisse)</fr_CH>
+  <fr_FR>français (France)</fr_FR>
+  <fr_LU>français (Luxembourg)</fr_LU>
+  <fr_MC>français (Principauté de Monaco)</fr_MC>
+  <fy>Frysk</fy>
+  <fy_NL>Frysk (Nederlân)</fy_NL>
+  <ga>Gaeilge</ga>
+  <ga_IE>Gaeilge (Éire)</ga_IE>
+  <gd>Gàidhlig</gd>
+  <gd_GB>Gàidhlig (An Rìoghachd Aonaichte)</gd_GB>
+  <gl>galego</gl>
+  <gl_ES>galego (galego)</gl_ES>
+  <gsw>Elsässisch</gsw>
+  <gsw_FR>Elsässisch (Frànkrisch)</gsw_FR>
+  <gu>ગુજરાતી</gu>
+  <gu_IN>ગુજરાતી (ભારત)</gu_IN>
+  <ha>Hausa</ha>
+  <ha_Latn>Hausa</ha_Latn>
+  <ha_Latn_NG>Hausa (Nigeria)</ha_Latn_NG>
+  <he>עברית</he>
+  <he_IL>עברית (ישראל)</he_IL>
+  <hi>हिंदी</hi>
+  <hi_IN>हिंदी (भारत)</hi_IN>
+  <hr>hrvatski</hr>
+  <hr_BA>hrvatski (Bosna i Hercegovina)</hr_BA>
+  <hr_HR>hrvatski (Hrvatska)</hr_HR>
+  <hsb>hornjoserbšćina</hsb>
+  <hsb_DE>hornjoserbšćina (Němska)</hsb_DE>
+  <hu>magyar</hu>
+  <hu_HU>magyar (Magyarország)</hu_HU>
+  <hy>Հայերեն</hy>
+  <hy_AM>Հայերեն (Հայաստան)</hy_AM>
+  <id>Bahasa Indonesia</id>
+  <id_ID>Bahasa Indonesia (Indonesia)</id_ID>
+  <ig>Igbo</ig>
+  <ig_NG>Igbo (Nigeria)</ig_NG>
+  <ii>ꆈꌠꁱꂷ</ii>
+  <ii_CN>ꆈꌠꁱꂷ (ꍏꉸꏓꂱꇭꉼꇩ)</ii_CN>
+  <is>íslenska</is>
+  <is_IS>íslenska (Ísland)</is_IS>
+  <it>italiano</it>
+  <it_CH>italiano (Svizzera)</it_CH>
+  <it_IT>italiano (Italia)</it_IT>
+  <iu>Inuktitut</iu>
+  <iu_Cans>ᐃᓄᒃᑎᑐᑦ</iu_Cans>
+  <iu_Cans_CA>ᐃᓄᒃᑎᑐᑦ (ᑲᓇᑕᒥ)</iu_Cans_CA>
+  <iu_Latn>Inuktitut</iu_Latn>
+  <iu_Latn_CA>Inuktitut (Kanatami)</iu_Latn_CA>
+  <ja>日本語</ja>
+  <ja_JP>日本語 (日本)</ja_JP>
+  <ka>ქართული</ka>
+  <ka_GE>ქართული (საქართველო)</ka_GE>
+  <kk>Қазақ</kk>
+  <kk_KZ>Қазақ (Қазақстан)</kk_KZ>
+  <kl>kalaallisut</kl>
+  <kl_GL>kalaallisut (Kalaallit Nunaat)</kl_GL>
+  <km>ខ្មែរ</km>
+  <km_KH>ខ្មែរ (កម្ពុជា)</km_KH>
+  <kn>ಕನ್ನಡ</kn>
+  <kn_IN>ಕನ್ನಡ (ಭಾರತ)</kn_IN>
+  <ko>한국어</ko>
+  <kok>कोंकणी</kok>
+  <kok_IN>कोंकणी (भारत)</kok_IN>
+  <ko_KR>한국어 (대한민국)</ko_KR>
+  <ky>Кыргыз</ky>
+  <ky_KG>Кыргыз (Кыргызстан)</ky_KG>
+  <lb>Lëtzebuergesch</lb>
+  <lb_LU>Lëtzebuergesch (Luxembourg)</lb_LU>
+  <lo>ລາວ</lo>
+  <lo_LA>ລາວ (ສ.ປ.ປ. ລາວ)</lo_LA>
+  <lt>lietuvių</lt>
+  <lt_LT>lietuvių (Lietuva)</lt_LT>
+  <lv>latviešu</lv>
+  <lv_LV>latviešu (Latvija)</lv_LV>
+  <mi>Reo Māori</mi>
+  <mi_NZ>Reo Māori (Aotearoa)</mi_NZ>
+  <mk>македонски јазик</mk>
+  <mk_MK>македонски јазик (Македонија)</mk_MK>
+  <ml>മലയാളം</ml>
+  <ml_IN>മലയാളം (ഭാരതം)</ml_IN>
+  <mn>Монгол хэл</mn>
+  <mn_Cyrl>Монгол хэл</mn_Cyrl>
+  <mn_MN>Монгол хэл (Монгол улс)</mn_MN>
+  <mn_Mong>ᠮᠤᠨᠭᠭᠤᠯ ᠬᠡᠯᠡ</mn_Mong>
+  <mn_Mong_CN>ᠮᠤᠨᠭᠭᠤᠯ ᠬᠡᠯᠡ (ᠪᠦᠭᠦᠳᠡ ᠨᠠᠢᠷᠠᠮᠳᠠᠬᠤ ᠳᠤᠮᠳᠠᠳᠤ ᠠᠷᠠᠳ ᠣᠯᠣᠰ)</mn_Mong_CN>
+  <moh>Kanien'kéha</moh>
+  <moh_CA>Kanien'kéha</moh_CA>
+  <mr>मराठी</mr>
+  <mr_IN>मराठी (भारत)</mr_IN>
+  <ms>Bahasa Melayu</ms>
+  <ms_BN>Bahasa Melayu (Brunei Darussalam)</ms_BN>
+  <ms_MY>Bahasa Melayu (Malaysia)</ms_MY>
+  <mt>Malti</mt>
+  <mt_MT>Malti (Malta)</mt_MT>
+  <nb>norsk (bokmål)</nb>
+  <nb_NO>norsk, bokmål (Norge)</nb_NO>
+  <ne>नेपाली</ne>
+  <ne_NP>नेपाली (नेपाल)</ne_NP>
+  <nl>Nederlands</nl>
+  <nl_BE>Nederlands (België)</nl_BE>
+  <nl_NL>Nederlands (Nederland)</nl_NL>
+  <nn>norsk (nynorsk)</nn>
+  <nn_NO>norsk, nynorsk (Noreg)</nn_NO>
+  <no>norsk</no>
+  <nso>Sesotho sa Leboa</nso>
+  <nso_ZA>Sesotho sa Leboa (Afrika Borwa)</nso_ZA>
+  <oc>Occitan</oc>
+  <oc_FR>Occitan (França)</oc_FR>
+  <or>ଓଡ଼ିଆ</or>
+  <or_IN>ଓଡ଼ିଆ (ଭାରତ)</or_IN>
+  <pa>ਪੰਜਾਬੀ</pa>
+  <pa_IN>ਪੰਜਾਬੀ (ਭਾਰਤ)</pa_IN>
+  <pl>polski</pl>
+  <pl_PL>polski (Polska)</pl_PL>
+  <prs>درى</prs>
+  <prs_AF>درى (افغانستان)</prs_AF>
+  <ps>پښتو</ps>
+  <ps_AF>پښتو (افغانستان)</ps_AF>
+  <pt>Português</pt>
+  <pt_BR>Português (Brasil)</pt_BR>
+  <pt_PT>português (Portugal)</pt_PT>
+  <qut>K'iche</qut>
+  <qut_GT>K'iche (Guatemala)</qut_GT>
+  <quz>runasimi</quz>
+  <quz_BO>runasimi (Qullasuyu)</quz_BO>
+  <quz_EC>runasimi (Ecuador)</quz_EC>
+  <quz_PE>runasimi (Piruw)</quz_PE>
+  <rm>Rumantsch</rm>
+  <rm_CH>Rumantsch (Svizra)</rm_CH>
+  <ro>română</ro>
+  <ro_RO>română (România)</ro_RO>
+  <ru>русский</ru>
+  <ru_RU>русский (Россия)</ru_RU>
+  <ru_RU_ie>русский (Россия)(е)</ru_RU_ie>
+  <ru_RU_yo>русский (Россия)(ё)</ru_RU_yo>
+  <rw>Kinyarwanda</rw>
+  <rw_RW>Kinyarwanda (Rwanda)</rw_RW>
+  <sa>संस्कृत</sa>
+  <sah>саха</sah>
+  <sah_RU>саха (Россия)</sah_RU>
+  <sa_IN>संस्कृत (भारतम्)</sa_IN>
+  <se>davvisámegiella</se>
+  <se_FI>davvisámegiella (Suopma)</se_FI>
+  <se_NO>davvisámegiella (Norga)</se_NO>
+  <se_SE>davvisámegiella (Ruoŧŧa)</se_SE>
+  <si>සිංහල</si>
+  <si_LK>සිංහල (ශ්‍රී ලංකා)</si_LK>
+  <sk>slovenčina</sk>
+  <sk_SK>slovenčina (Slovenská republika)</sk_SK>
+  <sl>slovenski</sl>
+  <sl_SI>slovenski (Slovenija)</sl_SI>
+  <sma>åarjelsaemiengiele</sma>
+  <sma_NO>åarjelsaemiengiele (Nöörje)</sma_NO>
+  <sma_SE>åarjelsaemiengiele (Sveerje)</sma_SE>
+  <smj>julevusámegiella</smj>
+  <smj_NO>julevusámegiella (Vuodna)</smj_NO>
+  <smj_SE>julevusámegiella (Svierik)</smj_SE>
+  <smn>sämikielâ</smn>
+  <smn_FI>sämikielâ (Suomâ)</smn_FI>
+  <sms>sääm´ǩiõll</sms>
+  <sms_FI>sääm´ǩiõll (Lää´ddjânnam)</sms_FI>
+  <sq>shqipe</sq>
+  <sq_AL>shqipe (Shqipëria)</sq_AL>
+  <sr>srpski</sr>
+  <sr_Cyrl>српски</sr_Cyrl>
+  <sr_Cyrl_BA>српски (Босна и Херцеговина)</sr_Cyrl_BA>
+  <sr_Cyrl_CS>српски (Србија и Црна Гора (Претходно))</sr_Cyrl_CS>
+  <sr_Cyrl_ME>српски (Црна Гора)</sr_Cyrl_ME>
+  <sr_Cyrl_RS>српски (Србија)</sr_Cyrl_RS>
+  <sr_Latn>srpski</sr_Latn>
+  <sr_Latn_BA>srpski (Bosna i Hercegovina)</sr_Latn_BA>
+  <sr_Latn_CS>srpski (Srbija i Crna Gora (Prethodno))</sr_Latn_CS>
+  <sr_Latn_ME>srpski (Crna Gora)</sr_Latn_ME>
+  <sr_Latn_RS>srpski (Srbija)</sr_Latn_RS>
+  <sv>svenska</sv>
+  <sv_FI>svenska (Finland)</sv_FI>
+  <sv_SE>svenska (Sverige)</sv_SE>
+  <sw>Kiswahili</sw>
+  <sw_KE>Kiswahili (Kenya)</sw_KE>
+  <syr>ܣܘܪܝܝܐ</syr>
+  <syr_SY>ܣܘܪܝܝܐ (سوريا)</syr_SY>
+  <ta>தமிழ்</ta>
+  <ta_IN>தமிழ் (இந்தியா)</ta_IN>
+  <te>తెలుగు</te>
+  <te_IN>తెలుగు (భారత దేశం)</te_IN>
+  <tg>Тоҷикӣ</tg>
+  <tg_Cyrl>Тоҷикӣ</tg_Cyrl>
+  <tg_Cyrl_TJ>Тоҷикӣ (Тоҷикистон)</tg_Cyrl_TJ>
+  <th>ไทย</th>
+  <th_TH>ไทย (ไทย)</th_TH>
+  <tk>türkmençe</tk>
+  <tk_TM>türkmençe (Türkmenistan)</tk_TM>
+  <tn>Setswana</tn>
+  <tn_ZA>Setswana (Aforika Borwa)</tn_ZA>
+  <tr>Türkçe</tr>
+  <tr_TR>Türkçe (Türkiye)</tr_TR>
+  <tt>Татар</tt>
+  <tt_RU>Татар (Россия)</tt_RU>
+  <tzm>Tamazight</tzm>
+  <tzm_Latn>Tamazight</tzm_Latn>
+  <tzm_Latn_DZ>Tamazight (Djazaïr)</tzm_Latn_DZ>
+  <ug>ئۇيغۇرچە</ug>
+  <ug_CN>ئۇيغۇرچە (جۇڭخۇا خەلق جۇمھۇرىيىتى)</ug_CN>
+  <uk>українська</uk>
+  <uk_UA>українська (Україна)</uk_UA>
+  <ur>اُردو</ur>
+  <ur_PK>اُردو (پاکستان)</ur_PK>
+  <uz>U'zbek</uz>
+  <uz_Cyrl>Ўзбек</uz_Cyrl>
+  <uz_Cyrl_UZ>Ўзбек (Ўзбекистон)</uz_Cyrl_UZ>
+  <uz_Latn>U'zbek</uz_Latn>
+  <uz_Latn_UZ>U'zbek (U'zbekiston Respublikasi)</uz_Latn_UZ>
+  <vi>Tiếng Việt</vi>
+  <vi_VN>Tiếng Việt (Việt Nam)</vi_VN>
+  <wo>Wolof</wo>
+  <wo_SN>Wolof (Sénégal)</wo_SN>
+  <xh>isiXhosa</xh>
+  <xh_ZA>isiXhosa (uMzantsi Afrika)</xh_ZA>
+  <yo>Yoruba</yo>
+  <yo_NG>Yoruba (Nigeria)</yo_NG>
+  <zh>中文</zh>
+  <zh_CHS>中文(简体) 旧版</zh_CHS>
+  <zh_CHT>中文(繁體) 舊版</zh_CHT>
+  <zh_CN>中文(中华人民共和国)</zh_CN>
+  <zh_Hans>中文(简体)</zh_Hans>
+  <zh_Hant>中文(繁體)</zh_Hant>
+  <zh_HK>中文(香港特別行政區)</zh_HK>
+  <zh_MO>中文(澳門特別行政區)</zh_MO>
+  <zh_SG>中文(新加坡)</zh_SG>
+  <zh_TW>中文(台灣)</zh_TW>
+  <zu>isiZulu</zu>
+  <zu_ZA>isiZulu (iNingizimu Afrika)</zu_ZA>
+</names>

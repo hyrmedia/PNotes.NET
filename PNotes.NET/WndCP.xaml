@@ -1,0 +1,1364 @@
+﻿<Window x:Class="PNotes.NET.WndCP"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:net="clr-namespace:PNotes.NET"
+        Name="DlgCP"
+        Title="Control Panel" 
+        Height="600" 
+        Width="1000"
+        Icon="{DynamicResource note_pinned}"
+        Style="{DynamicResource CustomWindowStyle}"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}"
+        Loaded="DlgCP_Loaded"
+        Closed="DlgCP_Closed"
+        SourceInitialized="DlgCP_SourceInitialized"
+        SizeChanged="DlgCP_SizeChanged"
+        Activated="DlgCP_Activated">
+    <Window.Resources>
+        <sys:String x:Key="Priority">Priority</sys:String>
+        <sys:String x:Key="Completed">Completed</sys:String>
+        <sys:String x:Key="Protected">Protected</sys:String>
+        <sys:String x:Key="Pinned">Pinned</sys:String>
+        <sys:String x:Key="Favorites">Favorites</sys:String>
+        <sys:String x:Key="Encrypted">Encrypted</sys:String>
+
+        <CommandBinding x:Key="GroupAddCommand" Command="{x:Static net:PNCommands.GroupAdd}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupAddSubgroupCommand" Command="{x:Static net:PNCommands.GroupAddSubgroup}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupEditCommand" Command="{x:Static net:PNCommands.GroupEdit}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupRemoveCommand" Command="{x:Static net:PNCommands.GroupRemove}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupShowCommand" Command="{x:Static net:PNCommands.GroupShow}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupShowAllCommand" Command="{x:Static net:PNCommands.GroupShowAll}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupHideCommand" Command="{x:Static net:PNCommands.GroupHide}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupHideAllCommand" Command="{x:Static net:PNCommands.GroupHideAll}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupPassAddCommand" Command="{x:Static net:PNCommands.GroupPassAdd}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="GroupPassRemoveCommand" Command="{x:Static net:PNCommands.GroupPassRemove}" Executed="GroupCommand_Executed"  CanExecute="GroupCommand_CanExecute"/>
+        <CommandBinding x:Key="NewNote" Command="{x:Static net:PNCommands.NewNote}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="LoadNote" Command="{x:Static net:PNCommands.LoadNote}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="NoteFromClipboard" Command="{x:Static net:PNCommands.NoteFromClipboard}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="DuplicateNote" Command="{x:Static net:PNCommands.DuplicateNote}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SaveAsShortcut" Command="{x:Static net:PNCommands.SaveAsShortcut}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="DiaryCommand" Command="{x:Static net:PNCommands.Diary}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Today" Command="{x:Static net:PNCommands.Today}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SaveCommand" Command="{x:Static net:PNCommands.Save}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SaveAsCommand" Command="{x:Static net:PNCommands.SaveAs}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SaveAsTextCommand" Command="{x:Static net:PNCommands.SaveAsText}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="RestoreFromBackup" Command="{x:Static net:PNCommands.RestoreFromBackup}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PrintCommand" Command="{x:Static net:PNCommands.Print}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Adjust" Command="{x:Static net:PNCommands.Adjust}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="AdjustAppearance" Command="{x:Static net:PNCommands.AdjustAppearance}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="AdjustSchedule" Command="{x:Static net:PNCommands.AdjustSchedule}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Delete" Command="{x:Static net:PNCommands.Delete}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SaveAllCommand" Command="{x:Static net:PNCommands.SaveAll}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="BackupSync" Command="{x:Static net:PNCommands.BackupSync}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="BackupCreate" Command="{x:Static net:PNCommands.BackupCreate}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="BackupRestore" Command="{x:Static net:PNCommands.BackupRestore}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SyncLocal" Command="{x:Static net:PNCommands.SyncLocal}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ImportNotes" Command="{x:Static net:PNCommands.ImportNotes}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ImportSettings" Command="{x:Static net:PNCommands.ImportSettings}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ImportFonts" Command="{x:Static net:PNCommands.ImportFonts}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ImportDictionaries" Command="{x:Static net:PNCommands.ImportDictionaries}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Placement" Command="{x:Static net:PNCommands.Placement}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="DockAllCommand" Command="{x:Static net:PNCommands.DockAll}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="DockAllNone" Command="{x:Static net:PNCommands.DockAllNone}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="DockAllLeft" Command="{x:Static net:PNCommands.DockAllLeft}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="DockAllTop" Command="{x:Static net:PNCommands.DockAllTop}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="DockAllRight" Command="{x:Static net:PNCommands.DockAllRight}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="DockAllBottom" Command="{x:Static net:PNCommands.DockAllBottom}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Visibility" Command="{x:Static net:PNCommands.Visibility}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ShowNoteCommand" Command="{x:Static net:PNCommands.ShowNote}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ShowAll" Command="{x:Static net:PNCommands.ShowAll}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="HideNoteCommand" Command="{x:Static net:PNCommands.HideNote}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="HideAll" Command="{x:Static net:PNCommands.HideAll}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="AllToFront" Command="{x:Static net:PNCommands.AllToFront}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="CentralizeCommand" Command="{x:Static net:PNCommands.Centralize}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SendAsText" Command="{x:Static net:PNCommands.SendAsText}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SendAsAttachment" Command="{x:Static net:PNCommands.SendAsAttachment}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SendAsZip" Command="{x:Static net:PNCommands.SendAsZip}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SendNetworkCommand" Command="{x:Static net:PNCommands.SendNetwork}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ContactAddCommand" Command="{x:Static net:PNCommands.ContactAdd}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ContactGroupAdd" Command="{x:Static net:PNCommands.ContactGroupAdd}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ContactSelectCommand" Command="{x:Static net:PNCommands.ContactSelect}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ContactGroupSelect" Command="{x:Static net:PNCommands.ContactGroupSelect}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="TagsCommand" Command="{x:Static net:PNCommands.Tags}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="TagsCurrent" Command="{x:Static net:PNCommands.TagsCurrent}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="TagsShowBy" Command="{x:Static net:PNCommands.TagsShowBy}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="TagsHideBy" Command="{x:Static net:PNCommands.TagsHideBy}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Switches" Command="{x:Static net:PNCommands.Switches}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="OnTop" Command="{x:Static net:PNCommands.OnTop}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="HighPriority" Command="{x:Static net:PNCommands.HighPriority}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ProtectionMode" Command="{x:Static net:PNCommands.ProtectionMode}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SetNotePassword" Command="{x:Static net:PNCommands.SetNotePassword}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="RemoveNotePassword" Command="{x:Static net:PNCommands.RemoveNotePassword}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="MarkAsComplete" Command="{x:Static net:PNCommands.MarkAsComplete}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="RollUnrollCommand" Command="{x:Static net:PNCommands.RollUnroll}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Pin" Command="{x:Static net:PNCommands.Pin}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Unpin" Command="{x:Static net:PNCommands.Unpin}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ScrambleCommand" Command="{x:Static net:PNCommands.Scramble}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="UnscrambleCommand" Command="{x:Static net:PNCommands.Unscramble}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="AddFavorites" Command="{x:Static net:PNCommands.AddFavorites}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="RemoveFavorites" Command="{x:Static net:PNCommands.RemoveFavorites}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="RunCommand" Command="{x:Static net:PNCommands.Run}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="EmptyBin" Command="{x:Static net:PNCommands.EmptyBin}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="RestoreNote" Command="{x:Static net:PNCommands.RestoreNote}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PreviewCommand" Command="{x:Static net:PNCommands.Preview}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PreviewFromMenu" Command="{x:Static net:PNCommands.PreviewFromMenu}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PreviewSettings" Command="{x:Static net:PNCommands.PreviewSettings}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="UseCustColor" Command="{x:Static net:PNCommands.UseCustColor}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ChooseCustColor" Command="{x:Static net:PNCommands.ChooseCustColor}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PreviewRightCommand" Command="{x:Static net:PNCommands.PreviewRight}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PreviewRightFromMenu" Command="{x:Static net:PNCommands.PreviewRightFromMenu}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ShowGroupsCommand" Command="{x:Static net:PNCommands.ShowGroups}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ShowGroupsFromMenu" Command="{x:Static net:PNCommands.ShowGroupsFromMenu}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ColReset" Command="{x:Static net:PNCommands.ColReset}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="HotkeysCP" Command="{x:Static net:PNCommands.HotkeysCP}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="MenusManagementCP" Command="{x:Static net:PNCommands.MenusManagementCP}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="Preferences" Command="{x:Static net:PNCommands.Preferences}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PasswordCommand" Command="{x:Static net:PNCommands.Password}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SearchCommand" Command="{x:Static net:PNCommands.Search}" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="QuickSearch" Command="{x:Static net:PNCommands.QuickSearch}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="HelpCommand" Command="{x:Static net:PNCommands.Help}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SupportCommand" Command="{x:Static net:PNCommands.Support}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="AboutCommand" Command="{x:Static net:PNCommands.About}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PwrdCreate" Command="{x:Static net:PNCommands.PwrdCreate}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PwrdChange" Command="{x:Static net:PNCommands.PwrdChange}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="PwrdRemove" Command="{x:Static net:PNCommands.PwrdRemove}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SearchInNotes" Command="{x:Static net:PNCommands.SearchInNotes}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SearchByTags" Command="{x:Static net:PNCommands.SearchByTags}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="SearchByDates" Command="{x:Static net:PNCommands.SearchByDates}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="IncBinInQSearch" Command="{x:Static net:PNCommands.IncBinInQSearch}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding x:Key="ClearQSearch" Command="{x:Static net:PNCommands.ClearQSearch}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+
+        <MenuItem x:Key="mnuOnTop" Name="mnuOnTop" x:Shared="false" IsCheckable="True" Command="net:PNCommands.OnTop"/>
+        <MenuItem x:Key="mnuToggleHighPriority" Name="mnuToggleHighPriority" x:Shared="false" IsCheckable="True" Command="net:PNCommands.HighPriority"/>
+        <MenuItem x:Key="mnuToggleProtectionMode" Name="mnuToggleProtectionMode" x:Shared="false" IsCheckable="True" Command="net:PNCommands.ProtectionMode"/>
+        <MenuItem x:Key="mnuSetPassword" Name="mnuSetPassword" x:Shared="false" Command="net:PNCommands.SetNotePassword">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource passadd}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuRemovePassword" Name="mnuRemovePassword" x:Shared="false" Command="net:PNCommands.RemoveNotePassword">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource passremove}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuMarkAsComplete" Name="mnuMarkAsComplete" x:Shared="false" IsCheckable="True" Command="net:PNCommands.MarkAsComplete"/>
+        <MenuItem x:Key="mnuRollUnroll" Name="mnuRollUnroll" x:Shared="false" Command="net:PNCommands.RollUnroll">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource rollunroll}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuPin" Name="mnuPin" x:Shared="false" Command="net:PNCommands.Pin">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource pinadd}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuUnpin" Name="mnuUnpin" x:Shared="false" Command="net:PNCommands.Unpin">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource pinremove}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuScramble" Name="mnuScramble" x:Shared="false" Command="net:PNCommands.Scramble">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource scramble}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuUnscramble" Name="mnuUnscramble" x:Shared="false" Command="net:PNCommands.Unscramble">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource unscramble}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Name="mnuUseCustColor" x:Key="mnuUseCustColor" x:Shared="false" IsCheckable="True" Command="net:PNCommands.UseCustColor"/>
+        <MenuItem Name="mnuChooseCustColor" x:Key="mnuChooseCustColor" x:Shared="false" Command="net:PNCommands.ChooseCustColor">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource colorpicker}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuPwrdCreate" Name="mnuPwrdCreate" x:Shared="false" Command="net:PNCommands.PwrdCreate">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource passadd}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuPwrdChange" Name="mnuPwrdChange" x:Shared="false" Command="net:PNCommands.PwrdChange">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource passedit}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuPwrdRemove" Name="mnuPwrdRemove" x:Shared="false" Command="net:PNCommands.PwrdRemove">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource passremove}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuSearchInNotes" Name="mnuSearchInNotes" x:Shared="false" Command="net:PNCommands.SearchInNotes"/>
+        <MenuItem x:Key="mnuSearchByTags" Name="mnuSearchByTags" x:Shared="false" Command="net:PNCommands.SearchByTags"/>
+        <MenuItem x:Key="mnuSearchByDates" Name="mnuSearchByDates" x:Shared="false" Command="net:PNCommands.SearchByDates"/>
+        <MenuItem x:Key="mnuIncBinInQSearch" Name="mnuIncBinInQSearch" x:Shared="false" Command="net:PNCommands.IncBinInQSearch"/>
+        <MenuItem x:Key="mnuClearQSearch" Name="mnuClearQSearch" x:Shared="false" Command="net:PNCommands.ClearQSearch"/>
+        <MenuItem x:Key="mnuTodayDiary" Name="mnuTodayDiary" x:Shared="false" Command="net:PNCommands.Today"/>
+        <MenuItem x:Key="mnuAdjustAppearance" Name="mnuAdjustAppearance" x:Shared="false" Command="net:PNCommands.AdjustAppearance">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource adjustapp}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuAdjustSchedule" Name="mnuAdjustSchedule" x:Shared="false" Command="net:PNCommands.AdjustSchedule">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource adjustsch}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuBackupCreate" Name="mnuBackupCreate" x:Shared="false" Command="net:PNCommands.BackupCreate"/>
+        <MenuItem x:Key="mnuBackupRestore" Name="mnuBackupRestore" x:Shared="false" Command="net:PNCommands.BackupRestore"/>
+        <MenuItem x:Key="mnuSyncLocal" Name="mnuSyncLocal" x:Shared="false" Command="net:PNCommands.SyncLocal"/>
+        <MenuItem x:Key="mnuImportNotes" Name="mnuImportNotes" x:Shared="false" Command="net:PNCommands.ImportNotes"/>
+        <MenuItem x:Key="mnuImportSettings" Name="mnuImportSettings" x:Shared="false" Command="net:PNCommands.ImportSettings"/>
+        <MenuItem x:Key="mnuImportFonts" Name="mnuImportFonts" x:Shared="false" Command="net:PNCommands.ImportFonts"/>
+        <MenuItem x:Key="mnuImportDictionaries" Name="mnuImportDictionaries" x:Shared="false" Command="net:PNCommands.ImportDictionaries"/>
+        <MenuItem x:Key="mnuDockAll" Name="mnuDockAll" x:Shared="false" Command="net:PNCommands.DockAll">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource dockall}"/>
+            </MenuItem.Icon>
+            <MenuItem Name="mnuDAllNone" Command="net:PNCommands.DockAllNone"/>
+            <MenuItem Name="mnuDAllLeft" Command="net:PNCommands.DockAllLeft">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource dockleft}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuDAllTop" Command="net:PNCommands.DockAllTop">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource docktop}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuDAllRight" Command="net:PNCommands.DockAllRight">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource dockright}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuDAllBottom" Command="net:PNCommands.DockAllBottom">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource dockbottom}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem x:Key="mnuVisibility" Name="mnuVisibility" x:Shared="false" Command="net:PNCommands.Visibility">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource placevis}"/>
+            </MenuItem.Icon>
+            <MenuItem Name="mnuShowNote" Command="net:PNCommands.ShowNote">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource shownote}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuShowAll" Command="net:PNCommands.ShowAll">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource showgroups}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuHideNote" Command="net:PNCommands.HideNote">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource hidenote}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuHideAll" Command="net:PNCommands.HideAll">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource hidegroups}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuAllToFront" Command="net:PNCommands.AllToFront">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource front}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem x:Key="mnuCentralize" Name="mnuCentralize" x:Shared="false" Command="net:PNCommands.Centralize">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource centralize}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem x:Key="mnuAddContact" Name="mnuAddContact" x:Shared="false" Command="net:PNCommands.ContactAdd">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource contactadd}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuAddGroup" Name="mnuAddGroup" x:Shared="false" Command="net:PNCommands.ContactGroupAdd">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource groupadd}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuSelectContact" Name="mnuSelectContact" x:Shared="false" Command="net:PNCommands.ContactSelect">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource contactselect}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuSelectGroup" Name="mnuSelectGroup" x:Shared="false" Command="net:PNCommands.ContactGroupSelect">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource groupselect}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuTagsCurrent" Name="mnuTagsCurrent" x:Shared="false" Command="net:PNCommands.TagsCurrent">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource tags}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuShowByTag" Name="mnuShowByTag" x:Shared="false" Command="net:PNCommands.TagsShowBy">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource showtag}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem x:Key="mnuHideByTag" Name="mnuHideByTag" x:Shared="false" Command="net:PNCommands.TagsHideBy">
+            <MenuItem.Icon>
+                <Image Source="{DynamicResource hidetag}"/>
+            </MenuItem.Icon>
+        </MenuItem>
+    </Window.Resources>
+    <DockPanel>
+        <WrapPanel Name="tbrCp" DockPanel.Dock="Top" Margin="4,0,4,0" Background="{DynamicResource ToolbarBackgrounsBrush}">
+            <WrapPanel.CommandBindings>
+                <StaticResource ResourceKey="NewNote"/>
+                <StaticResource ResourceKey="LoadNote"/>
+                <StaticResource ResourceKey="NoteFromClipboard"/>
+                <StaticResource ResourceKey="DuplicateNote"/>
+                <StaticResource ResourceKey="SaveAsShortcut"/>
+                <StaticResource ResourceKey="DiaryCommand"/>
+                <StaticResource ResourceKey="SaveCommand"/>
+                <StaticResource ResourceKey="SaveAsCommand"/>
+                <StaticResource ResourceKey="SaveAsTextCommand"/>
+                <StaticResource ResourceKey="RestoreFromBackup"/>
+                <StaticResource ResourceKey="PrintCommand"/>
+                <StaticResource ResourceKey="Adjust"/>
+                <StaticResource ResourceKey="Delete"/>
+                <StaticResource ResourceKey="SaveAllCommand"/>
+                <StaticResource ResourceKey="BackupSync"/>
+                <StaticResource ResourceKey="Placement"/>
+                <StaticResource ResourceKey="SendAsText"/>
+                <StaticResource ResourceKey="SendAsAttachment"/>
+                <StaticResource ResourceKey="SendAsZip"/>
+                <StaticResource ResourceKey="SendNetworkCommand"/>
+                <StaticResource ResourceKey="TagsCommand"/>
+                <StaticResource ResourceKey="Switches"/>
+                <StaticResource ResourceKey="AddFavorites"/>
+                <StaticResource ResourceKey="RemoveFavorites"/>
+                <StaticResource ResourceKey="RunCommand"/>
+                <StaticResource ResourceKey="EmptyBin"/>
+                <StaticResource ResourceKey="RestoreNote"/>
+                <StaticResource ResourceKey="PreviewCommand"/>
+                <StaticResource ResourceKey="PreviewSettings"/>
+                <StaticResource ResourceKey="PreviewRightCommand"/>
+                <StaticResource ResourceKey="ShowGroupsCommand"/>
+                <StaticResource ResourceKey="ColReset"/>
+                <StaticResource ResourceKey="HotkeysCP"/>
+                <StaticResource ResourceKey="MenusManagementCP"/>
+                <StaticResource ResourceKey="Preferences"/>
+                <StaticResource ResourceKey="PasswordCommand"/>
+                <StaticResource ResourceKey="SearchCommand"/>
+                <StaticResource ResourceKey="QuickSearch"/>
+                <StaticResource ResourceKey="HelpCommand"/>
+                <StaticResource ResourceKey="SupportCommand"/>
+                <StaticResource ResourceKey="AboutCommand"/>
+            </WrapPanel.CommandBindings>
+            <net:ToolbarButton x:Name="cmdNewNote" Command="net:PNCommands.NewNote">
+                <Image Stretch="None" Source="{DynamicResource new_note}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdLoadNotes" Command="net:PNCommands.LoadNote">
+                <Image Stretch="None" Source="{DynamicResource load}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdNoteFromCB" Command="net:PNCommands.NoteFromClipboard">
+                <Image Stretch="None" Source="{DynamicResource fromcp}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdDuplicateNote" Command="net:PNCommands.DuplicateNote">
+                <Image Stretch="None" Source="{DynamicResource note_copy}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdSaveAsShortcut" Command="net:PNCommands.SaveAsShortcut">
+                <Image Stretch="None" Source="{DynamicResource shortcut}"/>
+            </net:ToolbarButton>
+            <net:DropDownButton x:Name="cmdDiary" Command="net:PNCommands.Diary" DropDownOpened="Diary_DropDownOpened">
+                <Image Stretch="None" Source="{DynamicResource diary}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="Today"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuTodayDiary"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarButton x:Name="cmdSave" Command="net:PNCommands.Save">
+                <Image Stretch="None" Source="{DynamicResource save}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdSaveAs" Command="net:PNCommands.SaveAs">
+                <Image Stretch="None" Source="{DynamicResource saveas}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdSaveAsText" Command="net:PNCommands.SaveAsText">
+                <Image Stretch="None" Source="{DynamicResource saveastext}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdRestoreFromBackup" Command="net:PNCommands.RestoreFromBackup">
+                <Image Stretch="None" Source="{DynamicResource restore}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdPrint" Command="net:PNCommands.Print">
+                <Image Stretch="None" Source="{DynamicResource print}"/>
+            </net:ToolbarButton>
+            <net:DropDownButton x:Name="cmdAdjust" Command="net:PNCommands.Adjust">
+                <Image Stretch="None" Source="{DynamicResource control}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="AdjustAppearance"/>
+                            <StaticResource ResourceKey="AdjustSchedule"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuAdjustAppearance"/>
+                        <StaticResourceExtension ResourceKey="mnuAdjustSchedule"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarButton x:Name="cmdDelete" Command="net:PNCommands.Delete">
+                <Image Stretch="None" Source="{DynamicResource deletenote}"/>
+            </net:ToolbarButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarButton x:Name="cmdSaveAll" Command="net:PNCommands.SaveAll">
+                <Image Stretch="None" Source="{DynamicResource saveall}"/>
+            </net:ToolbarButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:DropDownButton x:Name="cmdBackup" Command="net:PNCommands.BackupSync">
+                <Image Stretch="None" Source="{DynamicResource back}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="BackupCreate"/>
+                            <StaticResource ResourceKey="BackupRestore"/>
+                            <StaticResource ResourceKey="SyncLocal"/>
+                            <StaticResource ResourceKey="ImportNotes"/>
+                            <StaticResource ResourceKey="ImportSettings"/>
+                            <StaticResource ResourceKey="ImportFonts"/>
+                            <StaticResource ResourceKey="ImportDictionaries"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuBackupCreate"/>
+                        <StaticResourceExtension ResourceKey="mnuBackupRestore"/>
+                        <StaticResourceExtension ResourceKey="mnuSyncLocal"/>
+                        <Separator/>
+                        <StaticResourceExtension ResourceKey="mnuImportNotes"/>
+                        <StaticResourceExtension ResourceKey="mnuImportSettings"/>
+                        <StaticResourceExtension ResourceKey="mnuImportFonts"/>
+                        <StaticResourceExtension ResourceKey="mnuImportDictionaries"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:DropDownButton x:Name="cmdPlacement" Command="net:PNCommands.Placement">
+                <Image Stretch="None" Source="{DynamicResource placevis}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="DockAllCommand"/>
+                            <StaticResource ResourceKey="DockAllNone"/>
+                            <StaticResource ResourceKey="DockAllLeft"/>
+                            <StaticResource ResourceKey="DockAllTop"/>
+                            <StaticResource ResourceKey="DockAllRight"/>
+                            <StaticResource ResourceKey="DockAllBottom"/>
+                            <StaticResource ResourceKey="Visibility"/>
+                            <StaticResource ResourceKey="ShowNoteCommand"/>
+                            <StaticResource ResourceKey="ShowAll"/>
+                            <StaticResource ResourceKey="HideNoteCommand"/>
+                            <StaticResource ResourceKey="HideAll"/>
+                            <StaticResource ResourceKey="AllToFront"/>
+                            <StaticResource ResourceKey="CentralizeCommand"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuDockAll"/>
+                        <StaticResourceExtension ResourceKey="mnuVisibility"/>
+                        <Separator/>
+                        <StaticResourceExtension ResourceKey="mnuCentralize"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <net:ToolbarButton x:Name="cmdSendAsText" Command="net:PNCommands.SendAsText">
+                <Image Stretch="None" Source="{DynamicResource sendmail}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdSendAsAttachment" Command="net:PNCommands.SendAsAttachment">
+                <Image Stretch="None" Source="{DynamicResource sendattach}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdSendZip" Command="net:PNCommands.SendAsZip">
+                <Image Stretch="None" Source="{DynamicResource mailzip}"/>
+            </net:ToolbarButton>
+            <net:DropDownButton x:Name="cmdSendNetwork" Command="net:PNCommands.SendNetwork">
+                <Image Stretch="None" Source="{DynamicResource sendnetwork}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="ContactAddCommand"/>
+                            <StaticResource ResourceKey="ContactGroupAdd"/>
+                            <StaticResource ResourceKey="ContactSelectCommand"/>
+                            <StaticResource ResourceKey="ContactGroupSelect"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuAddContact"/>
+                        <StaticResourceExtension ResourceKey="mnuAddGroup"/>
+                        <Separator/>
+                        <StaticResourceExtension ResourceKey="mnuSelectContact"/>
+                        <StaticResourceExtension ResourceKey="mnuSelectGroup"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:DropDownButton x:Name="cmdTags" Command="net:PNCommands.Tags" DropDownOpened="Tags_DropDownOpened">
+                <Image Stretch="None" Source="{DynamicResource tags}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="TagsCurrent"/>
+                            <StaticResource ResourceKey="TagsShowBy"/>
+                            <StaticResource ResourceKey="TagsHideBy"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuTagsCurrent"/>
+                        <StaticResourceExtension ResourceKey="mnuShowByTag"/>
+                        <StaticResourceExtension ResourceKey="mnuHideByTag"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:DropDownButton x:Name="cmdSwitches" Command="net:PNCommands.Switches" DropDownOpened="Switches_DropDownOpened">
+                <Image Stretch="None" Source="{DynamicResource check}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="OnTop"/>
+                            <StaticResource ResourceKey="HighPriority"/>
+                            <StaticResource ResourceKey="ProtectionMode"/>
+                            <StaticResource ResourceKey="SetNotePassword"/>
+                            <StaticResource ResourceKey="RemoveNotePassword"/>
+                            <StaticResource ResourceKey="MarkAsComplete"/>
+                            <StaticResource ResourceKey="RollUnrollCommand"/>
+                            <StaticResource ResourceKey="Pin"/>
+                            <StaticResource ResourceKey="Unpin"/>
+                            <StaticResource ResourceKey="ScrambleCommand"/>
+                            <StaticResource ResourceKey="UnscrambleCommand"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuOnTop"/>
+                        <StaticResourceExtension ResourceKey="mnuToggleHighPriority"/>
+                        <StaticResourceExtension ResourceKey="mnuToggleProtectionMode"/>
+                        <StaticResourceExtension ResourceKey="mnuSetPassword"/>
+                        <StaticResourceExtension ResourceKey="mnuRemovePassword"/>
+                        <StaticResourceExtension ResourceKey="mnuMarkAsComplete"/>
+                        <StaticResourceExtension ResourceKey="mnuRollUnroll"/>
+                        <StaticResourceExtension ResourceKey="mnuPin"/>
+                        <StaticResourceExtension ResourceKey="mnuUnpin"/>
+                        <StaticResourceExtension ResourceKey="mnuScramble"/>
+                        <StaticResourceExtension ResourceKey="mnuUnscramble"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <net:ToolbarButton x:Name="cmdFavorites" Command="net:PNCommands.AddFavorites">
+                <Image Stretch="None" Source="{DynamicResource favadd}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdRemoveFromFavorites" Command="net:PNCommands.RemoveFavorites">
+                <Image Stretch="None" Source="{DynamicResource favremove}"/>
+            </net:ToolbarButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:DropDownButton x:Name="cmdRun" Command="net:PNCommands.Run" DropDownOpened="Run_DropDownOpened">
+                <Image Stretch="None" Source="{DynamicResource run}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <MenuItem/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarButton x:Name="cmdEmptyBin" Command="net:PNCommands.EmptyBin">
+                <Image Stretch="None" Source="{DynamicResource bin_empty}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdRestoreNote" Command="net:PNCommands.RestoreNote">
+                <Image Stretch="None" Source="{DynamicResource bin_restore}"/>
+            </net:ToolbarButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarToggleButton x:Name="cmdPreview" IsChecked="True" Command="net:PNCommands.Preview">
+                <Image Stretch="None" Source="{DynamicResource preview}"/>
+            </net:ToolbarToggleButton>
+            <net:DropDownButton x:Name="cmdPreviewSettings" Command="net:PNCommands.PreviewSettings" DropDownOpened="PreviewSettings_DropDownOpened">
+                <Image Stretch="None" Source="{DynamicResource preview_sett}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="UseCustColor"/>
+                            <StaticResource ResourceKey="ChooseCustColor"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuUseCustColor"/>
+                        <StaticResourceExtension ResourceKey="mnuChooseCustColor"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <net:ToolbarToggleButton x:Name="cmdPreviewRight" Command="net:PNCommands.PreviewRight">
+                <Image Stretch="None" Source="{DynamicResource previewright}"/>
+            </net:ToolbarToggleButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarToggleButton x:Name="cmdShowGroups" IsChecked="True" Command="net:PNCommands.ShowGroups">
+                <Image Stretch="None" Source="{DynamicResource gr_view}"/>
+            </net:ToolbarToggleButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarButton x:Name="cmdColReset" Command="net:PNCommands.ColReset">
+                <Image Stretch="None" Source="{DynamicResource coleven}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdHotkeysCP" Command="net:PNCommands.HotkeysCP">
+                <Image Stretch="None" Source="{DynamicResource hotkeys}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdMenusManagementCP" Command="net:PNCommands.MenusManagementCP">
+                <Image Stretch="None" Source="{DynamicResource menus}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdPreferences" Command="net:PNCommands.Preferences">
+                <Image Stretch="None" Source="{DynamicResource prefs}"/>
+            </net:ToolbarButton>
+            <net:DropDownButton x:Name="cmdPassword" Command="net:PNCommands.Password">
+                <Image Stretch="None" Source="{DynamicResource password}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="PwrdCreate"/>
+                            <StaticResource ResourceKey="PwrdChange"/>
+                            <StaticResource ResourceKey="PwrdRemove"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuPwrdCreate"/>
+                        <StaticResourceExtension ResourceKey="mnuPwrdChange"/>
+                        <StaticResourceExtension ResourceKey="mnuPwrdRemove"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:DropDownButton x:Name="cmdSearch" Command="net:PNCommands.Search" DropDownOpened="Search_DropDownOpened">
+                <Image Stretch="None" Source="{DynamicResource search}"/>
+                <net:DropDownButton.DropDownMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="SearchInNotes"/>
+                            <StaticResource ResourceKey="SearchByTags"/>
+                            <StaticResource ResourceKey="SearchByDates"/>
+                            <StaticResource ResourceKey="IncBinInQSearch"/>
+                            <StaticResource ResourceKey="ClearQSearch"/>
+                        </ContextMenu.CommandBindings>
+                        <StaticResourceExtension ResourceKey="mnuSearchInNotes"/>
+                        <Separator/>
+                        <StaticResourceExtension ResourceKey="mnuSearchByTags"/>
+                        <Separator/>
+                        <StaticResourceExtension ResourceKey="mnuSearchByDates"/>
+                        <Separator/>
+                        <StaticResourceExtension ResourceKey="mnuIncBinInQSearch"/>
+                        <StaticResourceExtension ResourceKey="mnuClearQSearch"/>
+                    </ContextMenu>
+                </net:DropDownButton.DropDownMenu>
+            </net:DropDownButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <Grid>
+                <TextBox Name="txtQSearch" VerticalAlignment="Center" LostFocus="txtQSearch_LostFocus"  GotFocus="txtQSearch_GotFocus"  TextChanged="txtQSearch_TextChanged" PreviewKeyDown="txtQSearch_PreviewKeyDown"/>
+                <TextBox Name="txtSearch" Text="Quick search" VerticalAlignment="Center" FontStyle="Italic" Opacity="0.3" IsVisibleChanged="txtSearch_IsVisibleChanged" GotFocus="txtSearch_GotFocus" MouseLeftButtonDown="txtSearch_MouseLeftButtonDown"/>
+            </Grid>
+            <net:ToolbarButton x:Name="cmdQuickSearch" Command="net:PNCommands.QuickSearch">
+                <Image Stretch="None" Source="{DynamicResource searchweb}"/>
+            </net:ToolbarButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarButton x:Name="cmdHelp" Command="net:PNCommands.Help">
+                <Image Stretch="None" Source="{DynamicResource help}"/>
+            </net:ToolbarButton>
+            <Separator Style="{DynamicResource ToolbarSeparator}"/>
+            <net:ToolbarButton x:Name="cmdSupport" Command="net:PNCommands.Support">
+                <Image Stretch="None" Source="{DynamicResource support}"/>
+            </net:ToolbarButton>
+            <net:ToolbarButton x:Name="cmdAbout" Command="net:PNCommands.About">
+                <Image Stretch="None" Source="{DynamicResource about}"/>
+            </net:ToolbarButton>
+        </WrapPanel>
+        <Border DockPanel.Dock="Top" Margin="4,0,4,0" Height="1" BorderThickness="1" BorderBrush="{DynamicResource CommonControlBorderBrush}"/>
+        <StatusBar Name="stsCP" DockPanel.Dock="Bottom">
+            <StatusBarItem Margin="4,0,4,0" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <TextBlock x:Name="stlName"/>
+            </StatusBarItem>
+            <StatusBarItem Margin="4,0,4,0" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <TextBlock x:Name="stlCount"/>
+            </StatusBarItem>
+            <StatusBarItem Margin="4,0,4,0" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <TextBlock x:Name="stlTotal"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid x:Name="OuterGrid"  Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.45*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <WrapPanel Name="tbrGroups" Grid.Row="0" Grid.Column="0">
+                <WrapPanel.CommandBindings>
+                    <StaticResource ResourceKey="GroupAddCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupAddSubgroupCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupEditCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupRemoveCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupShowCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupShowAllCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupHideCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupHideAllCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupPassAddCommand"></StaticResource>
+                    <StaticResource ResourceKey="GroupPassRemoveCommand"></StaticResource>
+                </WrapPanel.CommandBindings>
+                <net:ToolbarButton x:Name="cmdAddTopGroup" Command="net:PNCommands.GroupAdd">
+                    <Image Stretch="None" Source="{DynamicResource gr_add}"/>
+                </net:ToolbarButton>
+                <net:ToolbarButton x:Name="cmdAddSubgroup" Command="net:PNCommands.GroupAddSubgroup">
+                    <Image Stretch="None" Source="{DynamicResource gr_sub_add}"/>
+                </net:ToolbarButton>
+                <net:ToolbarButton x:Name="cmdEditGroup" Command="net:PNCommands.GroupEdit">
+                    <Image Stretch="None" Source="{DynamicResource gr_edit}"/>
+                </net:ToolbarButton>
+                <net:ToolbarButton x:Name="cmdRemoveGroup" Command="net:PNCommands.GroupRemove">
+                    <Image Stretch="None" Source="{DynamicResource gr_remove}"/>
+                </net:ToolbarButton>
+                <Separator Style="{DynamicResource ToolbarSeparator}"/>
+                <net:ToolbarButton x:Name="cmdShowAllFromGroup" Command="net:PNCommands.GroupShow">
+                    <Image Stretch="None" Source="{DynamicResource gr_show}"/>
+                </net:ToolbarButton>
+                <net:ToolbarButton x:Name="cmdShowAllIncSubgroups" Command="net:PNCommands.GroupShowAll">
+                    <Image Stretch="None" Source="{DynamicResource gr_show_all}"/>
+                </net:ToolbarButton>
+                <Separator Style="{DynamicResource ToolbarSeparator}"/>
+                <net:ToolbarButton x:Name="cmdHideAllFromGroup" Command="net:PNCommands.GroupHide">
+                    <Image Stretch="None" Source="{DynamicResource gr_hide}"/>
+                </net:ToolbarButton>
+                <net:ToolbarButton x:Name="cmdHideAllIncSubgroups" Command="net:PNCommands.GroupHideAll">
+                    <Image Stretch="None" Source="{DynamicResource gr_hide_all}"/>
+                </net:ToolbarButton>
+                <Separator Style="{DynamicResource ToolbarSeparator}"/>
+                <net:ToolbarButton x:Name="cmdSetGroupPassword" Command="net:PNCommands.GroupPassAdd">
+                    <Image Stretch="None" Source="{DynamicResource passadd}"/>
+                </net:ToolbarButton>
+                <net:ToolbarButton x:Name="cmdRemoveGroupPassword" Command="net:PNCommands.GroupPassRemove">
+                    <Image Stretch="None" Source="{DynamicResource passremove}"/>
+                </net:ToolbarButton>
+            </WrapPanel>
+            <Border Grid.Row="1" Grid.Column="0" Visibility="Hidden">
+                <Border.ContextMenu>
+                    <ContextMenu x:Name="ctmGroups" 
+                                 TextElement.FontFamily="{Binding FontFamily}"
+                                 TextElement.FontSize="{Binding FontSize}"
+                                 TextElement.FontStretch="{Binding FontStretch}"
+                                 TextElement.FontStyle="{Binding FontStyle}"
+                                 TextElement.FontWeight="{Binding FontWeight}"
+                                 Closed="ctmGroups_Closed">
+                        <ContextMenu.CommandBindings>
+                            <StaticResource ResourceKey="GroupAddCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupAddSubgroupCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupEditCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupRemoveCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupShowCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupShowAllCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupHideCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupHideAllCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupPassAddCommand"></StaticResource>
+                            <StaticResource ResourceKey="GroupPassRemoveCommand"></StaticResource>
+                        </ContextMenu.CommandBindings>
+                        <Separator x:Name="sepGroupsMenu" Style="{DynamicResource TextSeparatorStyle}" net:PNUtils.GroupData="Some group data"/>
+                        <MenuItem Command="net:PNCommands.GroupAdd">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource gr_add}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="net:PNCommands.GroupAddSubgroup">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource gr_sub_add}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="net:PNCommands.GroupEdit">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource gr_edit}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="net:PNCommands.GroupRemove">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource gr_remove}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Command="net:PNCommands.GroupShow">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource gr_show}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="net:PNCommands.GroupShowAll">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource gr_show_all}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Command="net:PNCommands.GroupHide">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource gr_hide}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="net:PNCommands.GroupHideAll">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource gr_hide_all}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Command="net:PNCommands.GroupPassAdd">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource passadd}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="net:PNCommands.GroupPassRemove">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource passremove}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Border.ContextMenu>
+            </Border>
+            <net:PNTreeView x:Name="tvwGroups" Grid.Row="1" Grid.Column="0" AllowDrop="True" SelectedItemChanged="tvwGroups_SelectedItemChanged" MouseRightButtonUp="tvwGroups_MouseRightButtonUp" PreviewMouseLeftButtonDown="tvwGroups_PreviewMouseLeftButtonDown" PreviewMouseMove="tvwGroups_PreviewMouseMove" DragEnter="tvwGroups_DragEnter" DragLeave="tvwGroups_DragLeave" DragOver="tvwGroups_DragOver" Drop="tvwGroups_Drop" PreviewMouseLeftButtonUp="tvwGroups_PreviewMouseLeftButtonUp" PreviewKeyDown="tvwGroups_PreviewKeyDown"/>
+            <GridSplitter x:Name="SplitLeft" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="8" Background="{DynamicResource SplitterBackgrounsBrush}"/>
+            <Grid x:Name="InnerGrid" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ListView Name="grdBackup" net:PNGridViewHelper.AutoSort="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Visibility="Hidden" SelectionChanged="grdBackup_SelectionChanged" MouseDoubleClick="grdBackup_MouseDoubleClick">
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ListBackHeaderContextMenu">
+                            <MenuItem Tag="Back_Name" Header="Note Name" IsChecked="True" IsEnabled="False"/>
+                            <MenuItem Tag="Back_Original" Header="Original Note" IsCheckable="True" Checked="BackHeadeMenuItem_Checked" Unchecked="BackHeadeMenuItem_Checked"/>
+                            <MenuItem Tag="Back_Saved" Header="Time Saved" IsCheckable="True" Checked="BackHeadeMenuItem_Checked" Unchecked="BackHeadeMenuItem_Checked"/>
+                        </ContextMenu>
+                        <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ListBackHeaderContextMenu}"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Back_Name" net:PNGridViewHelper.PropertyName="Name" Header="Note Name" FixedWidth="160" DefaultWidth="160" AllowResize="True" WidthChanged="BackColumn_WidthChanged">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Stretch="None" Source="{DynamicResource lsback}" Margin="2,0,2,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Back_Original" Header="Original Note" FixedWidth="160" DefaultWidth="160" DisplayMemberBinding="{Binding Original}" AllowResize="True" VisibilityChanged="BackColumnVisibilityChanged" WidthChanged="BackColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Back_Saved" Header="Time Created" FixedWidth="128" DefaultWidth="128" DisplayMemberBinding="{Binding Created, Converter={StaticResource DateToDisplayConverter}}" AllowResize="True" VisibilityChanged="BackColumnVisibilityChanged" WidthChanged="BackColumn_WidthChanged"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView Name="grdNotes" net:PNGridViewHelper.AutoSort="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" SelectionChanged="grdNotes_SelectionChanged" MouseDoubleClick="grdNotes_MouseDoubleClick" PreviewMouseLeftButtonDown="grdNotes_PreviewMouseLeftButtonDown" PreviewMouseMove="grdNotes_PreviewMouseMove" PreviewMouseLeftButtonUp="grdNotes_PreviewMouseLeftButtonUp" LostMouseCapture="grdNotes_LostMouseCapture" PreviewKeyDown="grdNotes_PreviewKeyDown">
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ListNotesHeaderContextMenu">
+                            <MenuItem Tag="Note_Name" Header="Note Name" IsChecked="True" IsEnabled="False"/>
+                            <MenuItem Tag="Note_Id" Header="ID" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Priority" Header="Priority" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Completed" Header="Completed" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Locked" Header="Locked" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Password_Protected" Header="Password Protected" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Pinned" Header="Pinned" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Favorites" Header="Favorites" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Sent_Received" Header="Sent/Received" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Encrypted" Header="Encrypted" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Group" Header="Group" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_PrevGroup" Header="Group" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Created" Header="Created" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Saved" Header="Last Saved" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Deleted" Header="Deleted" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Schedule_Type" Header="Schedule Type" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Tags" Header="Tags" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Content" Header="Content" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Sent_To" Header="Sent To" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Sent_At" Header="Sent At" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Received_From" Header="Received From" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                            <MenuItem Tag="Note_Received_At" Header="Received At" IsCheckable="True" Checked="NotesHeaderMenuItem_Checked" Unchecked="NotesHeaderMenuItem_Checked"/>
+                        </ContextMenu>
+                        <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ListNotesHeaderContextMenu}"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Name" net:PNGridViewHelper.PropertyName="Name" Header="Note Name" FixedWidth="160" DefaultWidth="160" AllowResize="True" WidthChanged="NotesColumn_WidthChanged">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Stretch="None" net:PNUtils.ImageSourceKey="{Binding Path=State, Converter={StaticResource StateToImageConverter}}" Margin="2,0,2,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Id" Header="ID" FixedWidth="160" DefaultWidth="160" DisplayMemberBinding="{Binding Id}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ShowSortArrow="False" net:PNGridViewHelper.ColumnName="Note_Priority" net:PNGridViewHelper.PropertyName="Priority" FixedWidth="32" DefaultWidth="32" VisibilityChanged="NotesColumnVisibilityChanged">
+                                <net:FixedWidthColumn.Header>
+                                    <Image Source="{DynamicResource lspriority}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </net:FixedWidthColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" net:PNUtils.ImageSourceKey="{Binding Path=Priority, Converter={StaticResource PropToImageConverter}, ConverterParameter={StaticResource Priority}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ShowSortArrow="False" net:PNGridViewHelper.ColumnName="Note_Completed" net:PNGridViewHelper.PropertyName="Completed" FixedWidth="32" DefaultWidth="32" VisibilityChanged="NotesColumnVisibilityChanged">
+                                <net:FixedWidthColumn.Header>
+                                    <Image Source="{DynamicResource lscomplete}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </net:FixedWidthColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" net:PNUtils.ImageSourceKey="{Binding Path=Completed, Converter={StaticResource PropToImageConverter}, ConverterParameter={StaticResource Completed}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ShowSortArrow="False" net:PNGridViewHelper.ColumnName="Note_Locked" net:PNGridViewHelper.PropertyName="Protected" FixedWidth="32" DefaultWidth="32" VisibilityChanged="NotesColumnVisibilityChanged">
+                                <net:FixedWidthColumn.Header>
+                                    <Image Source="{DynamicResource lsprotect}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </net:FixedWidthColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" net:PNUtils.ImageSourceKey="{Binding Path=Protected, Converter={StaticResource PropToImageConverter}, ConverterParameter={StaticResource Protected}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ShowSortArrow="False" net:PNGridViewHelper.ColumnName="Note_Password_Protected" net:PNGridViewHelper.PropertyName="PasswordCommand" FixedWidth="32" DefaultWidth="32" VisibilityChanged="NotesColumnVisibilityChanged">
+                                <net:FixedWidthColumn.Header>
+                                    <Image Source="{DynamicResource lspass}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </net:FixedWidthColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" net:PNUtils.ImageSourceKey="{Binding Path=Password, Converter={StaticResource PropToImageConverter}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ShowSortArrow="False" net:PNGridViewHelper.ColumnName="Note_Pinned" net:PNGridViewHelper.PropertyName="Pinned" FixedWidth="32" DefaultWidth="32" VisibilityChanged="NotesColumnVisibilityChanged">
+                                <net:FixedWidthColumn.Header>
+                                    <Image Source="{DynamicResource lspin}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </net:FixedWidthColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" net:PNUtils.ImageSourceKey="{Binding Path=Pinned, Converter={StaticResource PropToImageConverter}, ConverterParameter={StaticResource Pinned}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ShowSortArrow="False" net:PNGridViewHelper.ColumnName="Note_Favorites" net:PNGridViewHelper.PropertyName="Favorites" FixedWidth="32" DefaultWidth="32" VisibilityChanged="NotesColumnVisibilityChanged">
+                                <net:FixedWidthColumn.Header>
+                                    <Image Source="{DynamicResource lsfav}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </net:FixedWidthColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" net:PNUtils.ImageSourceKey="{Binding Path=Favorites, Converter={StaticResource PropToImageConverter}, ConverterParameter={StaticResource Favorites}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ShowSortArrow="False" net:PNGridViewHelper.ColumnName="Note_Sent_Received" net:PNGridViewHelper.PropertyName="SentReceived" FixedWidth="32" DefaultWidth="32" VisibilityChanged="NotesColumnVisibilityChanged">
+                                <net:FixedWidthColumn.Header>
+                                    <Image Source="{DynamicResource lssendrec}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </net:FixedWidthColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" net:PNUtils.ImageSourceKey="{Binding SentReceived, Converter={StaticResource PropToImageConverter}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ShowSortArrow="False" net:PNGridViewHelper.ColumnName="Note_Encrypted" net:PNGridViewHelper.PropertyName="Encrypted" FixedWidth="32" DefaultWidth="32" VisibilityChanged="NotesColumnVisibilityChanged">
+                                <net:FixedWidthColumn.Header>
+                                    <Image Source="{DynamicResource lsscrambled}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </net:FixedWidthColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" net:PNUtils.ImageSourceKey="{Binding Path=Encrypted, Converter={StaticResource PropToImageConverter}, ConverterParameter={StaticResource Encrypted}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </net:FixedWidthColumn>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Group" Header="Group" FixedWidth="160" DefaultWidth="160" DisplayMemberBinding="{Binding Group}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_PrevGroup" Header="Group" FixedWidth="160" DefaultWidth="160" DisplayMemberBinding="{Binding PrevGroup}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Created" Header="Created" FixedWidth="128" DefaultWidth="128" DisplayMemberBinding="{Binding Created, Converter={StaticResource DateToDisplayConverter}}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Saved" Header="Last Saved" FixedWidth="128" DefaultWidth="128" DisplayMemberBinding="{Binding Saved, Converter={StaticResource DateToDisplayConverter}}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Deleted" Header="Deleted" FixedWidth="128" DefaultWidth="128" DisplayMemberBinding="{Binding Deleted, Converter={StaticResource DateToDisplayConverter}}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Schedule_Type" Header="Schedule Type" FixedWidth="160" DefaultWidth="160" DisplayMemberBinding="{Binding ScheduleType}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Tags" Header="Tags" FixedWidth="120" DefaultWidth="120" DisplayMemberBinding="{Binding Tags}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Content" Header="Content" FixedWidth="160" DefaultWidth="160" DisplayMemberBinding="{Binding Content}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Sent_To" Header="Sent To" FixedWidth="120" DefaultWidth="120" DisplayMemberBinding="{Binding SentTo}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Sent_At" Header="Sent At" FixedWidth="128" DefaultWidth="128" DisplayMemberBinding="{Binding SentAt, Converter={StaticResource DateToDisplayConverter}}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Received_From" Header="Received from" FixedWidth="120" DefaultWidth="120" DisplayMemberBinding="{Binding ReceivedFrom}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                            <net:FixedWidthColumn net:PNGridViewHelper.ColumnName="Note_Received_At" Header="Received At" FixedWidth="128" DefaultWidth="128" DisplayMemberBinding="{Binding ReceivedAt, Converter={StaticResource DateToDisplayConverter}}" AllowResize="True" VisibilityChanged="NotesColumnVisibilityChanged" WidthChanged="NotesColumn_WidthChanged"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ContextMenu>
+                        <ContextMenu Name="ctmList" Opened="ListMenu_Opened">
+                            <ContextMenu.CommandBindings>
+                                <StaticResource ResourceKey="NewNote"/>
+                                <StaticResource ResourceKey="LoadNote"/>
+                                <StaticResource ResourceKey="NoteFromClipboard"/>
+                                <StaticResource ResourceKey="DuplicateNote"/>
+                                <StaticResource ResourceKey="SaveAsShortcut"/>
+                                <StaticResource ResourceKey="DiaryCommand"/>
+                                <StaticResource ResourceKey="SaveCommand"/>
+                                <StaticResource ResourceKey="SaveAsCommand"/>
+                                <StaticResource ResourceKey="SaveAsTextCommand"/>
+                                <StaticResource ResourceKey="RestoreFromBackup"/>
+                                <StaticResource ResourceKey="PrintCommand"/>
+                                <StaticResource ResourceKey="Adjust"/>
+                                <StaticResource ResourceKey="Delete"/>
+                                <StaticResource ResourceKey="SaveAllCommand"/>
+                                <StaticResource ResourceKey="BackupSync"/>
+                                <StaticResource ResourceKey="Placement"/>
+                                <StaticResource ResourceKey="SendAsText"/>
+                                <StaticResource ResourceKey="SendAsAttachment"/>
+                                <StaticResource ResourceKey="SendAsZip"/>
+                                <StaticResource ResourceKey="SendNetworkCommand"/>
+                                <StaticResource ResourceKey="TagsCommand"/>
+                                <StaticResource ResourceKey="Switches"/>
+                                <StaticResource ResourceKey="AddFavorites"/>
+                                <StaticResource ResourceKey="RemoveFavorites"/>
+                                <StaticResource ResourceKey="RunCommand"/>
+                                <StaticResource ResourceKey="EmptyBin"/>
+                                <StaticResource ResourceKey="RestoreNote"/>
+                                <StaticResource ResourceKey="PreviewFromMenu"/>
+                                <StaticResource ResourceKey="PreviewSettings"/>
+                                <StaticResource ResourceKey="PreviewRightFromMenu"/>
+                                <StaticResource ResourceKey="ShowGroupsFromMenu"/>
+                                <StaticResource ResourceKey="ColReset"/>
+                                <StaticResource ResourceKey="HotkeysCP"/>
+                                <StaticResource ResourceKey="MenusManagementCP"/>
+                                <StaticResource ResourceKey="Preferences"/>
+                                <StaticResource ResourceKey="PasswordCommand"/>
+                                <StaticResource ResourceKey="SearchCommand"/>
+                                <StaticResource ResourceKey="QuickSearch"/>
+                                <StaticResource ResourceKey="HelpCommand"/>
+                                <StaticResource ResourceKey="SupportCommand"/>
+                                <StaticResource ResourceKey="AboutCommand"/>
+                                <StaticResource ResourceKey="Today"/>
+                                <StaticResource ResourceKey="AdjustAppearance"/>
+                                <StaticResource ResourceKey="AdjustSchedule"/>
+                                <StaticResource ResourceKey="BackupCreate"/>
+                                <StaticResource ResourceKey="BackupRestore"/>
+                                <StaticResource ResourceKey="SyncLocal"/>
+                                <StaticResource ResourceKey="ImportNotes"/>
+                                <StaticResource ResourceKey="ImportSettings"/>
+                                <StaticResource ResourceKey="ImportFonts"/>
+                                <StaticResource ResourceKey="ImportDictionaries"/>
+                                <StaticResource ResourceKey="DockAllCommand"/>
+                                <StaticResource ResourceKey="DockAllNone"/>
+                                <StaticResource ResourceKey="DockAllLeft"/>
+                                <StaticResource ResourceKey="DockAllTop"/>
+                                <StaticResource ResourceKey="DockAllRight"/>
+                                <StaticResource ResourceKey="DockAllBottom"/>
+                                <StaticResource ResourceKey="Visibility"/>
+                                <StaticResource ResourceKey="ShowNoteCommand"/>
+                                <StaticResource ResourceKey="ShowAll"/>
+                                <StaticResource ResourceKey="HideNoteCommand"/>
+                                <StaticResource ResourceKey="HideAll"/>
+                                <StaticResource ResourceKey="AllToFront"/>
+                                <StaticResource ResourceKey="CentralizeCommand"/>
+                                <StaticResource ResourceKey="ContactAddCommand"/>
+                                <StaticResource ResourceKey="ContactGroupAdd"/>
+                                <StaticResource ResourceKey="ContactSelectCommand"/>
+                                <StaticResource ResourceKey="ContactGroupSelect"/>
+                                <StaticResource ResourceKey="TagsCurrent"/>
+                                <StaticResource ResourceKey="TagsShowBy"/>
+                                <StaticResource ResourceKey="TagsHideBy"/>
+                                <StaticResource ResourceKey="OnTop"/>
+                                <StaticResource ResourceKey="HighPriority"/>
+                                <StaticResource ResourceKey="ProtectionMode"/>
+                                <StaticResource ResourceKey="SetNotePassword"/>
+                                <StaticResource ResourceKey="RemoveNotePassword"/>
+                                <StaticResource ResourceKey="MarkAsComplete"/>
+                                <StaticResource ResourceKey="RollUnrollCommand"/>
+                                <StaticResource ResourceKey="Pin"/>
+                                <StaticResource ResourceKey="Unpin"/>
+                                <StaticResource ResourceKey="ScrambleCommand"/>
+                                <StaticResource ResourceKey="UnscrambleCommand"/>
+                                <StaticResource ResourceKey="UseCustColor"/>
+                                <StaticResource ResourceKey="ChooseCustColor"/>
+                                <StaticResource ResourceKey="PwrdCreate"/>
+                                <StaticResource ResourceKey="PwrdChange"/>
+                                <StaticResource ResourceKey="PwrdRemove"/>
+                                <StaticResource ResourceKey="SearchInNotes"/>
+                                <StaticResource ResourceKey="SearchByTags"/>
+                                <StaticResource ResourceKey="SearchByDates"/>
+                                <StaticResource ResourceKey="IncBinInQSearch"/>
+                                <StaticResource ResourceKey="ClearQSearch"/>
+                            </ContextMenu.CommandBindings>
+                            <MenuItem x:Name="mnuNewNote" Command="net:PNCommands.NewNote">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource new_note}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuLoadNotes" Command="net:PNCommands.LoadNote">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource load}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuNoteFromCB" Command="net:PNCommands.NoteFromClipboard">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource fromcp}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuDuplicateNote" Command="net:PNCommands.DuplicateNote">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource note_copy}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuSaveAsShortcut" Command="net:PNCommands.SaveAsShortcut">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource shortcut}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuDiary" Command="net:PNCommands.Diary">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource diary}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuTodayDiary"/>
+                            </MenuItem>
+                            <Separator x:Name="toolStripMenuItem17"/>
+                            <MenuItem x:Name="mnuSave" Command="net:PNCommands.Save">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource save}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuSaveAs" Command="net:PNCommands.SaveAs">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource saveas}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuSaveAsText" Command="net:PNCommands.SaveAsText">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource saveastext}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuRestoreFromBackup" Command="net:PNCommands.RestoreFromBackup">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource restore}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuPrint" Command="net:PNCommands.Print">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource print}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuAdjust" Command="net:PNCommands.Adjust">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource control}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuAdjustAppearance"/>
+                                <StaticResourceExtension ResourceKey="mnuAdjustSchedule"/>
+                            </MenuItem>
+                            <Separator x:Name="toolStripMenuItem18"/>
+                            <MenuItem x:Name="mnuDelete" Command="net:PNCommands.Delete">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource deletenote}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator4"/>
+                            <MenuItem x:Name="mnuSaveAll" Command="net:PNCommands.SaveAll">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource saveall}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator22"/>
+                            <MenuItem x:Name="mnuBackup" Command="net:PNCommands.BackupSync">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource back}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuBackupCreate"/>
+                                <StaticResourceExtension ResourceKey="mnuBackupRestore"/>
+                                <StaticResourceExtension ResourceKey="mnuSyncLocal"/>
+                                <Separator x:Name="toolStripMenuItem21"/>
+                                <StaticResourceExtension ResourceKey="mnuImportNotes"/>
+                                <StaticResourceExtension ResourceKey="mnuImportSettings"/>
+                                <StaticResourceExtension ResourceKey="mnuImportFonts"/>
+                                <StaticResourceExtension ResourceKey="mnuImportDictionaries"/>
+                            </MenuItem>
+                            <Separator x:Name="toolStripMenuItem19"/>
+                            <MenuItem x:Name="mnuPlacement" Command="net:PNCommands.Placement">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource placevis}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuDockAll"/>
+                                <StaticResourceExtension ResourceKey="mnuVisibility"/>
+                                <Separator Name="toolStripMenuItem2"/>
+                                <StaticResourceExtension ResourceKey="mnuCentralize"/>
+                            </MenuItem>
+                            <Separator x:Name="toolStripMenuItem20"/>
+                            <MenuItem x:Name="mnuSendAsText" Command="net:PNCommands.SendAsText">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource sendmail}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuSendAsAttachment" Command="net:PNCommands.SendAsAttachment">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource sendattach}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuSendZip" Command="net:PNCommands.SendAsZip">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource mailzip}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuSendNetwork" Command="net:PNCommands.SendNetwork">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource sendnetwork}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuAddContact"/>
+                                <StaticResourceExtension ResourceKey="mnuAddGroup"/>
+                                <Separator x:Name="toolStripMenuItem50"/>
+                                <StaticResourceExtension ResourceKey="mnuSelectContact"/>
+                                <StaticResourceExtension ResourceKey="mnuSelectGroup"/>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator23"/>
+                            <MenuItem x:Name="mnuTags" Command="net:PNCommands.Tags">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource tags}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuTagsCurrent"/>
+                                <StaticResourceExtension ResourceKey="mnuShowByTag"/>
+                                <StaticResourceExtension ResourceKey="mnuHideByTag"/>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator24"/>
+                            <MenuItem x:Name="mnuSwitches" Command="net:PNCommands.Switches">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource check}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuOnTop"/>
+                                <StaticResourceExtension ResourceKey="mnuToggleHighPriority"/>
+                                <StaticResourceExtension ResourceKey="mnuToggleProtectionMode"/>
+                                <StaticResourceExtension ResourceKey="mnuSetPassword"/>
+                                <StaticResourceExtension ResourceKey="mnuRemovePassword"/>
+                                <StaticResourceExtension ResourceKey="mnuMarkAsComplete"/>
+                                <StaticResourceExtension ResourceKey="mnuRollUnroll"/>
+                                <StaticResourceExtension ResourceKey="mnuPin"/>
+                                <StaticResourceExtension ResourceKey="mnuUnpin"/>
+                                <StaticResourceExtension ResourceKey="mnuScramble"/>
+                                <StaticResourceExtension ResourceKey="mnuUnscramble"/>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuFavorites" Command="net:PNCommands.AddFavorites">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource favadd}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuRemoveFromFavorites" Command="net:PNCommands.RemoveFavorites">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource favremove}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator26"/>
+                            <MenuItem x:Name="mnuRun" Command="net:PNCommands.Run">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource run}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator27"/>
+                            <MenuItem x:Name="mnuEmptyBin" Command="net:PNCommands.EmptyBin">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource bin_empty}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuRestoreNote" Command="net:PNCommands.RestoreNote">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource bin_restore}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator28"/>
+                            <MenuItem x:Name="mnuPreview" IsChecked="True" IsCheckable="True" Command="net:PNCommands.PreviewFromMenu">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource preview}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuPreviewSettings" Command="net:PNCommands.PreviewSettings">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource preview_sett}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuUseCustColor"/>
+                                <StaticResourceExtension ResourceKey="mnuChooseCustColor"/>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuPreviewRight" IsCheckable="True" Command="net:PNCommands.PreviewRightFromMenu">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource previewright}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator29"/>
+                            <MenuItem x:Name="mnuShowGroups" IsChecked="True" IsCheckable="True" Command="net:PNCommands.ShowGroupsFromMenu">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource gr_view}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator37"/>
+                            <MenuItem x:Name="mnuColReset" Command="net:PNCommands.ColReset">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource coleven}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuHotkeysCP" Command="net:PNCommands.HotkeysCP">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource hotkeys}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuMenusManagementCP" Command="net:PNCommands.MenusManagementCP">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource menus}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuPreferences" Command="net:PNCommands.Preferences">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource prefs}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuPassword" Command="net:PNCommands.Password">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource password}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuPwrdCreate"/>
+                                <StaticResourceExtension ResourceKey="mnuPwrdChange"/>
+                                <StaticResourceExtension ResourceKey="mnuPwrdRemove"/>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator31"/>
+                            <MenuItem x:Name="mnuSearch" Command="net:PNCommands.Search">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource search}"/>
+                                </MenuItem.Icon>
+                                <StaticResourceExtension ResourceKey="mnuSearchInNotes"/>
+                                <Separator x:Name="toolStripMenuItem11"/>
+                                <StaticResourceExtension ResourceKey="mnuSearchByTags"/>
+                                <Separator x:Name="toolStripMenuItem12"/>
+                                <StaticResourceExtension ResourceKey="mnuSearchByDates"/>
+                                <Separator x:Name="toolStripMenuItem13"/>
+                                <StaticResourceExtension ResourceKey="mnuIncBinInQSearch"/>
+                                <StaticResourceExtension ResourceKey="mnuClearQSearch"/>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator32"/>
+                            <MenuItem x:Name="mnuHelp" Command="net:PNCommands.Help">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource help}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator x:Name="toolStripSeparator33"/>
+                            <MenuItem x:Name="mnuSupport" Command="net:PNCommands.Support">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource support}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="mnuAbout" Command="net:PNCommands.About">
+                                <MenuItem.Icon>
+                                    <Image Stretch="None" Source="{DynamicResource about}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
+                <GridSplitter x:Name="SplitHorz"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="8" Background="{DynamicResource SplitterBackgrounsBrush}"/>
+                <GridSplitter x:Name="SplitVert"  Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="8" Visibility="Collapsed" Background="{DynamicResource SplitterBackgrounsBrush}"/>
+                <Border x:Name="BorderHost"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="{DynamicResource CommonControlBorderBrush}" BorderThickness="1">
+                    <Border Name="brdHost" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

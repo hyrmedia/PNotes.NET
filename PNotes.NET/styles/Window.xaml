@@ -1,0 +1,271 @@
+﻿<ResourceDictionary x:Class="PNotes.NET.styles.CustomWindowStyle"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:styles="clr-namespace:PNotes.NET.styles">
+
+    <Style x:Key="FlatTitleBarButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource TitleBarButtonTextBrush}" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Opacity" Value="{DynamicResource TitleBarButtonOpacity}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border
+                            x:Name="PART_border"
+                            Background="Transparent"
+                            />
+                        <ContentPresenter />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsPressed" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_border" Property="Background" Value="{DynamicResource TitleBarButtonHighlightBrush}" />
+                            <Setter Property="Effect" Value="{DynamicResource TitleBarButtonHoverEffect}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="PART_border" Property="Background" Value="{DynamicResource TitleBarButtonPressedBrush}"/>
+                            <!--<Setter TargetName="PART_border" Property="Opacity" Value="{DynamicResource TitleBarButtonPressedOpacity}" />-->
+                            <Setter Property="Effect" Value="{DynamicResource TitleBarButtonPressedEffect}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource TitleBarButtonDisabledBrush}"/>
+                            <!--<Setter TargetName="PART_border" Property="Opacity" Value="{DynamicResource TitleBarButtonDisabledOpacity}" />-->
+                            <Setter Property="Opacity" Value="{DynamicResource TitleBarButtonDisabledOpacity}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="AllowsTransparency" Value="true" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <!--<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />-->
+        <Setter Property="ResizeMode" Value="CanResize" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <!--
+                    7 is a magic number. By default Windows fits a maximized window with Margin
+                    7 7 7 7 to fill entire screen (WPF .Net 4.5). Larger numbers produce a gap
+                    between maximized window and screen edges; smaller numbers show parts of
+                    the window outside of the current monitor on multi-display computers.
+                    -->
+                    <Grid Margin="7"
+                          TextOptions.TextRenderingMode="ClearType"
+                          TextOptions.TextFormattingMode="Display"
+                          SizeChanged="OnWindowSizeChanged">
+                        <Border x:Name="PART_Border"
+                                Width="Auto"
+                                Height="Auto"
+                                Background="{DynamicResource WindowBackgroundBrush}"
+                                BorderBrush="{DynamicResource WindowBorderBrush}"
+                                Padding="0"
+                                BorderThickness="{DynamicResource WindowBorderThickness}"
+                                CornerRadius="{DynamicResource WindowCornerRadius}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black"
+                                                  Opacity="0.5"
+                                                  BlurRadius="7"
+                                                  ShadowDepth="2"
+                                                  Direction="315"/>
+                            </Border.Effect>
+                            <DockPanel HorizontalAlignment="Stretch"
+                                       Background="Transparent"
+                                       VerticalAlignment="Stretch">
+                                <Border x:Name="TitleBar"
+                                        DockPanel.Dock="Top"
+                                        BorderThickness="0"
+                                        Background="{DynamicResource TitleBarBackgroundBrush}"
+                                        Margin="0,0,0,4"
+                                        CornerRadius="{DynamicResource TitleBarCornerRadius}"
+                                        MouseLeftButtonDown="TitleBarMouseLeftButtonDown"
+                                        MouseMove="TitleBarMouseMove">
+                                    <Grid x:Name="Title"
+                                          Height="{x:Static SystemParameters.IconHeight}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="{DynamicResource TitleBarRightGap}"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image x:Name="Icon"
+                                               Grid.Column="0"
+                                               Source="{Binding Path=Icon, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                               HorizontalAlignment="Right"
+                                               Margin="4,-7,0,7"
+                                               MouseLeftButtonDown="IconMouseLeftButtonDown"/>
+                                        <TextBlock x:Name="Caption"
+                                                   Grid.Column="1"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Margin="4,0,0,0"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TitleBarTextBrush}"
+                                                   Text="{Binding Path=Title, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                        <Button x:Name="MinButton" 
+                                                Grid.Column="2"
+                                                VerticalAlignment="Top"
+                                                Width="{DynamicResource TitleBarMinButtonWidth}"
+                                                Height="{DynamicResource TitleBarMinButtonHeight}"
+                                                Style="{StaticResource FlatTitleBarButton}"
+                                                ToolTip="Minimize"
+                                                Click="MinButtonClick">
+                                            <Grid>
+                                                <Border Style="{DynamicResource TitleBarMinButtonBorder}">
+                                                    <Path Style="{DynamicResource TitleBarMinButtonPath}"/>
+                                                </Border>
+                                            </Grid>
+                                        </Button>
+                                        <Button x:Name="MaxButton"
+                                                Grid.Column="3"
+                                                VerticalAlignment="Top"
+                                                Width="{DynamicResource TitleBarMaxButtonWidth}"
+                                                Height="{DynamicResource TitleBarMaxButtonHeight}"
+                                                ToolTip="Maximize"
+                                                Style="{StaticResource FlatTitleBarButton}"
+                                                Click="MaxButtonClick">
+                                            <Grid>
+                                                <Border Style="{DynamicResource TitleBarMaxButtonBorder}">
+                                                    <Path x:Name="MaxPath"
+                                                          Style="{DynamicResource TitleBarMaxButtonPath1}"/>
+                                                </Border>
+                                            </Grid>
+                                        </Button>
+                                        <Button x:Name="CloseButton"  
+                                                Grid.Column="4"
+                                                VerticalAlignment="Top"
+                                                Width="{DynamicResource TitleBarCloseButtonWidth}"
+                                                Height="{DynamicResource TitleBarCloseButtonHeight}"
+                                                ToolTip="Close"
+                                                Style="{StaticResource FlatTitleBarButton}"
+                                                Click="CloseButtonClick">
+                                            <Grid>
+                                                <Border Style="{DynamicResource TitleBarCloseButtonBorder}">
+                                                    <Grid>
+                                                        <Path Style="{DynamicResource TitleBarCloseButtonPath1}"/>
+                                                        <Path Style="{DynamicResource TitleBarCloseButtonPath2}"/>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                                <AdornerDecorator>
+                                    <ContentPresenter />
+                                </AdornerDecorator>
+                            </DockPanel>
+                        </Border>
+                        <Line MouseDown="OnSizeNorth"
+                              x:Name="lnSizeNorth"
+                              Stroke="Transparent"   
+                              Cursor="SizeNS"
+                              X1="1" 
+                              X2="{TemplateBinding ActualWidth}" 
+                              Y1="1" 
+                              Y2="1"
+                              StrokeThickness="3"/>
+                        <Line MouseDown="OnSizeSouth"
+                              x:Name="lnSizeSouth"
+                              Stroke="Transparent"
+                              VerticalAlignment="Bottom" 
+                              Cursor="SizeNS"
+                              X1="1" 
+                              X2="{TemplateBinding ActualWidth}" 
+                              Y1="{TemplateBinding ActualHeight}" 
+                              Y2="{TemplateBinding ActualHeight}"
+                              StrokeThickness="3"/>
+                        <Line MouseDown="OnSizeWest"
+                              x:Name="lnSizeWest"
+                              Stroke="Transparent"
+                              Cursor="SizeWE"
+                              X1="1" 
+                              X2="1" 
+                              Y1="1" 
+                              Y2="{TemplateBinding ActualHeight}"
+                              StrokeThickness="3"/>
+                        <Line MouseDown="OnSizeEast"
+                              x:Name="lnSizeEast"
+                              Stroke="Transparent"
+                              HorizontalAlignment="Right" 
+                              Cursor="SizeWE"
+                              X1="{TemplateBinding ActualWidth}" 
+                              X2="{TemplateBinding ActualWidth}" 
+                              Y1="1" 
+                              Y2="{TemplateBinding ActualHeight}"
+                              StrokeThickness="3"/>
+                        <Rectangle MouseDown="OnSizeNorthWest" x:Name="rectSizeNorthWest" Cursor="SizeNWSE" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <Rectangle MouseDown="OnSizeNorthEast" x:Name="rectSizeNorthEast" Cursor="SizeNESW" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                        <Rectangle MouseDown="OnSizeSouthWest" x:Name="rectSizeSouthWest" Cursor="SizeNESW" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                        <Rectangle MouseDown="OnSizeSouthEast" x:Name="rectSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="MaxPath" Property="Style" Value="{DynamicResource TitleBarMaxButtonPath2}"/>
+                            <Setter TargetName="MaxButton" Property="ToolTip" Value="Restore Down"/>
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter TargetName="MaxButton" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="MinButton" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="lnSizeNorth" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="lnSizeSouth" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="lnSizeWest" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="lnSizeEast" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="rectSizeNorthEast" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="rectSizeNorthWest" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="rectSizeSouthWest" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="rectSizeSouthEast" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Icon" Value="{x:Null}"/>
+                                <Condition Property="ResizeMode" Value="NoResize" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Title" Property="Height" Value="28"/>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource WindowDialogBorderBrush}"/>
+                            <Setter TargetName="PART_Border" Property="Effect" Value="{x:Null}"/>
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="{DynamicResource WindowDialogBorderThickness}"/>
+                        </MultiTrigger>
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter TargetName="MaxButton" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="lnSizeNorth" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="lnSizeSouth" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="lnSizeWest" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="lnSizeEast" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="rectSizeNorthEast" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="rectSizeNorthWest" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="rectSizeSouthWest" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="rectSizeSouthEast" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsActive" Value="false">
+                            <Setter TargetName="TitleBar" Property="Opacity" Value="{DynamicResource TitleBarInactiveOpacity}"/>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource WindowBorderInactiveBrush}"/>
+                        </Trigger>
+                        <Trigger Property="styles:CustomWindowStyle.WindowBorder" Value="MessageBox">
+                            <Setter TargetName="CloseButton" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource WindowDialogBorderBrush}"/>
+                            <Setter TargetName="PART_Border" Property="Effect" Value="{x:Null}"/>
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="{DynamicResource WindowDialogBorderThickness}"/>
+                        </Trigger>
+                        <Trigger Property="styles:CustomWindowStyle.WindowBorder" Value="NoBorder">
+                            <Setter TargetName="Title" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource WindowDialogBorderBrush}"/>
+                            <Setter TargetName="PART_Border" Property="Effect" Value="{x:Null}"/>
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="{DynamicResource WindowDialogBorderThickness}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

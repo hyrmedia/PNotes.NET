@@ -1,0 +1,38 @@
+﻿<Window x:Class="PNotes.NET.WndGetDicts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Name="DlgGetDicts"
+        Title="WndGetDicts" 
+        Height="320" 
+        Width="320"
+        Style="{DynamicResource CustomWindowStyle}"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}"
+        Loaded="DlgGetDicts_Loaded"
+        PreviewKeyDown="DlgGetDicts_PreviewKeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListBox Name="lstDicts" Margin="4" Grid.Row="0"/>
+        <TextBlock Name="lblDownload" Grid.Row="1" Margin="4" TextWrapping="Wrap"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="cmdBrowser" Content="Open in browser" Margin="4" Grid.Column="0" MinHeight="23" MinWidth="75" Click="cmdBrowser_Click"/>
+            <Button Name="cmdDownload" Content="Download" Margin="4" Grid.Column="1" MinHeight="23" MinWidth="75" IsDefault="True" IsEnabled="False" Click="cmdDownload_Click"/>
+            <Button Name="cmdCancel" Content="Cancel" Margin="4" Grid.Column="2" MinHeight="23" MinWidth="75" Click="cmdCancel_Click"/>
+        </Grid>
+    </Grid>
+</Window>

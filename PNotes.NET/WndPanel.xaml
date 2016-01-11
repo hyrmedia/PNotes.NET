@@ -1,0 +1,54 @@
+﻿<Window x:Class="PNotes.NET.WndPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:pnScrollPanel="clr-namespace:PNScrollPanel;assembly=PNScrollPanel"
+        xmlns:net="clr-namespace:PNotes.NET"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        Topmost="True"
+        Height="96" Width="300"
+        Loaded="Window_Loaded"
+        MouseEnter="Window_MouseEnter"
+        MouseLeave="Window_MouseLeave">
+    <Grid>
+        <Grid.Resources>
+            <net:AutoHideToAngleConverter x:Key="AutoHideToAngleConverter"/>
+            <net:OrientationToAngleConverter x:Key="OrientationToAngleConverter"/>
+            <net:TooltipForImageConverter x:Key="TooltipForImageConverter"/>
+        </Grid.Resources>
+        <Border x:Name="BorderTop" Background="{DynamicResource ToolbarBackgrounsBrush}" Height="96" VerticalAlignment="Top"/>
+        <Border x:Name="BorderLeft" Visibility="Hidden" Background="{DynamicResource ToolbarBackgrounsBrush}" Width="80" HorizontalAlignment="Left"/>
+        <pnScrollPanel:ScrollPanel x:Name="PanelScroll" ScrollButtonFixedSize="24" ScrollButtonHorizontalAlignment="Left" ScrollButtonVerticalAlignment="Top">
+            <ItemsControl Name="ThumbnailsPanel">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Initialized="StackPanel_Initialized"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </pnScrollPanel:ScrollPanel>
+        <Grid x:Name="GridButtons" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,25,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="imgAutoHide" Grid.Row="0" Grid.Column="0" Stretch="None" Source="{DynamicResource smallpin}" ToolTip="{Binding Path=Name, RelativeSource={RelativeSource Self}, Converter={StaticResource TooltipForImageConverter}}" Cursor="Hand" RenderTransformOrigin="0.5,0.5" Margin="3" MouseLeftButtonDown="Pin_MouseLeftButtonDown">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="{Binding Converter={StaticResource AutoHideToAngleConverter}}"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="imgOrientation" Grid.Row="1" Grid.Column="0" Stretch="None" Source="{DynamicResource paneltop}" ToolTip="{Binding Path=Name, RelativeSource={RelativeSource Self}, Converter={StaticResource TooltipForImageConverter}}" Cursor="Hand" RenderTransformOrigin="0.5,0.5" Margin="3" MouseLeftButtonDown="Orient_MouseLeftButtonDown">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="{Binding Converter={StaticResource OrientationToAngleConverter}}"/>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+    </Grid>
+</Window>

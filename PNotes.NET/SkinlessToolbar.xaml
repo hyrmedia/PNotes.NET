@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="PNotes.NET.SkinlessToolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             xmlns:net="clr-namespace:PNotes.NET"
+             Height="18"
+             Focusable="False"
+             Initialized="UserControl_Initialized">
+    <UserControl.Width>
+        <Binding Path="ActualWidth" ElementName="FontFamilyButton" Converter="{StaticResource SizeRelateConverter}">
+            <Binding.ConverterParameter>
+                <sys:Double>12</sys:Double>
+            </Binding.ConverterParameter>
+        </Binding>
+    </UserControl.Width>
+    <Grid>
+        <Border x:Name="FooterBorder" 
+            BorderThickness="0,1,0,0">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Background, Converter={StaticResource BrushToColorCoverter}, ConverterParameter=0.8}"/>
+            </Border.BorderBrush>
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStopCollection>
+                            <GradientStop Offset="0.0" Color="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Background, Converter={StaticResource BrushToColorCoverter}, ConverterParameter=1.25}"/>
+                            <GradientStop Offset="1" Color="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Background, Converter={StaticResource BrushToColorCoverter}, ConverterParameter=0.8}"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <net:FormatButton ButtonType="FontFamily" x:Name="FontFamilyButton" Grid.Column="0" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <TextBlock FontWeight="SemiBold" Text="A" HorizontalAlignment="Center"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="FontSize" x:Name="FontSizeButton" Grid.Column="1" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Margin="1,0,2,0" Data="M2,0 L2,11 M0,2 L4,2 M0,10 L4,10 " VerticalAlignment="Center" Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}" StrokeThickness="1"/>
+                        <TextBlock FontWeight="SemiBold" Text="A" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="FontColor" x:Name="FontColorButton" Grid.Column="2" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <TextBlock FontWeight="SemiBold" Text="A" HorizontalAlignment="Center">
+                        <TextBlock.TextDecorations>
+                            <TextDecorationCollection>
+                                <TextDecoration Location="Baseline">
+                                    <TextDecoration.Pen>
+                                        <Pen Brush="Red" Thickness="3"/>
+                                    </TextDecoration.Pen>
+                                </TextDecoration>
+                            </TextDecorationCollection>
+                        </TextBlock.TextDecorations>
+                    </TextBlock>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="FontBold" x:Name="FontBoldButton" Grid.Column="3" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <TextBlock FontStretch="UltraExpanded" FontWeight="ExtraBlack" Text="B" HorizontalAlignment="Center"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="FontItalic" x:Name="FontItalicButton" Grid.Column="4" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <TextBlock FontWeight="SemiBold" FontStyle="Italic" Text="I" HorizontalAlignment="Center"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="FontUnderline" x:Name="FontUnderlineButton" Grid.Column="5" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <TextBlock FontWeight="SemiBold" TextDecorations="Underline" Text="U" HorizontalAlignment="Center"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="FontStrikethrough" x:Name="FontStrikethroughButton" Grid.Column="6" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <TextBlock FontWeight="SemiBold" TextDecorations="Strikethrough" Text="S" HorizontalAlignment="Center"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="Highlight" x:Name="HighlightButton" Grid.Column="7" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <TextBlock FontWeight="SemiBold" Text="A" HorizontalAlignment="Center"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="Left" x:Name="LeftButton" Grid.Column="8" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <Path Margin="1,0,2,0" Data="M0,2 L10,2 M0,5 L5,5 M0,8 L10,8 M0,11 L5,11 " VerticalAlignment="Center" Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}" StrokeThickness="0.75"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="Center" x:Name="CenterButton" Grid.Column="9" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <Path Margin="1,0,2,0" Data="M0,2 L10,2 M2,5 L8,5 M0,8 L10,8 M2,11 L8,11 " VerticalAlignment="Center" Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}" StrokeThickness="0.75"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="Right" x:Name="RightButton" Grid.Column="10" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <Path Margin="1,0,2,0" Data="M0,2 L10,2 M5,5 L10,5 M0,8 L10,8 M5,11 L10,11 " VerticalAlignment="Center" Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}" StrokeThickness="0.75"/>
+                </net:FormatButton>
+                <net:FormatButton ButtonType="Bullets" x:Name="BulletsButton" Grid.Column="11" Margin="1,0,1,0" Click="FormatButton_Click">
+                    <Path Margin="1,0,2,0" Data="M0,2 L2,2 L2,4 L0,4 Z M5,3 L10,3 M0,7 L2,7 L2,9 L0,9 Z M5,8 L10,8 " VerticalAlignment="Center" Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}" StrokeThickness="0.75" Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}"/>
+                </net:FormatButton>
+                <Popup x:Name="PopUpFont" Grid.Column="0" AllowsTransparency="True" IsOpen="False" StaysOpen="False" Placement="Bottom" PlacementRectangle="{Binding ElementName=FontFamilyButton}" PopupAnimation="Slide">
+                    <ComboBox x:Name="cboFonts" DropDownClosed="cboFonts_DropDownClosed"/>
+                </Popup>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

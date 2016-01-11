@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNIPBox</name>
+    </assembly>
+    <members>
+        <member name="T:PNIPBox.IpBox">
+            <summary>
+            Represents the custom control that allows the user to enter ip address
+            </summary>
+        </member>
+        <member name="M:PNIPBox.IpBox.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
+            </summary>
+        </member>
+        <member name="M:PNIPBox.IpBox.GetAddressBytes">
+            <summary>
+                Gets bytes array representation of IP address
+            </summary>
+            <returns>Bytes array representation of IP address</returns>
+        </member>
+        <member name="M:PNIPBox.IpBox.SetAddressBytes(System.Byte[])">
+            <summary>
+                Sets IP address from bytes array
+            </summary>
+            <param name="bytes">Bytes array</param>
+        </member>
+        <member name="E:PNIPBox.IpBox.FieldChanged">
+            <summary>
+                Occurs when any field of IP address is changed
+            </summary>
+        </member>
+        <member name="P:PNIPBox.IpBox.IsBlank">
+            <summary>
+                Gets value specified whether conrol is blank
+            </summary>
+        </member>
+        <member name="P:PNIPBox.IpBox.IsAnyBlank">
+            <summary>
+                Gets value specified whether one of conrol's field is blank
+            </summary>
+        </member>
+        <member name="P:PNIPBox.IpBox.Text">
+            <returns>
+                The text associated with this control.
+            </returns>
+        </member>
+        <member name="T:PNIPBox.FieldChangedEventArgs">
+            <summary>
+                Represents event data for FieldChangedEvent
+            </summary>
+        </member>
+        <member name="M:PNIPBox.FieldChangedEventArgs.#ctor(System.Int32,System.String)">
+            <summary>
+                Creates new instance of FieldChangedEventArgs
+            </summary>
+            <param name="index">Filed index</param>
+            <param name="text">Field text</param>
+        </member>
+        <member name="P:PNIPBox.FieldChangedEventArgs.FieldIndex">
+            <summary>
+                Changed field index
+            </summary>
+        </member>
+        <member name="P:PNIPBox.FieldChangedEventArgs.Text">
+            <summary>
+                Changed field text
+            </summary>
+        </member>
+        <member name="T:PNIPBox.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PNIPBox.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PNIPBox.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,184 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pnColorPicker="clr-namespace:PNColorPicker;assembly=PNColorPicker">
+
+    <pnColorPicker:InvertColorConverter x:Key="ColorInvertConverter"/>
+
+    <Style x:Key="ColorRadio" 
+           TargetType="{x:Type RadioButton}">
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Border x:Name="bd" 
+                            Background="{TemplateBinding Background}">
+                        <Rectangle x:Name="rect"
+                                   SnapsToDevicePixels="true" 
+                                   StrokeDashArray="2 2" 
+                                   StrokeThickness="1" 
+                                   Margin="1"
+                                   Visibility="Hidden">
+                            <Rectangle.Stroke>
+                                <SolidColorBrush Color="{Binding Path=Background, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Converter={StaticResource ColorInvertConverter}}"/>
+                            </Rectangle.Stroke>
+                        </Rectangle>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="rect"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type pnColorPicker:ColorPicker}">
+        <Setter Property="MinHeight" Value="21"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Once"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pnColorPicker:ColorPicker}">
+                    <Border x:Name="OuterBd" 
+                            CornerRadius="{DynamicResource CommonCornerRadius}"
+                            Background="Transparent"
+                            BorderBrush="{DynamicResource ColorPickerBorderBrush}"
+                            BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Margin="1"
+                                    CornerRadius="{DynamicResource ButtonInnerCornerRadius}"
+                                    BorderBrush="{DynamicResource ColorPickerBorderBrush}"
+                                    BorderThickness="1"
+                                    Grid.Column="0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{Binding Path=SelectedColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=pnColorPicker:ColorPicker}, Mode=OneWay}"/>
+                                </Border.Background>
+                            </Border>
+                            <Border x:Name="DisabledBd" Margin="1"
+                                    Background="{DynamicResource ColorPickerDisabledBackgroundBrush}"
+                                    BorderBrush="{DynamicResource ColorPickerBorderBrush}"
+                                    BorderThickness="1"
+                                    Grid.Column="0"
+                                    Visibility="Hidden"/>
+                            <Button x:Name="PART_Button"
+                                    Margin="1"
+                                    Grid.Column="1"
+                                    Content="..."
+                                    Padding="4,0,4,0"/>
+                            <Popup x:Name="PART_Popup" 
+                                       AllowsTransparency="True" 
+                                       Placement="Bottom"
+                                       PlacementTarget="{Binding ElementName=PART_OuterBorder}" 
+                                       StaysOpen="False"
+                                       HorizontalOffset="0"
+                                       PopupAnimation="Scroll">
+                                <Border Background="{DynamicResource ColorPickerDropDownBackgroundBrush}"
+                                        BorderBrush="{DynamicResource ColorPickerBorderBrush}"
+                                        BorderThickness="1"
+                                        Padding="1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TabControl x:Name="PART_Tab" 
+                                                Grid.Row="0">
+                                            <TabItem Header="Basic">
+                                                <UniformGrid x:Name="PART_Basic" Rows="6" Columns="8">
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFFFFFF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFC0C0FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFC0E0FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFC0FFFF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFC0FFC0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFFFFC0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFFC0C0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFFC0FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFE0E0E0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF8080FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF80C0FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF80FFFF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF80FF80"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFFFF80"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFF8080"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFF80FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFC0C0C0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF0000FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF0080FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF00FFFF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF00FF00"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFFFF00"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFF0000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFFF00FF"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF808080"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF0000C0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF0040C0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF00C0C0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF00C000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFC0C000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFC00000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FFC000C0"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF404040"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF000080"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF004080"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF008080"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF008000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF808000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF800000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF800080"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF000000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF000040"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF404080"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF004040"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF004000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF404000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF400000"/>
+                                                    <RadioButton Style="{StaticResource ColorRadio}" Background="#FF400040"/>
+                                                </UniformGrid>
+                                            </TabItem>
+                                            <TabItem Header="Web">
+                                                <ListBox x:Name="PART_Web" 
+                                                     Height="{Binding Path=ActualHeight, ElementName=PART_Basic}"
+                                                     Width="{Binding Path=ActualWidth, ElementName=PART_Basic}"/>
+                                            </TabItem>
+                                            <TabItem Header="Custom">
+                                                <pnColorPicker:CustomColors x:Name="PART_Custom" 
+                                                                Height="{Binding Path=ActualHeight, ElementName=PART_Basic}"
+                                                                Width="{Binding Path=ActualWidth, ElementName=PART_Basic}"/>
+                                            </TabItem>
+                                        </TabControl>
+                                        <Button x:Name="PART_Ok"
+                                            Grid.Row="1"
+                                            Content="OK"
+                                            IsDefault="True"
+                                            Margin="0,2,0,0"/>
+                                    </Grid>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="PART_Button" Property="IsMouseOver" Value="true">
+                            <Setter TargetName="OuterBd" Property="BorderBrush" Value="{DynamicResource ColorPickerBorderHoverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="DisabledBd" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

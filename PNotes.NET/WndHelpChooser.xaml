@@ -1,0 +1,45 @@
+﻿<Window x:Class="PNotes.NET.WndHelpChooser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Name="DlgHelpChooser"
+        Title="WndHelpChooser" 
+        Height="200" 
+        Width="540"
+        Style="{DynamicResource CustomWindowStyle}"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}"
+        Loaded="DlgHelpChooser_Loaded"
+        PreviewKeyDown="DlgHelpChooser_PreviewKeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Name="lblHelpMissing" Text="Local help file is missing. Please, choose one of the options below:" Grid.Row="0" Margin="4"/>
+        <RadioButton Name="optGoOnlineHelp" Content="Continue to on-line documentation" Grid.Row="1" Margin="24,4,4,4" IsChecked="True"/>
+        <RadioButton Name="optGetCHM" Content="Download help file in CHM format" Grid.Row="2" Margin="24,4,4,4"/>
+        <RadioButton Name="optGetPDF" Content="Download help file in PDF format" Grid.Row="3" Margin="24,4,4,4"/>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Name="elpProgress" Grid.Column="0" Width="21" Height="21" Margin="4" StrokeThickness="3" StrokeDashArray="3.3 1.3" Style="{DynamicResource ProgressImage}" Visibility="Hidden"/>
+            <TextBlock Name="lblDownloadInProgress" Text="Download in progress..." Grid.Column="1" VerticalAlignment="Center" Margin="4" Visibility="Hidden"/>
+            <Button Name="cmdOK" Content="OK" MinWidth="75" MinHeight="23" Margin="4" Grid.Column="2" IsDefault="True" Click="cmdOK_Click"/>
+            <Button Name="cmdCancel" Content="Cancel" MinWidth="75" MinHeight="23" IsCancel="True" Margin="4" Grid.Column="3" Click="cmdCancel_Click"/>
+        </Grid>
+    </Grid>
+</Window>

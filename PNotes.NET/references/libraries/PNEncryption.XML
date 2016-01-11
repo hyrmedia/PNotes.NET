@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNEncryption</name>
+    </assembly>
+    <members>
+        <member name="T:PNEncryption.PNEncryptor">
+            <summary>
+            Represents class for simple encryption/decription operations
+            </summary>
+        </member>
+        <member name="M:PNEncryption.PNEncryptor.#ctor(System.String)">
+            <summary>
+            Initializes new instance of PNEncryptor class
+            </summary>
+            <param name="keyString">String used as initial token for encryption/decryption</param>
+        </member>
+        <member name="M:PNEncryption.PNEncryptor.DecryptTextFile(System.String)">
+            <summary>
+            Decrypts text file
+            </summary>
+            <param name="srcFile">Full file name</param>
+        </member>
+        <member name="M:PNEncryption.PNEncryptor.EncryptTextFile(System.String)">
+            <summary>
+            Encrypts text file
+            </summary>
+            <param name="srcFile">Full file name</param>
+        </member>
+        <member name="M:PNEncryption.PNEncryptor.DecryptString(System.String)">
+            <summary>
+            Decrypts string
+            </summary>
+            <param name="src">String to decrypt</param>
+            <returns>Decrypted string</returns>
+        </member>
+        <member name="M:PNEncryption.PNEncryptor.DecryptStringWithTrim(System.String)">
+            <summary>
+            Decrypts string if it is not empty or null
+            </summary>
+            <param name="src">String to decrypt</param>
+            <returns>Decrypted string or empty string in case the source is empty string or null</returns>
+        </member>
+        <member name="M:PNEncryption.PNEncryptor.EncryptString(System.String)">
+            <summary>
+            Encrypts string
+            </summary>
+            <param name="src">String to encrypt</param>
+            <returns>Encrypted string</returns>
+        </member>
+        <member name="M:PNEncryption.PNEncryptor.EncryptStringWithTrim(System.String)">
+            <summary>
+            Encrypts string if it is not empty or null
+            </summary>
+            <param name="src">String to encrypt</param>
+            <returns>Encrypted string or empty string in case the source is empty string or null</returns>
+        </member>
+        <member name="M:PNEncryption.PNEncryptor.GetHashString(System.String)">
+            <summary>
+            Returns hash string for input string
+            </summary>
+            <param name="src">String to return hash for</param>
+            <returns>Hash string for input string</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="PNotes.NET.Baloon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tb="http://www.hardcodet.net/taskbar"
+             xmlns:pn="clr-namespace:PNotes.NET"
+             Height="164" 
+             Width="320"
+             Name="PnBaloon"
+             Foreground="{DynamicResource BaloonTextBrush}"
+             SizeChanged="PnBaloon_SizeChanged">
+    <UserControl.Resources>
+        <pn:BaloonImageConverter x:Key="BaloonImageConverter"/>
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="BaloonGrid"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00"
+                                      Value="0" />
+                <SplineDoubleKeyFrame KeyTime="00:00:01"
+                                      Value="0.55" />
+                <SplineDoubleKeyFrame KeyTime="00:00:03"
+                                      Value="0.95" />
+                <!--				<SplineDoubleKeyFrame KeyTime="00:00:05" Value="0"/>-->
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <!--<Storyboard x:Key="HighlightCloseButton">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="cmdCancel"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00"
+                                      Value="0.7" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000"
+                                      Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>-->
+        <!--<Storyboard x:Key="FadeCloseButton">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="cmdCancel"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00"
+                                      Value="1" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000"
+                                      Value="0.7" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>-->
+        <Storyboard x:Key="FadeBack">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="BaloonGrid"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00"
+                                      Value="1" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000"
+                                      Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="FadeOut"
+                    Completed="Storyboard_Completed">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="BaloonGrid"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00"
+                                      Value="1" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000"
+                                      Value="0.2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="FadeOutOnLeave"
+                    Completed="Storyboard_Completed">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="BaloonGrid"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00"
+                                      Value="1" />
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000"
+                                      Value="0.2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <!--<EventTrigger RoutedEvent="Mouse.MouseEnter"
+                      SourceName="cmdCancel">
+            <BeginStoryboard Storyboard="{StaticResource HighlightCloseButton}"
+                             x:Name="HighlightCloseButton_BeginStoryboard" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave"
+                      SourceName="cmdCancel">
+            <BeginStoryboard Storyboard="{StaticResource FadeCloseButton}"
+                             x:Name="FadeCloseButton_BeginStoryboard" />
+        </EventTrigger>-->
+        <EventTrigger RoutedEvent="tb:TaskbarIcon.BalloonShowing">
+            <BeginStoryboard Storyboard="{StaticResource FadeIn}"
+                             x:Name="FadeIn_BeginStoryboard" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+            <StopStoryboard BeginStoryboardName="FadeIn_BeginStoryboard" />
+            <StopStoryboard BeginStoryboardName="FadeBack_BeginStoryboard" />
+            <BeginStoryboard x:Name="FadeBack_BeginStoryboard1"
+                             Storyboard="{StaticResource FadeBack}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+            <StopStoryboard BeginStoryboardName="FadeBack_BeginStoryboard1" />
+            <BeginStoryboard x:Name="FadeBack_BeginStoryboard"
+                             Storyboard="{StaticResource FadeOutOnLeave}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="tb:TaskbarIcon.BalloonClosing">
+            <BeginStoryboard Storyboard="{StaticResource FadeOut}"
+                             x:Name="FadeOut_BeginStoryboard" />
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid Name="BaloonGrid"
+          MouseEnter="BaloonGrid_MouseEnter">
+        <Border HorizontalAlignment="Stretch"
+                Background="{DynamicResource BaloonBackgroundBrush}"
+                Margin="5"
+                CornerRadius="0"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource BaloonBorderdBrush}">
+            <Border.Effect>
+                <DropShadowEffect Color="{DynamicResource BaloonShadowColor}"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Name="BaloonImage" 
+                       Grid.Row="0" 
+                       Grid.Column="0" 
+                       Margin="10" 
+                       Stretch="None" 
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Source="{Binding Converter={StaticResource BaloonImageConverter}, Path=Mode, ElementName=PnBaloon}"/>
+                <pn:SmallButton pn:PNUtils.SmallButtonType="Remove" x:Name="cmdCancel" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Click="cmdCancel_Click"/>
+                <Path Fill="#FFFFFFFF" Grid.Row="0" Grid.Column="1"
+                      Stretch="Fill"
+                      Margin="10,26,10,0"
+                      VerticalAlignment="Top"
+                      Height="1"
+                      Data="M26,107 L220.04123,107"
+                      SnapsToDevicePixels="True"
+                      Stroke="{DynamicResource BaloonSeparatorBrush}"/>
+                <TextBlock Name="BaloonTextBlock" Grid.Row="0" 
+                           Grid.Column="1" 
+                           Margin="10,36,10,10" 
+                           TextWrapping="Wrap">
+                    <Run Name="BaloonTextRun" Text="{Binding Path=BaloonText, ElementName=PnBaloon, Mode=Default}"/>
+                    <Run Name="BaloonLinkRun" TextDecorations="Underline" 
+                         Cursor="Hand"
+                         MouseLeftButtonDown="BaloonLinkRun_MouseLeftButtonDown"
+                         Text="{Binding Path=BaloonLink, ElementName=PnBaloon, Mode=Default}"/>
+                </TextBlock>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

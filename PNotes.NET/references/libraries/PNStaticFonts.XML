@@ -1,0 +1,670 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNStaticFonts</name>
+    </assembly>
+    <members>
+        <member name="T:PNStaticFonts.FontWeight">
+            <summary>
+                Font weight enumeration
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_DONTCARE">
+            <summary>
+                0
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_THIN">
+            <summary>
+                100
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_EXTRALIGHT">
+            <summary>
+                200
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_ULTRALIGHT">
+            <summary>
+                200
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_LIGHT">
+            <summary>
+                300
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_NORMAL">
+            <summary>
+                400
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_REGULAR">
+            <summary>
+                400
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_MEDIUM">
+            <summary>
+                500
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_SEMIBOLD">
+            <summary>
+                600
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_DEMIBOLD">
+            <summary>
+                600
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_BOLD">
+            <summary>
+                700
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_EXTRABOLD">
+            <summary>
+                800
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_ULTRABOLD">
+            <summary>
+                800
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_HEAVY">
+            <summary>
+                900
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.FontWeight.FW_BLACK">
+            <summary>
+                900
+            </summary>
+        </member>
+        <member name="T:PNStaticFonts.DTStyles">
+            <summary>
+                DrawText enumeration
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.DTStyles.DT_LEFT">
+            <summary>
+                0x00000000
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.DTStyles.DT_SINGLELINE">
+            <summary>
+                0x00000020
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.DTStyles.DT_VCENTER">
+            <summary>
+                0x00000004
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.DTStyles.DT_RIGHT">
+            <summary>
+                0x00000002
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.DTStyles.DT_CENTER">
+            <summary>
+                0x00000001
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.DTStyles.DT_END_ELLIPSIS">
+            <summary>
+                0x00008000
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.DTStyles.DT_WORDBREAK">
+            <summary>
+                0x00000010
+            </summary>
+        </member>
+        <member name="T:PNStaticFonts.LFParams">
+            <summary>
+                Misc GDI constants
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LFParams.LF_FACESIZE">
+            <summary>
+                32
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LFParams.LF_FULLFACESIZE">
+            <summary>
+                64
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LFParams.DEFAULT_CHARSET">
+            <summary>
+                1
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LFParams.PROOF_QUALITY">
+            <summary>
+                2
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LFParams.VARIABLE_PITCH">
+            <summary>
+                2
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LFParams.OUT_TT_PRECIS">
+            <summary>
+                4
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LFParams.CLIP_DEFAULT_PRECIS">
+            <summary>
+                0
+            </summary>
+        </member>
+        <member name="T:PNStaticFonts.VariableParams">
+            <summary>
+                Variable parameters
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.VariableParams.LOGPIXELSY">
+            <summary>
+                90
+            </summary>
+        </member>
+        <member name="T:PNStaticFonts.LOGFONT">
+            <summary>
+                Represents Windows GDI LOGFONT structure
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfHeight">
+            <summary>
+                Specifies the height, in logical units, of the font's character cell or character
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfWidth">
+            <summary>
+                Specifies the average width, in logical units, of characters in the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfEscapement">
+            <summary>
+                Specifies the angle, in tenths of degrees, between the escapement vector and the x-axis of the device
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfOrientation">
+            <summary>
+                Specifies the angle, in tenths of degrees, between each character's base line and the x-axis of the device
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfWeight">
+            <summary>
+                Specifies the weight of the font in the range 0 through 1000
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfItalic">
+            <summary>
+                TRUE to specify an italic font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfUnderline">
+            <summary>
+                TRUE to specify an underlined font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfStrikeOut">
+            <summary>
+                TRUE to specify a strikeout font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfCharSet">
+            <summary>
+                Specifies the character set
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfOutPrecision">
+            <summary>
+                Specifies the output precision
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfClipPrecision">
+            <summary>
+                Specifies the clipping precision
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfQuality">
+            <summary>
+                Specifies the output quality
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfPitchAndFamily">
+            <summary>
+                Specifies the pitch and family of the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.LOGFONT.lfFaceName">
+            <summary>
+                Specifies a null-terminated string that specifies the typeface name of the font
+            </summary>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.Init">
+            <summary>
+                Initializes structure with default values
+            </summary>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.GetFontSize">
+            <summary>
+                Gets font size in points
+            </summary>
+            <returns>Font size in points</returns>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.SetFontSize(System.Int32)">
+            <summary>
+                Sets font size from points
+            </summary>
+            <param name="size">Font size in points</param>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.SetFontFace(System.String)">
+            <summary>
+                Sets new font face name
+            </summary>
+            <param name="faceName">New font face name</param>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.ToString">
+            <summary>
+                Gets string representation of structure
+            </summary>
+            <returns>String representation of structure</returns>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.op_Equality(PNStaticFonts.LOGFONT,PNStaticFonts.LOGFONT)">
+            <summary>
+                Compares two LOGFONT structures
+            </summary>
+            <param name="a">LOGFONT structure</param>
+            <param name="b">LOGFONT structure</param>
+            <returns>True if structures are equal, false otherwise</returns>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.op_Inequality(PNStaticFonts.LOGFONT,PNStaticFonts.LOGFONT)">
+            <summary>
+                Compares two LOGFONT structures
+            </summary>
+            <param name="a">LOGFONT structure</param>
+            <param name="b">LOGFONT structure</param>
+            <returns>True if structures are not equal, false otherwise</returns>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.Equals(System.Object)">
+            <summary>
+                Indicates whether this instance and a specified object are equal.
+            </summary>
+            <returns>
+                true if <paramref name="obj" /> and this instance are the same type and represent the same value; otherwise, false.
+            </returns>
+            <param name="obj">Another object to compare to. </param>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.Equals(PNStaticFonts.LOGFONT)">
+            <summary>
+                Indicates whether this instance and a specified object are equal.
+            </summary>
+            <returns>
+                true if <paramref name="lf" /> and this instance are the same type and represent the same value; otherwise, false.
+            </returns>
+            <param name="lf">Another LOGFONT structure to compare to. </param>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:PNStaticFonts.LOGFONT.GetHashCode">
+            <summary>
+                Returns the hash code for this instance.
+            </summary>
+            <returns>
+                A 32-bit signed integer that is the hash code for this instance.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:PNStaticFonts.NEWTEXTMETRIC">
+            <summary>
+                Represents Windows GDI NEWTEXTMETRIC structure
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmHeight">
+            <summary>
+                The height (ascent + descent) of characters
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmAscent">
+            <summary>
+                The ascent (units above the base line) of characters
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmDescent">
+            <summary>
+                The descent (units below the base line) of characters
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmInternalLeading">
+            <summary>
+                The amount of leading (space) inside the bounds set by the tmHeight member
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmExternalLeading">
+            <summary>
+                The amount of extra leading (space) that the application adds between rows
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmAveCharWidth">
+            <summary>
+                The average width of characters in the font (generally defined as the width of the letter x)
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmMaxCharWidth">
+            <summary>
+                The width of the widest character in the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmWeight">
+            <summary>
+                The weight of the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmOverhang">
+            <summary>
+                The extra width per string that may be added to some synthesized fonts. When synthesizing some attributes, such as bold or italic, graphics device interface (GDI) or a device may have to add width to a string on both a per-character and per-string basis
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmDigitizedAspectX">
+            <summary>
+                The horizontal aspect of the device for which the font was designed
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmDigitizedAspectY">
+            <summary>
+                The vertical aspect of the device for which the font was designed
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmFirstChar">
+            <summary>
+                The value of the first character defined in the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmLastChar">
+            <summary>
+                The value of the last character defined in the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmDefaultChar">
+            <summary>
+                The value of the character to be substituted for characters that are not in the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmBreakChar">
+            <summary>
+                The value of the character to be used to define word breaks for text justification
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmItalic">
+            <summary>
+                An italic font if it is nonzero
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmUnderlined">
+            <summary>
+                An underlined font if it is nonzero
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmStruckOut">
+            <summary>
+                A strikeout font if it is nonzero
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmPitchAndFamily">
+            <summary>
+                The pitch and family of the selected font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.tmCharSet">
+            <summary>
+                The character set of the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.ntmFlags">
+            <summary>
+                Specifies whether the font is italic, underscored, outlined, bold, and so forth
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.ntmSizeEM">
+            <summary>
+                The size of the em square for the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.ntmCellHeight">
+            <summary>
+                The height, in notional units, of the font
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.NEWTEXTMETRIC.ntmAvgWidth">
+            <summary>
+                The average width of characters in the font, in notional units
+            </summary>
+        </member>
+        <member name="T:PNStaticFonts.RECT">
+            <summary>
+                Represents Windows GDI RECT structure
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.RECT.left">
+            <summary>
+                Specifies the x-coordinate of the upper-left corner of a rectangle
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.RECT.top">
+            <summary>
+                Specifies the y-coordinate of the upper-left corner of a rectangle
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.RECT.right">
+            <summary>
+                Specifies the x-coordinate of the lower-right corner of a rectangle
+            </summary>
+        </member>
+        <member name="F:PNStaticFonts.RECT.bottom">
+            <summary>
+                Specifies the y-coordinate of the lower-right corner of a rectangle
+            </summary>
+        </member>
+        <member name="M:PNStaticFonts.RECT.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+                Creates instance of RECT structure
+            </summary>
+            <param name="l">Left</param>
+            <param name="t">Top</param>
+            <param name="r">Right</param>
+            <param name="b">Bottom</param>
+        </member>
+        <member name="T:PNStaticFonts.Fonts">
+            <summary>
+                Represents class for various GDI fonts operations
+            </summary>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.GetDC(System.IntPtr)">
+            <summary>
+                Retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen
+            </summary>
+            <param name="hWnd">A handle to the window whose DC is to be retrieved. If this value is NULL, GetDC retrieves the DC for the entire screen</param>
+            <returns>If the function succeeds, the return value is a handle to the DC for the specified window's client area.If the function fails, the return value is NULL</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.ReleaseDC(System.IntPtr,System.IntPtr)">
+            <summary>
+                Releases a device context (DC), freeing it for use by other applications
+            </summary>
+            <param name="hWnd">A handle to the window whose DC is to be released</param>
+            <param name="hDc">A handle to the DC to be released</param>
+            <returns>The return value indicates whether the DC was released. If the DC was released, the return value is 1.If the DC was not released, the return value is zero</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.MulDiv(System.Int32,System.Int32,System.Int32)">
+            <summary>
+                The MulDiv function multiplies two 32-bit values and then divides the 64-bit result by a third 32-bit value
+            </summary>
+            <param name="nNumber">Multiplicand</param>
+            <param name="nNumerator">Multiplier</param>
+            <param name="nDenominator">Number by which the result of the multiplication is to be divided</param>
+            <returns>If the function succeeds, the return value is the result of the multiplication and division. If either an overflow occurred or nDenominator was 0, the return value is –1</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.GetDeviceCaps(System.IntPtr,System.Int32)">
+            <summary>
+                Retrieves device-specific information for the specified device
+            </summary>
+            <param name="hdc">A handle to the DC</param>
+            <param name="nIndex">The item to be returned</param>
+            <returns>The return value specifies the value of the desired item</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.GetSysColorBrush(System.Int32)">
+            <summary>
+                Retrieves a handle identifying a logical brush that corresponds to the specified color index
+            </summary>
+            <param name="nIndex">A color index. This value corresponds to the color used to paint one of the window elements</param>
+            <returns>The return value identifies a logical brush if the nIndex parameter is supported by the current platform. Otherwise, it returns NULL</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.GetSysColor(System.Int32)">
+            <summary>
+                Retrieves the current color of the specified display element. Display elements are the parts of a window and the display that appear on the system display screen
+            </summary>
+            <param name="nIndex">The display element whose color is to be retrieved</param>
+            <returns>The function returns the red, green, blue (RGB) color value of the given element</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.SetBkMode(System.IntPtr,System.Int32)">
+            <summary>
+                Sets the background mix mode of the specified device context
+            </summary>
+            <param name="hdc">A handle to the device context</param>
+            <param name="iBkMode">The background mode</param>
+            <returns>If the function succeeds, the return value specifies the previous background mode.If the function fails, the return value is zero</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.FillRect(System.IntPtr,PNStaticFonts.RECT,System.IntPtr)">
+            <summary>
+                Fills a rectangle by using the specified brush
+            </summary>
+            <param name="hDc">A handle to the device context</param>
+            <param name="lprc">A pointer to a RECT structure that contains the logical coordinates of the rectangle to be filled</param>
+            <param name="hbr">A handle to the brush used to fill the rectangle</param>
+            <returns>If the function succeeds, the return value is nonzero</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.SetTextColor(System.IntPtr,System.Int32)">
+            <summary>
+                Sets the text color for the specified device context to the specified color
+            </summary>
+            <param name="hdc">A handle to the device context</param>
+            <param name="crColor">The color of the text</param>
+            <returns>If the function succeeds, the return value is a color reference for the previous text color as a COLORREF value. If the function fails, the return value is CLR_INVALID</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.DrawText(System.IntPtr,System.String,System.Int32,PNStaticFonts.RECT,PNStaticFonts.DTStyles)">
+            <summary>
+                Draws formatted text in the specified rectangle. It formats the text according to the specified method (expanding tabs, justifying characters, breaking lines, and so forth)
+            </summary>
+            <param name="hDc">A handle to the device context</param>
+            <param name="lpString">A pointer to the string that specifies the text to be drawn. If the nCount parameter is -1, the string must be null-terminated</param>
+            <param name="nCount">The length, in characters, of the string. If nCount is -1, then the lpchText parameter is assumed to be a pointer to a null-terminated string and DrawText computes the character count automatically</param>
+            <param name="lpRect">A pointer to a RECT structure that contains the rectangle (in logical coordinates) in which the text is to be formatted</param>
+            <param name="uFormat">The method of formatting the text</param>
+            <returns>If the function succeeds, the return value is the height of the text in logical units. If DT_VCENTER or DT_BOTTOM is specified, the return value is the offset from lpRect->top to the bottom of the drawn text If the function fails, the return value is zero</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.CreateFontIndirect(PNStaticFonts.LOGFONT@)">
+            <summary>
+                Creates a logical font that has the specified characteristics. The font can subsequently be selected as the current font for any device context
+            </summary>
+            <param name="lplf">A pointer to a LOGFONT structure that defines the characteristics of the logical font</param>
+            <returns>If the function succeeds, the return value is a handle to a logical font. If the function fails, the return value is NULL</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.SelectObject(System.IntPtr,System.IntPtr)">
+            <summary>
+                selects an object into the specified device context (DC). The new object replaces the previous object of the same type
+            </summary>
+            <param name="hdc">A handle to the DC</param>
+            <param name="hgdiobj">A handle to the object to be selected</param>
+            <returns>If the selected object is not a region and the function succeeds, the return value is a handle to the object being replaced</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.DeleteObject(System.IntPtr)">
+            <summary>
+                Deletes a logical pen, brush, font, bitmap, region, or palette, freeing all system resources associated with the object. After the object is deleted, the specified handle is no longer valid
+            </summary>
+            <param name="hObject">A handle to a logical pen, brush, font, bitmap, region, or palette</param>
+            <returns>If the function succeeds, the return value is nonzero. If the specified handle is not valid or is currently selected into a DC, the return value is zero</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.GetFontsList(System.Collections.Generic.List{PNStaticFonts.LOGFONT})">
+            <summary>
+                Collects installed fonts names and fills List of LOGFONT structures
+            </summary>
+            <param name="list">List of LOGFONT structures to fill</param>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.MeasureString(System.Drawing.Graphics,PNStaticFonts.LOGFONT,System.String)">
+            <summary>
+                Measures string accordingly to GDI device context and specified font
+            </summary>
+            <param name="g">Graphics object to get device context</param>
+            <param name="lf">LOGFONT structure</param>
+            <param name="str">String to measure</param>
+            <returns>Size of string measures</returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.DrawFontNameGDI(System.Drawing.Graphics,PNStaticFonts.LOGFONT,System.Drawing.Rectangle,System.Drawing.Color)">
+            <summary>
+                Draw font name on GDI device context
+            </summary>
+            <param name="g">Graphics object to draw on</param>
+            <param name="lf">LOGFONT structure</param>
+            <param name="bounds">Rectangle to draw within</param>
+            <param name="color">Color used to draw text</param>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.DrawTextGDI(System.Drawing.Graphics,System.Drawing.Color,System.Drawing.Rectangle,PNStaticFonts.LOGFONT,System.String,PNStaticFonts.DTStyles)">
+            <summary>
+                Draws text on GDI device context
+            </summary>
+            <param name="g">Graphics object to draw on</param>
+            <param name="clr">Text color</param>
+            <param name="rect">Rectangle to draw within</param>
+            <param name="lf">LOGFONT structure</param>
+            <param name="text">Text to draw</param>
+            <param name="style">DrawText flags</param>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.RegisterCustomFonts(System.Collections.Generic.IEnumerable{System.IO.FileInfo})">
+            <summary>
+                Registers custom fonts
+            </summary>
+            <param name="files">FileInfo collection of custom fonts</param>
+            <returns></returns>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.UnregisterCustomFonts(System.Collections.Generic.List{System.String})">
+            <summary>
+                Unregisters custom fonts
+            </summary>
+            <param name="list">List of custom fonts</param>
+        </member>
+        <member name="M:PNStaticFonts.Fonts.IsUnicodeCharAvailable(System.Char,System.String)">
+            <summary>
+            Checks whether character is available for specified font
+            </summary>
+            <param name="character">Character to check</param>
+            <param name="fontName">Font name</param>
+            <returns></returns>
+        </member>
+        <member name="T:PNStaticFonts.LogFontConverter">
+            <summary>
+                Converts LOGFONT structure to and from string
+            </summary>
+        </member>
+        <member name="M:PNStaticFonts.LogFontConverter.ConvertToString(PNStaticFonts.LOGFONT)">
+            <summary>
+                Converts LOGFONT structure to string
+            </summary>
+            <param name="logFont">LOGFONT structure to convert</param>
+            <returns>String</returns>
+        </member>
+        <member name="M:PNStaticFonts.LogFontConverter.ConvertFromString(System.String)">
+            <summary>
+                Converts string to LOGFONT structure
+            </summary>
+            <param name="str">String to convert</param>
+            <returns>LOGFONT structure</returns>
+        </member>
+    </members>
+</doc>

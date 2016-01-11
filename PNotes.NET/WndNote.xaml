@@ -1,0 +1,782 @@
+﻿<Window x:Class="PNotes.NET.WndNote"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:net="clr-namespace:PNotes.NET"
+        Height="300" Width="300"
+        Title="Untitled"
+        BorderThickness="1"
+        Name="DlgNote"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        ShowActivated="True"
+        WindowStartupLocation="CenterScreen"
+        AllowDrop="True"
+        MinWidth="{Binding Path=MinWidth, ElementName=SkinlessHeader}"
+        MinHeight="{Binding Path=Height, ElementName=SkinlessHeader}"
+        SourceInitialized="Window_SourceInitialized"
+        MouseDown="Window_MouseDown"
+        Activated="Window_Activated"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
+        Closing="Window_Closing"
+        MouseEnter="Window_MouseEnter"
+        MouseLeave="Window_MouseLeave" 
+        PreviewMouseDoubleClick="Window_PreviewMouseDoubleClick">
+    <Window.BorderBrush>
+        <SolidColorBrush Color="{Binding ElementName=DlgNote, Path=Background, Converter={StaticResource BrushToColorCoverter}, ConverterParameter=0.8}"/>
+    </Window.BorderBrush>
+    <Window.ContextMenu>
+        <ContextMenu x:Name="ctmNote"
+                     TextElement.FontFamily="{Binding FontFamily}"
+                     TextElement.FontSize="{Binding FontSize}"
+                     TextElement.FontStretch="{Binding FontStretch}"
+                     TextElement.FontStyle="{Binding FontStyle}"
+                     TextElement.FontWeight="{Binding FontWeight}" Opened="ctmNote_Opened">
+            <MenuItem Name="mnuSave" Header="Save" InputGestureText="Ctrl+S" IsEnabled="False" Click="mnuSave_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource save}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuRename" Header="Rename/Change Group" Click="mnuRename_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource saveas}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuSaveAsText" Header="Save As Text File" Click="mnuSaveAsText_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource saveastext}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuRestoreFromBackup" Header="Restore From Backup" Click="mnuRestoreFromBackup_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource restore}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuDuplicateNote" Header="Duplicate Note" Click="mnuDuplicateNote_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource note_copy}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuSaveAsShortcut" Header="Save As Desktop Shortcut" Click="mnuSaveAsShortcut_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource shortcut}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Name="toolStripSeparator1"/>
+            <MenuItem Name="mnuPrint" Header="Print" InputGestureText="Ctrl+P" Click="mnuPrint_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource print}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Name="toolStripSeparator2"/>
+            <MenuItem Name="mnuAdjustAppearance" Header="Adjust Appearance" Click="mnuAdjustAppearance_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource adjustapp}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuAdjustSchedule" Header="Adjust Schedule" Click="mnuAdjustSchedule_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource adjustsch}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Name="toolStripSeparator3"/>
+            <MenuItem Name="mnuHideNote" Header="Hide" Click="mnuHideNote_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource hidenote}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuDeleteNote" Header="Delete" Click="mnuDeleteNote_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource deletenote}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuPanel" Header="Put In Panel" Click="mnuPanel_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource topanel}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Name="toolStripSeparator4"/>
+            <MenuItem Name="mnuDock" Header="Dock">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource dockall}"/>
+                </MenuItem.Icon>
+                <MenuItem Name="mnuDockNone" Header="None" Click="mnuDockNone_Click"/>
+                <MenuItem Name="mnuDockLeft" Header="Left" Click="mnuDockLeft_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource dockleft}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuDockTop" Header="Top" Click="mnuDockTop_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource docktop}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuDockRight" Header="Right" Click="mnuDockRight_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource dockright}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuDockBottom" Header="Bottom" Click="mnuDockBottom_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource dockbottom}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <Separator Name="toolStripSeparator5"/>
+            <MenuItem Name="mnuSendAsText" Header="Send As Text" Click="mnuSendAsText_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource sendmail}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuSendAsAttachment" Header="Send As Attachment" Click="mnuSendAsAttachment_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource sendattach}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuSendZip" Header="Send As ZIP Archive" Click="mnuSendZip_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource mailzip}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuSendNetwork" Header="Send Via Network">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource sendnetwork}"/>
+                </MenuItem.Icon>
+                <MenuItem Name="mnuAddContact" Header="Add Contact" Click="mnuAddContact_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource contactadd}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuAddGroup" Header="Add Group Of Contacts" Click="mnuAddGroup_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource groupadd}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Name="toolStripMenuItem50"/>
+                <MenuItem Name="mnuSelectContact" Header="Select Contacts" Click="mnuSelectContact_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource contactselect}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnuSelectGroup" Header="Select Group Of Contacts" Click="mnuSelectGroup_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource groupselect}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Name="mnuReply" Header="Reply" Click="mnuReply_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource reply}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Name="toolStripSeparator14"/>
+            <MenuItem Name="mnuPostNote" Header="Post Entire Note On:">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource post}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuReplacePost" Header="Replace Note Text By Post From:">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource insertpost}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Name="toolStripSeparator13"/>
+            <MenuItem Name="mnuExportToOffice" Header="Export to MS Office As:">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource msoffice}"/>
+                </MenuItem.Icon>
+                <MenuItem Name="mnuExportOutlookNote" Header="Outlook Note" Click="mnuExportOutlookNote_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{DynamicResource outlooknote}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <Separator Name="toolStripSeparator6"/>
+            <MenuItem Name="mnuTags" Header="Tags" Click="mnuTags_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource tags}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Name="toolStripSeparator10"/>
+            <MenuItem Name="mnuLinked" Header="Linked Notes">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource link}"/>
+                </MenuItem.Icon>
+                <MenuItem Name="mnuManageLinks" Header="Manage Linked Notes" Click="mnuManageLinks_Click"/>
+            </MenuItem>
+            <Separator Name="toolStripSeparator11"/>
+            <MenuItem Name="mnuAddToFavorites" Header="Add To Favorites" Click="mnuAddToFavorites_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource favadd}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuRemoveFromFavorites" Header="Remove From Favorites" Click="mnuRemoveFromFavorites_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource favremove}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Name="toolStripSeparator8"/>
+            <MenuItem Name="mnuOnTop" Header="On Top" IsCheckable="True" Click="mnuOnTop_Click"/>
+            <MenuItem Name="mnuToggleHighPriority" Header="Toggle High Priority" IsCheckable="True" Click="mnuToggleHighPriority_Click"/>
+            <MenuItem Name="mnuToggleProtectionMode" Header="Toggle Protection Mode" IsCheckable="True" Click="mnuToggleProtectionMode_Click"/>
+            <MenuItem Name="mnuSetPassword" Header="Set Note Password" Click="mnuSetPassword_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource passadd}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuRemovePassword" Header="Remove Note Password" Click="mnuRemovePassword_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource passremove}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuMarkAsComplete" Header="Mark As Complete" IsCheckable="True" Click="mnuMarkAsComplete_Click"/>
+            <MenuItem Name="mnuRollUnroll" Header="Roll/Unroll" Click="mnuRollUnroll_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource rollunroll}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuPin" Header="Pin To Window" Click="mnuPin_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource pinadd}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuUnpin" Header="Unpin" Click="mnuUnpin_Click">
+                <MenuItem.Icon>
+                    <Image Source="{DynamicResource pinremove}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Name="mnuScramble" Header="Encrypt Text" Click="mnuScramble_Click"/>
+        </ContextMenu>
+    </Window.ContextMenu>
+    <Window.Resources>
+        <Storyboard x:Key="FadeAway" Completed="StoryboardClose_Completed">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" From="{Binding Path=Opacity, ElementName=DlgNote}" Duration="0:0:0.5" Storyboard.TargetName="DlgNote"/>
+        </Storyboard>
+        <Storyboard x:Key="ThumbnailStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="Left" Duration="0:0:0.3" Completed="LeftAnimationThumbnail_Completed">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetProperty="Top" Duration="0:0:0.3" Completed="TopAnimationThumbnail_Completed">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <net:RolledVisibilityConverter x:Key="RolledVisibility"/>
+        </Grid.Resources>
+        <Canvas x:Name="cnvSkin" Visibility="Hidden" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Image x:Name="SkinImage" Canvas.Left="0" Canvas.Top="0" Stretch="None"/>
+            <net:SkinnableHeader x:Name="SkinnableHeader" HideDeleteButtonClicked="PHeader_HideDeleteButtonClicked"/>
+            <net:SkinnableFooter x:Name="SkinnableFooter" MarkButtonClicked="PFooter_MarkButtonClicked"/>
+            <net:SkinnableToolbar x:Name="SkinnableToolbar" FormatButtonClicked="PFooter_FormatButtonClicked"/>
+            <Border x:Name="EditTargetSkinnable" Background="Transparent"/>
+        </Canvas>
+        <DockPanel x:Name="pnlkSkinless">
+            <net:SkinlessHeader x:Name="SkinlessHeader" 
+                        DockPanel.Dock="Top" 
+                        HeaderButtonClicked="PHeader_HideDeleteButtonClicked"
+                        MouseLeftButtonUp="PHeader_MouseLeftButtonDown"/>
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="18"/>
+                </Grid.ColumnDefinitions>
+                <net:SkinlessFooter x:Name="SkinlessFooter" 
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Left"
+                                    MarkButtonClicked="PFooter_MarkButtonClicked"/>
+                <net:SkinlessToolbar x:Name="SkinlessToolbar"
+                                     Grid.Column="1"
+                                     HorizontalAlignment="Right"
+                                     FormatButtonClicked="PFooter_FormatButtonClicked"/>
+            </Grid>
+
+            <Border Visibility="Hidden">
+                <Border.ContextMenu>
+                    <ContextMenu x:Name="ctmEdit" 
+                         TextElement.FontFamily="{Binding FontFamily}"
+                         TextElement.FontSize="{Binding FontSize}"
+                         TextElement.FontStretch="{Binding FontStretch}"
+                         TextElement.FontStyle="{Binding FontStyle}"
+                         TextElement.FontWeight="{Binding FontWeight}"
+                         Opened="ctmEdit_Opened">
+                        <MenuItem Name="mnuUndo" Header="Undo" InputGestureText="Ctrl+Z" Click="mnuUndo_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource undo}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuRedo" Header="Redo" InputGestureText="Ctrl+Y" Click="mnuRedo_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource redo}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Name="toolStripSeparator9"/>
+                        <MenuItem Name="mnuCut" Header="Cut" InputGestureText="Ctrl+X" Click="mnuCut_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource cut}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuCopy" Header="Copy" InputGestureText="Ctrl+C" Click="mnuCopy_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource copy}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuPaste" Header="Paste" InputGestureText="Ctrl+V" Click="mnuPaste_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource paste}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Name="toolStripMenuItem11"/>
+                        <MenuItem Name="mnuCopyPlain" Header="Copy As Plain Text" Click="mnuCopyPlain_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource copy}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuPastePlain" Header="Paste As Plain Text" Click="mnuPastePlain_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource paste}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Name="toolStripSeparator12"/>
+                        <MenuItem Name="mnuFormat" Header="Format">
+                            <MenuItem Name="mnuToUpper" Header="Convert To Uppercase" Click="mnuToUpper_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource upper}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuToLower" Header="Convert To Lowercase" Click="mnuToLower_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource lower}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuCapSent" Header="Capitalize Sentences" Click="mnuCapSent_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource capsent}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuCapWord" Header="Capitalize Words" Click="mnuCapWord_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource capword}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuToggleCase" Header="Toggle Case" Click="mnuToggleCase_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource updown}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator Name="toolStripSeparator7"/>
+                            <MenuItem Name="mnuFont" Header="Font" Click="mnuFont_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource font}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuFontSize" Header="Font Size">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource fontsize}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuFontColor" Header="Font Color">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource fontcolor}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuBold" Header="Bold" InputGestureText="Ctrl+B" Click="mnuBold_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource bold}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuItalic" Header="Italic" InputGestureText="Ctrl+I" Click="mnuItalic_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource italic}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuUnderline" Header="Underline" InputGestureText="Ctrl+U" Click="mnuUnderline_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource under}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuStrikethrough" Header="Strikethrough" InputGestureText="Ctrl+K" Click="mnuStrikethrough_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource strike}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuHighlight" Header="Highlight">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource highlight}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuAlignLeft" Header="Align Left" InputGestureText="Ctrl+L" Click="mnuAlignLeft_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource left}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuAlignCenter" Header="Center" InputGestureText="Ctrl+E" Click="mnuAlignCenter_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource center}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuAlignRight" Header="Align Right" InputGestureText="Ctrl+R" Click="mnuAlignRight_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource right}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuBulletsNumbering" Header="Bullets/Numbering">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource bullets}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator Name="toolStripSeparator15"/>
+                            <MenuItem Name="mnuLineSpacing" Header="Line Spacing">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource linespacing}"/>
+                                </MenuItem.Icon>
+                                <MenuItem Name="mnuSpace10" Header="1.0" IsCheckable="True" Click="mnuSpace10_Click"/>
+                                <MenuItem Name="mnuSpace15" Header="1.5" IsCheckable="True" Click="mnuSpace15_Click"/>
+                                <MenuItem Name="mnuSpace20" Header="2.0" IsCheckable="True" Click="mnuSpace20_Click"/>
+                                <MenuItem Name="mnuSpace30" Header="3.0" IsCheckable="True" Click="mnuSpace30_Click"/>
+                                <Separator Name="toolStripSeparator17"/>
+                                <MenuItem Name="mnuAddSpaceBefore" Header="Add Space Before Paragraph" Click="mnuAddSpaceBefore_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="{DynamicResource lineaddbefore}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Name="mnuRemoveSpaceBefore" Header="Remove Space Before Paragraph" Click="mnuRemoveSpaceBefore_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="{DynamicResource lineremovebefore}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Name="mnuRemoveSpaceAfter" Header="Remove Space After Paragraph" Click="mnuRemoveSpaceAfter_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="{DynamicResource lineremoveafter}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Name="mnuAddSpaceAfter" Header="Add Space After Paragraph" Click="mnuAddSpaceAfter_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="{DynamicResource lineaddafter}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </MenuItem>
+                            <Separator Name="toolStripSeparator16"/>
+                            <MenuItem Name="mnuSubscript" Header="Subscript" Click="mnuSubscript_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource sub}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuSuperscript" Header="Superscript" Click="mnuSuperscript_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource super}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator Name="toolStripSeparator19"/>
+                            <MenuItem Name="mnuClearFormat" Header="Clear All Formatting" Click="mnuClearFormat_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource clear}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator Name="toolStripSeparator20"/>
+                            <MenuItem Name="mnuIncreaseIndent" Header="Increase Indent" Click="mnuIncreaseIndent_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource indentinc}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuDecreaseIndent" Header="Decrease Indent" Click="mnuDecreaseIndent_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource indentdec}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                        <Separator Name="toolStripMenuItem51"/>
+                        <MenuItem Name="mnuInsert" Header="Insert">
+                            <MenuItem Name="mnuInsertPicture" Header="Insert Picture" Click="mnuInsertPicture_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource picture}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuInsertSmiley" Header="Insert Smilie" Click="mnuInsertSmiley_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource smilie}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuInsertDT" Header="Insert Date/Time" Click="mnuInsertDT_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource calendar}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuInsertTable" Header="Insert Table" Click="mnuInsertTable_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource table}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuInsertSpecialSymbol" Header="Insert Special Symbol" Click="mnuInsertSpecialSymbol_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource sum}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="mnuDrawing" Header="Insert Free Drawing" Click="mnuDrawing_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{DynamicResource pencil}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                        <Separator Name="toolStripMenuItem52"/>
+                        <MenuItem Name="mnuSpell" Header="Spell Checking">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource spell}"/>
+                            </MenuItem.Icon>
+                            <MenuItem Name="mnuCheckSpellNow" Header="Check Now" Click="mnuCheckSpellNow_Click"/>
+                            <Separator Name="toolStripMenuItem53"/>
+                            <MenuItem Name="mnuCheckSpellAuto" Header="Check Automatically" Click="mnuCheckSpellAuto_Click"/>
+                            <Separator Name="toolStripMenuItem54"/>
+                            <MenuItem Name="mnuDownloadDict" Header="Download Dictionaries" Click="mnuDownloadDict_Click"/>
+                        </MenuItem>
+                        <Separator Name="toolStripMenuItem55"/>
+                        <MenuItem Name="mnuFind" Header="Find" InputGestureText="Ctrl+F" Click="mnuFind_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource find}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuFindNext" Header="Find Next" InputGestureText="F3" Click="mnuFindNext_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource findnext}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuReplace" Header="Replace" InputGestureText="Ctrl+H" Click="mnuReplace_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource replace}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Name="toolStripMenuItem56"/>
+                        <MenuItem Name="mnuSearchWeb" Header="Search Selected On:">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource searchweb}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuPostOn" Header="Post Selected On:">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource post}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuInsertPost" Header="Insert Post From:">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource insertpost}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Name="toolStripMenuItem57"/>
+                        <MenuItem Name="mnuSelectAll" Header="SelectAll" InputGestureText="Ctrl+A" Click="mnuSelectAll_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource selectall}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Name="toolStripSeparator18"/>
+                        <MenuItem Name="mnuSortAscending" Header="Sort Ascending" Click="mnuSortAscending_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource sortasc}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="mnuSortDescending" Header="Sort Descending" Click="mnuSortDescending_Click">
+                            <MenuItem.Icon>
+                                <Image Source="{DynamicResource sortdesc}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Border.ContextMenu>
+            </Border>
+            <Border x:Name="EditTargetSkinless" Margin="2" Background="Transparent"/>
+        </DockPanel>
+        <Border Visibility="Collapsed">
+            <Border.ContextMenu>
+                <ContextMenu x:Name="ctmBullets"
+                     TextElement.FontFamily="{Binding FontFamily}"
+                     TextElement.FontSize="{Binding FontSize}"
+                     TextElement.FontStretch="{Binding FontStretch}"
+                     TextElement.FontStyle="{Binding FontStyle}"
+                     TextElement.FontWeight="{Binding FontWeight}">
+            <MenuItem Name="mnuNoBullets" Header="No Bullets/Numbering" IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuBullets" Header="Simple Bullets" IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuArabicPoint" Header="1. 2. 3." IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuArabicParts" Header="1) 2) 3)" IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuSmallLettersPoint" Header="a. b. c." IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuSmallLettersPart" Header="a) b) c)" IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuBigLettersPoint" Header="A. B. C." IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuBigLettersParts" Header="A) B) C)" IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuLatinSmall" Header="i. ii. iii." IsCheckable="True" Click="BulletsMenu_Click"/>
+            <MenuItem Name="mnuLatinBig" Header="I. II. III." IsCheckable="True" Click="BulletsMenu_Click"/>
+        </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
+        <Border Visibility="Collapsed">
+            <Border.ContextMenu>
+                <ContextMenu x:Name="ctmFontSize"
+                     TextElement.FontFamily="{Binding FontFamily}"
+                     TextElement.FontSize="{Binding FontSize}"
+                     TextElement.FontStretch="{Binding FontStretch}"
+                     TextElement.FontStyle="{Binding FontStyle}"
+                     TextElement.FontWeight="{Binding FontWeight}">
+                    <MenuItem Header="8" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="9" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="10" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="11" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="12" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="14" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="16" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="18" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="20" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="22" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="24" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="26" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="28" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="36" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="48" IsCheckable="True" Click="SizeMenu_Click"/>
+                    <MenuItem Header="72" IsCheckable="True" Click="SizeMenu_Click"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
+        <Border Visibility="Collapsed">
+            <Border.ContextMenu>
+                <ContextMenu x:Name="ctmFontColor"
+                     TextElement.FontFamily="{Binding FontFamily}"
+                     TextElement.FontSize="{Binding FontSize}"
+                     TextElement.FontStretch="{Binding FontStretch}"
+                     TextElement.FontStyle="{Binding FontStyle}"
+                     TextElement.FontWeight="{Binding FontWeight}">
+                    <MenuItem Name="mnuColorAutomatic" Header="Automatic" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Black" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Navy" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Green" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Teal" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Maroon" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Purple" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Olive" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Silver" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Gray" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Blue" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Lime" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Cyan" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Red" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Magenta" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="Yellow" IsCheckable="True" Click="FontColorMenu_Click"/>
+                    <MenuItem Background="White" IsCheckable="True" Click="FontColorMenu_Click"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
+        <Border Visibility="Collapsed">
+            <Border.ContextMenu>
+                <ContextMenu x:Name="ctmFontHighlight"
+                     TextElement.FontFamily="{Binding FontFamily}"
+                     TextElement.FontSize="{Binding FontSize}"
+                     TextElement.FontStretch="{Binding FontStretch}"
+                     TextElement.FontStyle="{Binding FontStyle}"
+                     TextElement.FontWeight="{Binding FontWeight}">
+                    <MenuItem Name="mnuNoHighlight" Header="No Fill" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Black" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Navy" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Green" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Teal" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Maroon" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Purple" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Olive" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Silver" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Gray" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Blue" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Lime" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Cyan" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Red" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Magenta" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="Yellow" Click="FontHighlightMenu_Click"/>
+                    <MenuItem Background="White" Click="FontHighlightMenu_Click"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
+        <Border Visibility="Collapsed">
+            <Border.ContextMenu>
+                <ContextMenu x:Name="ctmDrop" Closed="ctmDrop_Closed">
+                    <MenuItem Name="mnuInsertContent" Header="Insert File Content" Click="mnuInsertContent_Click"/>
+                    <MenuItem Name="mnuInsertObject" Header="Insert As Object" Click="mnuInsertObject_Click"/>
+                    <MenuItem Name="mnuInsertLink" Header="Insert Link To File" Click="mnuInsertLink_Click"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
+        <Line Name="lnSizeNorth" 
+              MouseDown="OnSizeNorth" 
+              Stroke="Transparent"   
+              Cursor="SizeNS"
+              X1="1" 
+              X2="{Binding Path=ActualWidth, ElementName=DlgNote}" 
+              Y1="1" 
+              Y2="1"
+              StrokeThickness="3" 
+              Visibility="{Binding Path=IsRolled, Converter={StaticResource RolledVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=net:WndNote}, Mode=OneWay}"/>
+        <Line Name="lnSizeSouth"
+              MouseDown="OnSizeSouth"
+              Stroke="Transparent"
+              VerticalAlignment="Bottom" 
+              Cursor="SizeNS"
+              X1="1" 
+              X2="{Binding Path=ActualWidth, ElementName=DlgNote}" 
+              Y1="{Binding Path=ActualHeight, ElementName=DlgNote}" 
+              Y2="{Binding Path=ActualHeight, ElementName=DlgNote}"
+              StrokeThickness="3"
+              Visibility="{Binding Path=IsRolled, Converter={StaticResource RolledVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=net:WndNote}, Mode=OneWay}"/>
+        <Line Name="lnSizeWest"
+              MouseDown="OnSizeWest"
+              Stroke="Transparent"
+              Cursor="SizeWE"
+              X1="1" 
+              X2="1" 
+              Y1="1" 
+              Y2="{Binding Path=ActualHeight, ElementName=DlgNote}"
+              StrokeThickness="3"
+              Visibility="{Binding Path=IsRolled, Converter={StaticResource RolledVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=net:WndNote}, Mode=OneWay}"/>
+        <Line Name="lnSizeEast"
+              MouseDown="OnSizeEast"
+              Stroke="Transparent"
+              HorizontalAlignment="Right" 
+              Cursor="SizeWE"
+              X1="{Binding Path=ActualWidth, ElementName=DlgNote}" 
+              X2="{Binding Path=ActualWidth, ElementName=DlgNote}" 
+              Y1="1" 
+              Y2="{Binding Path=ActualHeight, ElementName=DlgNote}"
+              StrokeThickness="3"
+              Visibility="{Binding Path=IsRolled, Converter={StaticResource RolledVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=net:WndNote}, Mode=OneWay}"/>
+        <Rectangle Name="rectSizeNorthWest"
+                   MouseDown="OnSizeNorthWest" 
+                   Cursor="SizeNWSE" 
+                   Fill="Transparent" 
+                   Width="5" 
+                   Height="5" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Left"
+                   Visibility="{Binding Path=IsRolled, Converter={StaticResource RolledVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=net:WndNote}, Mode=OneWay}"/>
+        <Rectangle Name="rectSizeNorthEast"
+                   MouseDown="OnSizeNorthEast" 
+                   Cursor="SizeNESW" 
+                   Fill="Transparent" 
+                   Width="5" 
+                   Height="5" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Right"
+                   Visibility="{Binding Path=IsRolled, Converter={StaticResource RolledVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=net:WndNote}, Mode=OneWay}"/>
+        <Rectangle Name="rectSizeSouthWest"
+                   MouseDown="OnSizeSouthWest" 
+                   Cursor="SizeNESW" 
+                   Fill="Transparent" 
+                   Width="5" 
+                   Height="5" 
+                   VerticalAlignment="Bottom" 
+                   HorizontalAlignment="Left"
+                   Visibility="{Binding Path=IsRolled, Converter={StaticResource RolledVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=net:WndNote}, Mode=OneWay}"/>
+        <ResizeGrip Name="gripSize"
+                    MouseDown="OnSizeSouthEast" 
+                    Cursor="SizeNWSE" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right"
+                    Visibility="{Binding Path=IsRolled, Converter={StaticResource RolledVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=net:WndNote}, Mode=OneWay}"/>
+    </Grid>
+</Window>

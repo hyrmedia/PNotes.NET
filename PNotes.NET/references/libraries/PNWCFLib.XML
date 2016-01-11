@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNWCFLib</name>
+    </assembly>
+    <members>
+        <member name="T:PNWCFLib.PNDataErrorEventArgs">
+            <summary>
+            Provides data for any error event
+            </summary>
+        </member>
+        <member name="M:PNWCFLib.PNDataErrorEventArgs.#ctor(System.Exception)">
+            <summary>
+            Creates new instance of PNDataErrorEventArgs
+            </summary>
+            <param name="ex">Exception occured</param>
+        </member>
+        <member name="P:PNWCFLib.PNDataErrorEventArgs.Exception">
+            <summary>
+            Exception occured
+            </summary>
+        </member>
+        <member name="T:PNWCFLib.PNDataReceivedEventArgs">
+            <summary>
+            Provides data for note receiving event
+            </summary>
+        </member>
+        <member name="M:PNWCFLib.PNDataReceivedEventArgs.#ctor(System.String)">
+            <summary>
+            Creates new instance of PNDataReceivedEventArgs
+            </summary>
+            <param name="data">Data received (usually the string representation of note)</param>
+        </member>
+        <member name="P:PNWCFLib.PNDataReceivedEventArgs.Data">
+            <summary>
+            Data received (usually the string representation of note)
+            </summary>
+        </member>
+        <member name="T:PNWCFLib.PNDataReceivedEventHandler">
+            <summary>
+            Represents the method that will handle an event of data receiving
+            </summary>
+            <param name="sender">The source of the event</param>
+            <param name="e">Event data</param>
+        </member>
+        <member name="T:PNWCFLib.PNDataErrorEventHandler">
+            <summary>
+            Represents the method that will handle an event of data error
+            </summary>
+            <param name="sender">The source of the event</param>
+            <param name="e">Event data</param>
+        </member>
+        <member name="T:PNWCFLib.PNService">
+            <summary>
+            PNotes WCF service
+            </summary>
+        </member>
+        <member name="T:PNWCFLib.IPNService">
+            <summary>
+            Main PNotes WCF service interface
+            </summary>
+        </member>
+        <member name="M:PNWCFLib.IPNService.GetNote(System.String)">
+            <summary>
+            Receives string implementation of note
+            </summary>
+            <param name="message">String implementation of note</param>
+            <returns>SUCCESS if note received successfully, exception message otherwise</returns>
+        </member>
+        <member name="M:PNWCFLib.PNService.GetNote(System.String)">
+            <summary>
+            Receives string implementation of note
+            </summary>
+            <param name="message">String implementation of note</param>
+            <returns>SUCCESS if note received successfully, exception message otherwise</returns>
+        </member>
+        <member name="E:PNWCFLib.PNService.PNDataReceived">
+            <summary>
+            Raises when note is received
+            </summary>
+        </member>
+    </members>
+</doc>

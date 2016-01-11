@@ -1,0 +1,38 @@
+﻿<Window x:Class="PNotes.NET.WndMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:styles="clr-namespace:PNotes.NET.styles"
+        Name="DlgMessageBox" 
+        Height="200" 
+        Width="300"
+        WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource CustomWindowStyle}"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        Topmost="True"
+        styles:CustomWindowStyle.WindowBorder="MessageBox"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Name="imgIcon" Grid.Row="0" Grid.Column="0" Stretch="None" Margin="32,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <TextBlock Name="txbText" Grid.Row="0" Grid.Column="1" Margin="8,42,42,42" VerticalAlignment="Center" HorizontalAlignment="Left" MaxWidth="375" TextWrapping="Wrap"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="cmdOK" MinHeight="23" MinWidth="75" Margin="2,4,2,4" Content="OK" Click="cmdOK_Click"/>
+            <Button Name="cmdYes" MinHeight="23" MinWidth="75" Margin="2,4,2,4" Content="Yes" Click="cmdYes_Click"/>
+            <Button Name="cmdNo" MinHeight="23" MinWidth="75" Margin="2,4,2,4" Content="No" Click="cmdNo_Click"/>
+            <Button Name="cmdCancel" MinHeight="23" MinWidth="75" Margin="2,4,2,4" Content="Cancel" Click="cmdCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,159 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Focus Visual -->
+    <Style x:Key="RadioButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle StrokeThickness="1" 
+                               Margin="19,1,1,1" 
+                               Stroke="{DynamicResource FocustVisualBrush}" 
+                               HorizontalAlignment="Stretch" 
+                               StrokeDashArray="1 2" 
+                               SnapsToDevicePixels="true"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type RadioButton}" 
+           TargetType="{x:Type RadioButton}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Background" Value="{DynamicResource RadioBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource RadioBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource RadioButtonFocusVisual}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <BulletDecorator x:Name="Decorator" 
+                                     Background="Transparent" 
+                                     VerticalAlignment="Center">
+                        <BulletDecorator.Bullet>
+                            <Grid Width="18"
+                                  Height="18">
+                                <Ellipse x:Name="Border" 
+                                         Width="18" 
+                                         Height="18" 
+                                         StrokeThickness="{TemplateBinding BorderThickness}" 
+                                         Stroke="{TemplateBinding BorderBrush}" 
+                                         Fill="{TemplateBinding Background}"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                <Ellipse x:Name="CheckMark" 
+                                         Visibility="Collapsed" 
+                                         Width="12" 
+                                         Height="12" 
+                                         SnapsToDevicePixels="False" 
+                                         Fill="{DynamicResource RadioCheckMarkBrush}"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                <Ellipse x:Name="InderminateMark" 
+                                         Visibility="Collapsed" 
+                                         Width="8" 
+                                         Height="8" 
+                                         SnapsToDevicePixels="False" 
+                                         Opacity="0.5" 
+                                         Fill="{DynamicResource RadioCheckMarkBrush}"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center">
+                                </Ellipse>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" 
+                                                                       Storyboard.TargetProperty="Stroke">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource RadiorBorderHoveBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" 
+                                                                       Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource RadioBackgroundHoverBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" 
+                                                                       Storyboard.TargetProperty="Stroke">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource RadioBorderPressedBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" 
+                                                                       Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource RadioBackgroundPressedBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckMark" 
+                                                                       Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource RadioDisabledCheckmarkBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InderminateMark" 
+                                                                       Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource RadioDisabledCheckmarkBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" 
+                                                                       Storyboard.TargetProperty="Stroke">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource RadioDisabledBorderBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" 
+                                                                       Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource RadioDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Decorator" 
+                                                                       Storyboard.TargetProperty="(TextBlock.Foreground)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                                    Value="{DynamicResource DisabledTextBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckMark" 
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                    Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InderminateMark" 
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                    Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter Margin="4,0,0,0" 
+                                          VerticalAlignment="Center" 
+                                          HorizontalAlignment="Left" 
+                                          RecognizesAccessKey="True"
+                                          TextElement.Foreground="{TemplateBinding Foreground}"/>
+                    </BulletDecorator>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

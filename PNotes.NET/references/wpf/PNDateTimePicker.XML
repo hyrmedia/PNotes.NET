@@ -1,0 +1,642 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNDateTimePicker</name>
+    </assembly>
+    <members>
+        <member name="T:PNDateTimePicker.DateBoxStatus">
+            <summary>
+            Specifies the current status of DateTimePicker
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxStatus.Normal">
+            <summary>
+            Status normal
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxStatus.Error">
+            <summary>
+            Status error
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxStatus.Significant">
+            <summary>
+            Status significant date
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxStatus.DayOff">
+            <summary>
+            Status day-off
+            </summary>
+        </member>
+        <member name="T:PNDateTimePicker.DateBoxSelectionMode">
+            <summary>
+            Specifies the date selection mode of calendar
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxSelectionMode.SimpleSelection">
+            <summary>
+            Simple mode
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxSelectionMode.SingleClick">
+            <summary>
+            Single click mode
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxSelectionMode.DoubleClick">
+            <summary>
+            Double click mode
+            </summary>
+        </member>
+        <member name="T:PNDateTimePicker.DateBoxFormat">
+            <summary>
+            Specifies the date/time format of DateTimePicker
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxFormat.ShortDate">
+            <summary>
+            Short date
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxFormat.ShortDateAndShortTime">
+            <summary>
+            Short date and short time
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxFormat.ShortDateAndLongTime">
+            <summary>
+            Short date and long time
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxFormat.LongDate">
+            <summary>
+            Long date
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxFormat.LongDateAndShortTime">
+            <summary>
+            Long date and short time
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxFormat.LongDateAndLongTime">
+            <summary>
+            Long date and long time
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxFormat.ShortTime">
+            <summary>
+            Short time
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateBoxFormat.LongTime">
+            <summary>
+            Long time
+            </summary>
+        </member>
+        <member name="T:PNDateTimePicker.DateTimePicker">
+            <summary>
+            Represents the custom control that allows the user to select a date and/or a time
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.DateValueProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.DateValue"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.StatusProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.Status"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.ErrorBackgroundProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.ErrorBackground"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.DayOffBackgroundProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.DayOffBackground"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.SignificantDateBackgroundProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.SignificantDateBackground"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.SelectionModeProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.SelectionMode"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.FormatProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.Format"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.AllowErrorValuesProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.AllowErrorValues"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.InfoPanelOrientationProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.InfoPanelOrientation"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.SignificantDateForegroundProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.SignificantDateForeground"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.DayOffForegroundProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.DayOffForeground"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.IsBlackoutDateProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.IsBlackoutDate"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.IsReadOnlyProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.IsReadOnly"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.IsEmptyProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.IsEmpty"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.IsNowButtonVisibleProperty">
+            <summary>
+            The identifier of the <see cref="P:PNDateTimePicker.DateTimePicker.IsNowButtonVisible"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnInitialized(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.FrameworkElement.Initialized"/> event. This method is invoked whenever <see cref="P:System.Windows.FrameworkElement.IsInitialized"/> is set to true internally. 
+            </summary>
+            <param name="e">The <see cref="T:System.Windows.RoutedEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
+            </summary>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.AddDayOff(System.DayOfWeek)">
+            <summary>
+            Adds day-off
+            </summary>
+            <param name="day">Day of week</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.RemoveDayOff(System.DayOfWeek)">
+            <summary>
+            Removes day-off
+            </summary>
+            <param name="day">Day of week</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnIsNowButtonVisibleChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.IsNowButtonVisibleChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old value</param>
+            <param name="newValue">New value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnIsEmptyChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.IsEmptyChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old value</param>
+            <param name="newValue">New value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnIsReadOnlyChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.IsBlackoutDateChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old value</param>
+            <param name="newValue">New value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnIsBlackoutDateChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.IsBlackoutDateChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old value</param>
+            <param name="newValue">New value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnFormatChanged(PNDateTimePicker.DateBoxFormat,PNDateTimePicker.DateBoxFormat)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.FormatChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old format value</param>
+            <param name="newValue">New format value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnInfoPanelOrientationChanged(System.Windows.Controls.Orientation,System.Windows.Controls.Orientation)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.InfoPanelOrientationChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old orientation value</param>
+            <param name="newValue">New orientation value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnSelectionModeChanged(PNDateTimePicker.DateBoxSelectionMode,PNDateTimePicker.DateBoxSelectionMode)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.SelectionModeChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old selection mode value</param>
+            <param name="newValue">New selection mode value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnAllowErrorValuesChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.AllowErrorValuesChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old value</param>
+            <param name="newValue">New value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnStatusChanged(PNDateTimePicker.DateBoxStatus,PNDateTimePicker.DateBoxStatus)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.StatusChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old status value</param>
+            <param name="newValue">New status value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnErrorBackgroundChanged(System.Windows.Media.SolidColorBrush,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.ErrorBackgroundChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old background value</param>
+            <param name="newValue">New background value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnSignificantDateForegroundChanged(System.Windows.Media.SolidColorBrush,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.SignificantDateForegroundChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old foreground value</param>
+            <param name="newValue">New foreground value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnDayOffForegroundChanged(System.Windows.Media.SolidColorBrush,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.DayOffForegroundChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old foreground value</param>
+            <param name="newValue">New foreground value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnSignificantDateBackgroundChanged(System.Windows.Media.SolidColorBrush,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.SignificantDateBackgroundChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old background value</param>
+            <param name="newValue">New background value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnDayOffBackgroundChanged(System.Windows.Media.SolidColorBrush,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.DayOffBackgroundChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old background value</param>
+            <param name="newValue">New background value</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateTimePicker.OnDateValueChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Invoked just before the <see cref="E:PNDateTimePicker.DateTimePicker.DateValueChanged"/> event is raised on control
+            </summary>
+            <param name="oldValue">Old date value</param>
+            <param name="newValue">New date value</param>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.IsNowButtonVisibleEvent">
+            <summary>
+            Identifies the <see cref="F:PNDateTimePicker.DateTimePicker.IsNowButtonVisibleEvent"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.IsEmptyChangedEvent">
+            <summary>
+            Identifies the <see cref="F:PNDateTimePicker.DateTimePicker.IsEmptyChangedEvent"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.IsReadOnlyChangedEvent">
+            <summary>
+            Identifies the <see cref="F:PNDateTimePicker.DateTimePicker.IsReadOnlyChangedEvent"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.IsBlackoutDateChangedEvent">
+            <summary>
+            Identifies the <see cref="F:PNDateTimePicker.DateTimePicker.IsBlackoutDateChangedEvent"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.FormatChangedEvent">
+            <summary>
+            Identifies the <see cref="F:PNDateTimePicker.DateTimePicker.FormatChangedEvent"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.InfoPanelOrientationChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.InfoPanelOrientationChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.SelectionModeChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.SelectionModeChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.StatusChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.StatusChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.SignificantDateForegroundChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.SignificantDateForegroundChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.DayOffForegroundChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.DayOffForegroundChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.SignificantDateBackgroundChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.SignificantDateBackgroundChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.DayOffBackgroundChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.DayOffBackgroundChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.ErrorBackgroundChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.ErrorBackgroundChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.AllowErrorValuesChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.AllowErrorValuesChanged"/> routed event
+            </summary>
+        </member>
+        <member name="F:PNDateTimePicker.DateTimePicker.DateValueChangedEvent">
+            <summary>
+            Identifies the <see cref="E:PNDateTimePicker.DateTimePicker.DateValueChanged"/> routed event
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.IsNowButtonVisible">
+            <summary>
+            Gets or sets the value specifies whether 'Now' button is visible
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.IsEmpty">
+            <summary>
+            Gets or sets the value specifies whether any date/time is shown
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.IsReadOnly">
+            <summary>
+            Gets or sets the read-only state of control
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.IsBlackoutDate">
+            <summary>
+            Gets the value specifies whether currently selected date is blackout date
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.SignificantDateForeground">
+            <summary>
+            Gets or sets signicant dates foreground
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.DayOffForeground">
+            <summary>
+            Gets or sets days-off foreground
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.InfoPanelOrientation">
+            <summary>
+            Gets or sets orientation of info panel of signicant dates
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.AllowErrorValues">
+            <summary>
+            Specifies whether user is allowed to enter invalid dates
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.Format">
+            <summary>
+            Gets or sets format of DateTimePicker
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.SelectionMode">
+            <summary>
+            Gets or sets selection mode of drop-down calendar of DateTimePicker
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.DateValue">
+            <summary>
+            Gets or sets the date/time value of DateTimePicker
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.Status">
+            <summary>
+            Gets current status of DateTimePicker
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.SignificantDateBackground">
+            <summary>
+            Gets or sets significant dates background
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.DayOffBackground">
+            <summary>
+            Gets or sets days-off background
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.ErrorBackground">
+            <summary>
+            Gets or sets background for invalid dates
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.SignificantDates">
+            <summary>
+            Gets collection of significant dates
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.BlackoutDates">
+            <summary>
+            Gets blackout dates collection
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.Text">
+            <summary>
+            Gets date/time value of DateTimePicker as string
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.DateTimePicker.NowButtonContent">
+            <summary>
+            Gets or sets content of 'Now' button
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.IsNowButtonVisibleChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.IsNowButtonVisible"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.IsEmptyChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.IsEmpty"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.IsReadOnlyChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.IsReadOnly"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.IsBlackoutDateChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.IsBlackoutDate"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.FormatChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.Format"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.InfoPanelOrientationChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.InfoPanelOrientation"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.SelectionModeChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.SelectionMode"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.StatusChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.Status"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.SignificantDateForegroundChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.SignificantDateForeground"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.DayOffForegroundChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.DayOffForeground"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.SignificantDateBackgroundChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.SignificantDateBackground"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.DayOffBackgroundChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.DayOffBackground"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.ErrorBackgroundChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.ErrorBackground"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.AllowErrorValuesChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.AllowErrorValues"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="E:PNDateTimePicker.DateTimePicker.DateValueChanged">
+            <summary>
+            Occurs when the <see cref="P:PNDateTimePicker.DateTimePicker.DateValue"/> property has been changed in some way
+            </summary>
+        </member>
+        <member name="T:PNDateTimePicker.SignificantDate">
+            <summary>
+            Represents significant calendar date
+            </summary>
+        </member>
+        <member name="M:PNDateTimePicker.SignificantDate.#ctor(System.DateTime)">
+            <summary>
+            Creates new instance of SignificantDate
+            </summary>
+            <param name="date">Significant date date</param>
+        </member>
+        <member name="M:PNDateTimePicker.SignificantDate.#ctor(System.DateTime,System.Windows.UIElement)">
+            <summary>
+            Creates new instance of SignificantDate
+            </summary>
+            <param name="date">Significant date date</param>
+            <param name="content">UIElement with significant date details</param>
+        </member>
+        <member name="M:PNDateTimePicker.SignificantDate.#ctor(System.DateTime,System.Collections.Generic.IEnumerable{System.Windows.UIElement})">
+            <summary>
+            Creates new instance of SignificantDate
+            </summary>
+            <param name="date">Significant date date</param>
+            <param name="contentList">List of UIElements with significant date details</param>
+        </member>
+        <member name="P:PNDateTimePicker.SignificantDate.VisualDetailsList">
+            <summary>
+            Gets list of significant date details
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.SignificantDate.Date">
+            <summary>
+            Gets or sets significant date date
+            </summary>
+        </member>
+        <member name="T:PNDateTimePicker.SignificantDatesCollection">
+            <summary>
+            Represents collection of SignificantDate objects
+            </summary>
+        </member>
+        <member name="M:PNDateTimePicker.SignificantDatesCollection.InsertItem(System.Int32,PNDateTimePicker.SignificantDate)">
+            <summary>
+            Inserts an item into the collection at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param><param name="item">The object to insert.</param>
+        </member>
+        <member name="M:PNDateTimePicker.SignificantDatesCollection.SetItem(System.Int32,PNDateTimePicker.SignificantDate)">
+            <summary>
+            Replaces the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to replace.</param><param name="item">The new value for the element at the specified index.</param>
+        </member>
+        <member name="T:PNDateTimePicker.DateToStringPartConverter">
+            <summary>
+            Converts DateTime to formatted string
+            </summary>
+        </member>
+        <member name="M:PNDateTimePicker.DateToStringPartConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value. 
+            </summary>
+            <returns>
+            A converted value. If the method returns null, the valid null value is used.
+            </returns>
+            <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
+        </member>
+        <member name="M:PNDateTimePicker.DateToStringPartConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value. 
+            </summary>
+            <returns>
+            A converted value. If the method returns null, the valid null value is used.
+            </returns>
+            <param name="value">The value that is produced by the binding target.</param><param name="targetType">The type to convert to.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
+        </member>
+        <member name="T:PNDateTimePicker.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PNDateTimePicker.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

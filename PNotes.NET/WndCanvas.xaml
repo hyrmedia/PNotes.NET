@@ -1,0 +1,94 @@
+﻿<Window x:Class="PNotes.NET.WndCanvas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:pnPalette="clr-namespace:PNPalette;assembly=PNPalette"
+        xmlns:net="clr-namespace:PNotes.NET"
+        xmlns:styles="clr-namespace:PNotes.NET.styles"
+        Name="DlgCanvas"
+        Title="WndCanvas" 
+        Height="240" 
+        Width="240"
+        Style="{DynamicResource CustomWindowStyle}"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        styles:CustomWindowStyle.WindowBorder="NoBorder"
+        Loaded="DlgCanvas_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="1" Background="{DynamicResource ToolbarBackgrounsBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <net:DropDownButton x:Name="cmdLine" Height="16" Margin="2" Click="cmdLine_Click">
+                    <net:DropDownButton.DropDownMenu>
+                        <ContextMenu Name="ctmLines" Placement="Mouse">
+                            <MenuItem Name="mnuLine1" Click="mnuLine_Click">
+                                <MenuItem.Header>
+                                    <Image Source="{DynamicResource line1}"/>
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem Name="mnuLine2" IsChecked="True" Click="mnuLine_Click">
+                                <MenuItem.Header>
+                                    <Image Source="{DynamicResource line2}"/>
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem Name="mnuLine4" Click="mnuLine_Click">
+                                <MenuItem.Header>
+                                    <Image Source="{DynamicResource line4}"/>
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem Name="mnuLine6" Click="mnuLine_Click">
+                                <MenuItem.Header>
+                                    <Image Source="{DynamicResource line6}"/>
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem Name="mnuLine8" Click="mnuLine_Click">
+                                <MenuItem.Header>
+                                    <Image Source="{DynamicResource line8}"/>
+                                </MenuItem.Header>
+                            </MenuItem>
+                        </ContextMenu>
+                    </net:DropDownButton.DropDownMenu>
+                    <Image Name="imgLine" Source="{DynamicResource line2}"/>
+                </net:DropDownButton>
+                <RadioButton Name="cmdPen" Grid.Column="1" Margin="2" IsChecked="True" Checked="cmdPen_Checked">
+                    <Image Source="{DynamicResource pencil}"/>
+                </RadioButton>
+                <RadioButton Name="cmdEraser" Grid.Column="2" Margin="2" Checked="cmdEraser_Checked">
+                    <Image Source="{DynamicResource clear}"/>
+                </RadioButton>
+                <Rectangle Grid.Column="4" 
+                           Margin="2" 
+                           Width="{Binding Path=ActualWidth, ElementName=cmdOK}"
+                           Height="{Binding Path=ActualHeight, ElementName=cmdOK}"
+                           Fill="{Binding Path=SelectedBrush, ElementName=palette}"/>
+                <net:SmallButton net:PNUtils.SmallButtonType="Apply" x:Name="cmdOK" Grid.Column="5" IsEnabled="False" Margin="2" Click="cmdOK_Click"/>
+                <net:SmallButton net:PNUtils.SmallButtonType="Remove" x:Name="cmdCancel" Grid.Column="6" Margin="2" IsCancel="True"/>
+            </Grid>
+        </Border>
+        <pnPalette:Palette Name="palette" Grid.Row="1" Grid.Column="0" Margin="1" SelectedBrushChanged="palette_SelectedBrushChanged"/>
+        <Border Grid.Row="1" Grid.Column="1" Margin="1">
+            <InkCanvas Name="inkCanvas"
+                       EditingMode="Ink"
+                       Width="{Binding Mode=OneWay, Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}}"
+                       Height="{Binding Mode=OneWay, Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}}"
+                       PreviewKeyDown="inkCanvas_PreviewKeyDown"
+                       StrokeCollected="inkCanvas_StrokeCollected"
+                       StrokeErased="inkCanvas_StrokeErased"/>
+        </Border>
+    </Grid>
+</Window>

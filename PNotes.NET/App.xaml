@@ -1,0 +1,43 @@
+﻿<Application x:Class="PNotes.NET.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="window1.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="styles/colorschemes/DarkGray.xaml"/>-->
+                <ResourceDictionary Source="styles/Resources.xaml"/>
+                <ResourceDictionary Source="styles/Images.xaml"/>
+                <ResourceDictionary Source="styles/Styles.xaml"/>
+                <ResourceDictionary Source="Themes/generic.xaml"/>
+
+                <!--<ResourceDictionary Source="styles/Window.xaml"/>
+                <ResourceDictionary Source="styles/Menu.xaml"/>
+                <ResourceDictionary Source="styles/TabControl.xaml"/>
+                <ResourceDictionary Source="styles/TabItem.xaml"/>
+                <ResourceDictionary Source="styles/GroupBox.xaml"/>
+                <ResourceDictionary Source="styles/Button.xaml"/>
+                <ResourceDictionary Source="styles/ToggleButton.xaml"/>
+                <ResourceDictionary Source="styles/RepeatButton.xaml"/>
+                <ResourceDictionary Source="styles/CheckBox.xaml"/>
+                <ResourceDictionary Source="styles/RadioButton.xaml"/>
+                <ResourceDictionary Source="styles/ScrollBar.xaml"/>
+                <ResourceDictionary Source="styles/ScrollViewer.xaml"/>
+                <ResourceDictionary Source="styles/ListBox.xaml"/>
+                <ResourceDictionary Source="styles/ComboBox.xaml"/>
+                <ResourceDictionary Source="styles/TextBox.xaml"/>
+                <ResourceDictionary Source="styles/TreeView.xaml"/>
+                <ResourceDictionary Source="styles/Calendar.xaml"/>
+                <ResourceDictionary Source="styles/Label.xaml"/>
+                <ResourceDictionary Source="styles/StatusBar.xaml"/>
+                <ResourceDictionary Source="styles/Slider.xaml"/>
+                <ResourceDictionary Source="styles/Expander.xaml"/>
+                <ResourceDictionary Source="styles/ListView.xaml"/>
+                <ResourceDictionary Source="styles/ColorPicker.xaml"/>
+                <ResourceDictionary Source="styles/NumericUpDown.xaml"/>
+                <ResourceDictionary Source="styles/DateTimePicker.xaml"/>
+                <ResourceDictionary Source="styles/IpBox.xaml"/>-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,31 @@
+﻿<Window x:Class="PNotes.NET.WndAbout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:net="clr-namespace:PNotes.NET"
+        Name="DlgAbout" 
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        Background="Transparent"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Height="{Binding ActualHeight, ElementName=imgAbout}" 
+        Width="{Binding ActualWidth, ElementName=imgAbout}" 
+        FontFamily="Segoe Script" 
+        FontSize="18"
+        Loaded="DlgAbout_Loaded"
+        PreviewKeyDown="DlgAbout_PreviewKeyDown">
+    <Canvas>
+        <Image Name="imgAbout" Source="images/about_dialog.png"/>
+        <TextBlock Name="lblInfo" Margin="4" TextWrapping="Wrap" Canvas.Left="182" Canvas.Top="85">
+            <Run Name="progName" Text="PNotes.NET 1.0.0.100&#10;"/>
+            <Run Name="progDesc" Text="Stickies, post-it, notes etc.&#10;"/>
+            <Run Name="progCopy" Text="Copyright 2012 Andrey Gruber&#10;"/>
+            <Run Name="progMail" Text="andrey.gruber@gmail.com" Foreground="Red" TextDecorations="Underline" Cursor="Hand" MouseLeftButtonDown="progMail_MouseLeftButtonDown"/>
+        </TextBlock>
+        <TextBlock Name="lblGPL" Text="This program is distributed under the terms of the GNU General Public License version 2 or later." TextWrapping="Wrap" Margin="4" Canvas.Left="38" Canvas.Top="226" Width="530"/>
+        <net:AboutControl x:Name="cntAbout" Canvas.Left="90" Canvas.Top="334" Width="438" Height="198" Duration="25" AboutLinkClicked="AboutControl_AboutLinkClicked"/>
+        <TextBlock Name="cmdLicense" Canvas.Left="38" Canvas.Top="572" Text="Show license" TextDecorations="Underline" Cursor="Hand" Foreground="Red" MouseLeftButtonDown="cmdLicense_MouseLeftButtonDown"/>
+        <TextBlock Name="cmdOK" Canvas.Left="495" Canvas.Top="572" Text="OK" TextDecorations="Underline" Cursor="Hand" Foreground="Red" MouseLeftButtonDown="cmdOK_MouseLeftButtonDown"/>
+    </Canvas>
+</Window>

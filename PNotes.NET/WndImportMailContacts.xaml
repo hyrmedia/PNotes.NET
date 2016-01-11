@@ -1,0 +1,52 @@
+﻿<Window x:Class="PNotes.NET.WndImportMailContacts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:net="clr-namespace:PNotes.NET"
+        Name="DlgImportMailContacts"
+        Title="WndImportMailContacts" 
+        Height="310" 
+        Width="400"
+        SizeToContent="Height"
+        Style="{DynamicResource CustomWindowStyle}"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}"
+        Loaded="DlgImportMailContacts_Loaded">
+    <StackPanel Name="stkImport">
+        <TextBlock Name="pnsImportContacts" Text="Import mail contacts from:" Margin="4"/>
+        <ListView Name="grdMailContacts" net:PNGridViewHelper.AutoSort="True" net:PNGridViewHelper.ShowGridLines="true" Height="170" Margin="4">
+            <ListView.View>
+                <GridView>
+                    <net:FixedWidthColumn FixedWidth="30">
+                        <net:FixedWidthColumn.Header>
+                            <CheckBox x:Name="chkAll" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="HeaderChecked" Unchecked="HeaderChecked"/>
+                        </net:FixedWidthColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChecked" Unchecked="CheckBoxChecked"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </net:FixedWidthColumn>
+                    <GridViewColumn net:PNGridViewHelper.ColumnName="DispName" Header="Display name" Width="136" DisplayMemberBinding="{Binding DispName}"/>
+                    <GridViewColumn net:PNGridViewHelper.ColumnName="MailAddress" Header="Sender address" Width="136" DisplayMemberBinding="{Binding Address}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <CheckBox Name="chkNoDuplicates" Content="Do not show duplicates" Margin="4"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="cmdLoadImport" Content="Load" Margin="4" MinWidth="75" MinHeight="23" Grid.Column="0" Click="cmdLoadImport_Click"/>
+            <Button Name="cmdOK" Content="OK" Margin="4" MinWidth="75" IsDefault="True" IsEnabled="False" MinHeight="23" Grid.Column="1" HorizontalAlignment="Right" Click="cmdOK_Click"/>
+            <Button Name="cmdCancel" Content="Cancel" Margin="4" MinWidth="75" IsCancel="True" MinHeight="23" Grid.Column="2"/>
+        </Grid>
+    </StackPanel>
+</Window>

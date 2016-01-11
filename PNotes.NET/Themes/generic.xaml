@@ -1,0 +1,1083 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:pn="clr-namespace:PNotes.NET"
+                    xmlns:pnColorPicker="clr-namespace:PNColorPicker;assembly=PNColorPicker">
+
+    <pn:BrushBrightnessConverter x:Key="BrushConverter"/>
+    <pn:BrushBrightnessToColorConverter x:Key="BrushToColorCoverter"/>
+    <pn:ColorBrightnessToColorConverter x:Key="ColorToColorConverter"/>
+    <pn:HeaderTextHeightConverter x:Key="TextToSizeConverter"/>
+    <pn:HeaderTextWidthConverter x:Key="TextToWidthConverter"/>
+    <pn:DateToDisplayStringConverter x:Key="DateToDisplayConverter"/>
+    <pn:PropertyToImageConverter x:Key="PropToImageConverter"/>
+    <pn:NoteStateToImageConverter x:Key="StateToImageConverter"/>
+    <pn:CheckedToEnableOppsiteConverter x:Key="EnableOppositeConverter"/>
+    <pn:SizeRelationConverter x:Key="SizeRelateConverter"/>
+    <pn:ConnectionStatusConverter x:Key="ConnectionStatusConverter"/>
+    <pn:EnabledToSmallButtonColorConverter x:Key="EnabledToSmallButtonColorConverter"/>
+    
+    <sys:Double x:Key="ThumbFullGrow">2.5</sys:Double>
+    <sys:Double x:Key="ThumbHalfGrow">1.7</sys:Double>
+
+    <Geometry x:Key="ContDisconnected">M7,3 L0,3 L0,12 L16,12 L16,10 M6,14 L10,14 M3,16 L13,16 M16,0 L8,8 M16,8 L8,0</Geometry>
+    <Geometry x:Key="ContConnected">M16,3 L0,3 L0,12 L16,12 L16,3 M6,14 L10,14 M3,16 L13,16</Geometry>
+    <!--<Geometry x:Key="ContWithPnotes">M16,3 L0,3 L0,12 L16,12 L16,3 M6,14 L10,14 M3,16 L13,16 M13,6 L3,6 L3,9 L13,9 Z</Geometry>-->
+
+    <Style TargetType="{x:Type pn:PNListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}"/>
+    <Style TargetType="{x:Type pnColorPicker:WebItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}"/>
+    <Style TargetType="{x:Type pn:PNTreeView}" BasedOn="{StaticResource {x:Type TreeView}}"/>
+    <Style TargetType="{x:Type pn:PNTreeItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}"/>
+
+    <Style TargetType="{x:Type TextBlock}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="{DynamicResource DisabledTextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Image}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" Value="0.3"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ToolbarImage" TargetType="{x:Type Image}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" Value="0.3"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="1" Opacity="0.7" Color="{DynamicResource LightContrastColor}"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ProgressImage" TargetType="{x:Type Ellipse}">
+        <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+        <Setter Property="Stretch" Value="Fill"/>
+        <Setter Property="StrokeDashCap" Value="Round"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <RotateTransform/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource LightContrastColor}"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Ellipse.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type pn:HeaderButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="MaxWidth" Value="16" />
+        <Setter Property="MaxHeight" Value="16" />
+        <Setter Property="MinWidth" Value="12" />
+        <Setter Property="MinHeight" Value="12" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:HeaderButton}">
+                    <Border Background="{TemplateBinding Background}">
+                        <Viewbox x:Name="vbox" Stretch="Fill">
+                            <Path x:Name="buttonPath"
+                                  Data="M 3,3 L 9,9 M 9,3 L 3,9" 
+                                  Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" 
+                                  Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" 
+                                  StrokeThickness="1.5"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"/>
+                        </Viewbox>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ButtonType" Value="Hide"/>
+                                <Condition Property="IsAlternated" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Data" 
+                                    TargetName="buttonPath" 
+                                    Value="M 0,3 L 6,7 L 12,3 Z" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ButtonType" Value="Hide"/>
+                                <Condition Property="IsAlternated" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Data" 
+                                    TargetName="buttonPath" 
+                                    Value="M 3,3 L 9,9 M 9,3 L 3,9" />
+                        </MultiTrigger>
+                        <Trigger Property="ButtonType" Value="Panel">
+                            <Setter Property="Data"
+                                    TargetName="buttonPath"
+                                    Value="M0,3 L12,3 M6,12 L6,4 L3,7 M6,4 L9,7"/>
+                            <Setter Property="Fill"
+                                    TargetName="buttonPath"
+                                    Value="Transparent"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type pn:FormatButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="MaxWidth" Value="16" />
+        <Setter Property="MaxHeight" Value="16" />
+        <Setter Property="MinWidth" Value="12" />
+        <Setter Property="MinHeight" Value="12" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:FormatButton}">
+                    <Border x:Name="bd">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStopCollection>
+                                    <GradientStop Offset="0.0" Color="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Background, Converter={StaticResource BrushToColorCoverter}, ConverterParameter=1.25}"/>
+                                    <GradientStop Offset="1" Color="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Background, Converter={StaticResource BrushToColorCoverter}, ConverterParameter=0.8}"/>
+                                </GradientStopCollection>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Viewbox x:Name="vb" Stretch="Uniform">
+                            <ContentPresenter/>
+                        </Viewbox>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ButtonType" Value="Highlight">
+                            <Setter TargetName="bd" Property="Background" Value="Lime"/>
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Left">
+                            <Setter TargetName="vb" Property="Stretch" Value="None"/>
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Center">
+                            <Setter TargetName="vb" Property="Stretch" Value="None"/>
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Right">
+                            <Setter TargetName="vb" Property="Stretch" Value="None"/>
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Bullets">
+                            <Setter TargetName="vb" Property="Stretch" Value="None"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ButtonSize" Value="Large">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type pn:MarkButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="MaxWidth" Value="16" />
+        <Setter Property="MaxHeight" Value="16" />
+        <Setter Property="MinWidth" Value="12" />
+        <Setter Property="MinHeight" Value="12" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}, Path=Foreground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:MarkButton}">
+                    <Grid>
+                        <Viewbox>
+                            <Path x:Name="path1" Data="M 6,0 A 6,6 360 1 0 6,12 M 6,0 A 6,6 360 1 1 6,12 M 6,6.5 L 6,2 M 9,6.5 L 5.5,6.5" Fill="Transparent" Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" StrokeThickness="0.75" />
+                        </Viewbox>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ButtonType" Value="Change">
+                            <Setter Property="Data" TargetName="path1" Value="M 4,0 L 12,0 L 12,12 L 4,12 Z M 0,0 L 7,7" />
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Protection">
+                            <Setter Property="Data" TargetName="path1" Value="M 0,6 L 0,11 L 1,12 L 11,12 L 12,11 L 12,6 L 11,5 L 10,5 L 10,2 L 8,0 L 4,0 L 2,2 L 2,5 L 1,5 L 0,6 M 4,5 L 8,5 L 8,3 L 7,2 L 5,2 L 4,3 Z M 4,8 L 8,8 M 5,9 L 7,9" />
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Priority">
+                            <Setter Property="Data" TargetName="path1" Value="M 0,0 L 6,12 M 3,6 L 12,2 L 0,0" />
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Complete">
+                            <Setter Property="Data" TargetName="path1" Value="M 0,6 L 4,12 L 12,0" />
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Password">
+                            <Setter Property="Data" TargetName="path1" Value="M 0,1 L 0,6 L 1,7 L 5,7 L 5,9 L 7,9 L 7,11 L 9,11 L 9,12 L 12,12 L 12,10 L 8,6 L 8,1 L 7,0 L 1,0 L 0,1 M 3,2 L 5,2 L 5,5 L 3,5 L 3,1.5" />
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Pin">
+                            <Setter Property="Data" TargetName="path1" Value="M 0,12 L 4,8 M 2,6 L 6,10 L 9,10 L 10,9 L 10,5 L 12,3 L 12,1 L 11,0 L 9,0 L 7,2 L 3,2 L 2,3 L 2,6 Z" />
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Mail">
+                            <Setter Property="Data" TargetName="path1" Value="M 0,2 L 0,11 L 12,11 L 12,2 Z M 2,8 L 10,8 M 7,4 L 9,4 L 9,6 L 7,6 Z" />
+                        </Trigger>
+                        <Trigger Property="ButtonType" Value="Encrypted">
+                            <Setter Property="Data" TargetName="path1" Value="M 1,1 L 1,6 M 4,1.5 L 8,1.5 L 8,5.5 L 4,5.5 Z M 11,1 L 11,6 M 1,7.5 L 5,7.5 L 5,11.5 L 1,11.5 Z M 8,7 L 8,12 M 11,7 L 11,12 " />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ButtonSize" Value="Large">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle SnapsToDevicePixels="true" 
+                               Stroke="Black" 
+                               StrokeDashArray="1 2" 
+                               StrokeThickness="1" 
+                               Margin="2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OptionButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Grid>
+                        <Border x:Name="OuterBd" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="1" 
+                                Background="{TemplateBinding Background}">
+                            <Border x:Name="InnerBd" 
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    Margin="{TemplateBinding Padding}" 
+                                    VerticalAlignment="{TemplateBinding 
+                                    VerticalContentAlignment}" 
+                                    RecognizesAccessKey="True"
+                                    TextElement.Foreground="{TemplateBinding Foreground}"/>
+                            </Border>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="IsChecked" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="OuterBd" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ButtonBackgroundHoverBrush}"/>
+                            <Setter TargetName="InnerBd" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ButtonBackgroundHoverBrush}"/>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource ButtonSelectedTextBrush}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="OuterBd" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ButtonBackgroundPressedBrush}"/>
+                            <Setter TargetName="InnerBd" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ButtonBackgroundPressedBrush}"/>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource ButtonSelectedTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="OuterBd" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ButtonBackgroundPressedBrush}"/>
+                            <Setter TargetName="InnerBd" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ButtonBackgroundPressedBrush}"/>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource ButtonSelectedTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="OuterBd" 
+                                    Property="BorderBrush" 
+                                    Value="{DynamicResource ButtonBackgroundHoverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="InnerBd" 
+                                    Property="TextBlock.Foreground" 
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                            <Setter Property="Foreground" 
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Geometry x:Key="DownArrow">M 4 2 L 8 8 L 12 2 Z</Geometry>
+
+    <Style TargetType="{x:Type pn:DropDownButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:DropDownButton}">
+                    <Grid>
+                        <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1">
+                            <Grid Margin="{TemplateBinding Padding}" 
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Grid.Column="0"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                    RecognizesAccessKey="True"
+                                    TextElement.Foreground="{TemplateBinding Foreground}"/>
+                                <Path x:Name="downPath" 
+                                          Grid.Column="1" 
+                                          VerticalAlignment="Center" 
+                                          HorizontalAlignment="Center" 
+                                          Fill="{TemplateBinding Foreground}"
+                                          Data="{StaticResource DownArrow}"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ToolbarButtonHoverBrush}"/>
+                            <!--<Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource ToolbarButtonSelectedBorderBrush}"/>-->
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ToolbarButtonSelectedBackgroundBrush}"/>
+                            <Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource ToolbarButtonSelectedBorderBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="pn:PNUtils.IsBigIcon" Value="true">
+                <Setter Property="Width" Value="44"/>
+                <Setter Property="Height" Value="36"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type pn:ToolbarButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:ToolbarButton}">
+                    <Grid>
+                        <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1">
+                            <ContentPresenter 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    Margin="{TemplateBinding Padding}" 
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                    RecognizesAccessKey="True"
+                                    TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ToolbarButtonHoverBrush}"/>
+                            <Setter TargetName="Border"
+                                    Property="BorderThickness"
+                                    Value="1"/>
+                            <!--<Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource ToolbarButtonSelectedBorderBrush}"/>-->
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ToolbarButtonSelectedBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="pn:PNUtils.IsBigIcon" Value="true">
+                <Setter Property="Width" Value="36"/>
+                <Setter Property="Height" Value="36"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ToolbarSeparator" TargetType="Separator">
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Margin" Value="1,3,1,3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Border BorderBrush="{DynamicResource StatusBarSeparatorBrush}"
+	                  BorderThickness="1"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type pn:ToolbarToggleButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:ToolbarToggleButton}">
+                    <Grid>
+                        <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1">
+                            <ContentPresenter 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    Margin="{TemplateBinding Padding}" 
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                    RecognizesAccessKey="True"
+                                    TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ToolbarButtonHoverBrush}"/>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource ButtonSelectedTextBrush}"/>
+                            <!--<Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource ToolbarButtonSelectedBorderBrush}"/>-->
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="Border" 
+                                    Property="Background" 
+                                    Value="{DynamicResource ToolbarButtonSelectedBackgroundBrush}"/>
+                            <Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource ToolbarButtonSelectedBorderBrush}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="true"/>
+                                <Condition Property="IsEnabled" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" 
+                                    Property="Background" 
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                            <Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="pn:PNUtils.IsBigIcon" Value="true">
+                <Setter Property="Width" Value="36"/>
+                <Setter Property="Height" Value="36"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type pn:SmallButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Foreground" Value="{DynamicResource SmallButtonBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="MaxWidth" Value="16"/>
+        <Setter Property="MaxHeight" Value="16"/>
+        <Setter Property="MinWidth" Value="16"/>
+        <Setter Property="MinHeight" Value="16"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:SmallButton}">
+                    <Border Background="{TemplateBinding Background}">
+                        <Path x:Name="path" Stroke="{DynamicResource SmallButtonBrush}" Fill="{x:Null}" Data="M8,0 L8,16 M0,8 L16,8" StrokeThickness="4"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                        </Trigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Add"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Edit"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Remove"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Apply"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Clean"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                        </MultiTrigger>-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Run"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                            <Setter TargetName="path"
+                                    Property="Fill"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="User"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                            <Setter TargetName="path"
+                                    Property="Fill"
+                                    Value="{DynamicResource SmallButtonHoverBrush}"/>
+                        </MultiTrigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                        </Trigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Add"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Edit"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Remove"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Apply"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Clean"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                        </MultiTrigger>-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Run"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                            <Setter TargetName="path"
+                                    Property="Fill"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="true"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="User"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                            <Setter TargetName="path"
+                                    Property="Fill"
+                                    Value="{DynamicResource SmallButtonPressewdBrush}"/>
+                        </MultiTrigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </Trigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Add"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Edit"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Remove"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Apply"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Clean"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </MultiTrigger>-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Run"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                            <Setter TargetName="path"
+                                    Property="Fill"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="User"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Stroke"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                            <Setter TargetName="path"
+                                    Property="Fill"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="false"/>
+                                <Condition Property="IsPressed" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="Run"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Fill"
+                                    Value="{DynamicResource SmallButtonBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="false"/>
+                                <Condition Property="IsPressed" Value="false"/>
+                                <Condition Property="pn:PNUtils.SmallButtonType" Value="User"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="path"
+                                    Property="Fill"
+                                    Value="{DynamicResource SmallButtonBrush}"/>
+                        </MultiTrigger>
+
+                        <Trigger Property="pn:PNUtils.SmallButtonType" Value="Edit">
+                            <Setter TargetName="path" Property="Data" Value="M0,0 L0,16 L16,16 L16,8 M0,0 L8,0 M16,0 L6,10"/>
+                            <Setter TargetName="path" Property="StrokeStartLineCap" Value="Square"/>
+                            <Setter TargetName="path" Property="StrokeEndLineCap" Value="Triangle"/>
+                        </Trigger>
+                        <Trigger Property="pn:PNUtils.SmallButtonType" Value="Remove">
+                            <Setter TargetName="path" Property="Data" Value="M1,1 L15,15 M15,1 L1,15"/>
+                        </Trigger>
+                        <Trigger Property="pn:PNUtils.SmallButtonType" Value="Apply">
+                            <Setter TargetName="path" Property="Data" Value="M1.5,8 L6.5,13 L14.5,1"/>
+                        </Trigger>
+                        <Trigger Property="pn:PNUtils.SmallButtonType" Value="Clean">
+                            <Setter TargetName="path" Property="Data" Value="M1,1 L15,1 L13,15 L3,15 Z M6,4 L6,12 M10,4 L10,12"/>
+                            <Setter TargetName="path" Property="StrokeThickness" Value="2"/>
+                        </Trigger>
+                        <Trigger Property="pn:PNUtils.SmallButtonType" Value="Run">
+                            <Setter TargetName="path" Property="Data" Value="M1,1 L15,8 L1,15 Z"/>
+                            <Setter TargetName="path" Property="StrokeThickness" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="pn:PNUtils.SmallButtonType" Value="User">
+                            <Setter TargetName="path" Property="Data" Value="M0,16 A8,6 180 1 1 16,16 Z M8,2 A4,4 180 1 1 8,10 M8,2 A4,4 180 1 0 8,10"/>
+                            <Setter TargetName="path" Property="StrokeThickness" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type pn:FolderButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Height" Value="56"/>
+        <Setter Property="Width" Value="56"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:FolderButton}">
+                    <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1">
+                        <ContentPresenter 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    Margin="{TemplateBinding Padding}" 
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                    RecognizesAccessKey="True"
+                                    TextElement.Foreground="{TemplateBinding Foreground}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource RadioBorderPressedBrush}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="true"/>
+                                <Condition Property="IsEnabled" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource RadioDisabledBorderBrush}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Storyboard x:Key="ThumbnailEnter">
+        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleX)" Duration="0:0:0.15" To="{StaticResource ThumbFullGrow}">
+            <DoubleAnimation.EasingFunction>
+                <SineEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleY)" Duration="0:0:0.15" To="{StaticResource ThumbFullGrow}">
+            <DoubleAnimation.EasingFunction>
+                <SineEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+    </Storyboard>
+
+    <Storyboard x:Key="ThumbnailLeave">
+        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleX)" Duration="0:0:0.15">
+            <DoubleAnimation.EasingFunction>
+                <SineEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleY)" Duration="0:0:0.15">
+            <DoubleAnimation.EasingFunction>
+                <SineEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+    </Storyboard>
+    
+    <Storyboard x:Key="HalfsSizeGrow">
+        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleX)" Duration="0:0:0.3" To="{StaticResource ThumbHalfGrow}">
+            <DoubleAnimation.EasingFunction>
+                <SineEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleY)" Duration="0:0:0.3" To="{StaticResource ThumbHalfGrow}">
+            <DoubleAnimation.EasingFunction>
+                <SineEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+    </Storyboard>
+
+    <Storyboard x:Key="NormalSizeGrow">
+        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleX)" Duration="0:0:0.3">
+            <DoubleAnimation.EasingFunction>
+                <SineEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleY)" Duration="0:0:0.3">
+            <DoubleAnimation.EasingFunction>
+                <SineEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+    </Storyboard>
+
+    <Style TargetType="{x:Type pn:ThumbnailButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="96"/>
+        <Setter Property="Width" Value="56"/>
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    <RotateTransform Angle="0"/>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pn:ThumbnailButton}">
+                    <Border x:Name="ThumbBorder" Padding="2" Background="Transparent">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="{Binding ActualWidth, ElementName=ThumbBorder}"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding ThumbnailName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type pn:ThumbnailButton}}}"/>
+                            <!--<Border Padding="2,0,2,0" Grid.Row="1" Background="{DynamicResource ToolbarBackgrounsBrush}">-->
+                            <Border x:Name="BorderSource" Grid.Row="1" Background="{Binding ThumbnailBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type pn:ThumbnailButton}}}"/>
+                            <!--</Border>-->
+                            <Rectangle Grid.Row="2" RenderTransformOrigin="1,0.5" Fill="{Binding ThumbnailBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type pn:ThumbnailButton}}}">
+                                <!--<Rectangle.Fill>
+                                    <VisualBrush Visual="{Binding ElementName=BorderSource}"/>
+                                </Rectangle.Fill>-->
+                                <Rectangle.OpacityMask>
+                                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                        <GradientStop Color="Transparent" Offset="0.3"/>
+                                        <GradientStop Color="#99000000" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="-1"/>
+                                        <SkewTransform AngleX="30"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--<Style.Triggers>
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleX)" Duration="0:0:0.15" To="{StaticResource ThumbFullGrow}">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleY)" Duration="0:0:0.15" To="{StaticResource ThumbFullGrow}">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleX)" Duration="0:0:0.15">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="(LayoutTransform).(Children).[0].(ScaleTransform.ScaleY)" Duration="0:0:0.15">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>-->
+    </Style>
+    
+    <Style x:Key="GridLineHorz" TargetType="Rectangle">
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="StrokeThickness" Value="0.75"/>
+        <Setter Property="Stroke" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="Opacity" Value="0.25"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Stroke" Value="{DynamicResource DisabledTextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="GridLineVert" TargetType="Rectangle">
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="StrokeThickness" Value="0.75"/>
+        <Setter Property="Stroke" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="Opacity" Value="0.25"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Stroke" Value="{DynamicResource DisabledTextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

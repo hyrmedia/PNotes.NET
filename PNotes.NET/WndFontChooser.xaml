@@ -1,0 +1,149 @@
+﻿<Window x:Class="PNotes.NET.WndFontChooser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        Name="DlgFontChooser"
+        Style="{DynamicResource CustomWindowStyle}"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Title="WndFontChooser" 
+        WindowStartupLocation="CenterOwner"
+        Height="480" 
+        Width="480"
+        Loaded="DlgFontChooser_Loaded"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}">
+    <Window.Resources>
+        <x:Array Type="sys:Double" x:Key="Sizes">
+            <sys:Double>6</sys:Double>
+            <sys:Double>7</sys:Double>
+            <sys:Double>8</sys:Double>
+            <sys:Double>9</sys:Double>
+            <sys:Double>10</sys:Double>
+            <sys:Double>11</sys:Double>
+            <sys:Double>12</sys:Double>
+            <sys:Double>14</sys:Double>
+            <sys:Double>16</sys:Double>
+            <sys:Double>18</sys:Double>
+            <sys:Double>19</sys:Double>
+            <sys:Double>20</sys:Double>
+            <sys:Double>22</sys:Double>
+            <sys:Double>24</sys:Double>
+            <sys:Double>36</sys:Double>
+            <sys:Double>48</sys:Double>
+            <sys:Double>72</sys:Double>
+        </x:Array>
+        <CollectionViewSource x:Key="SortedItems" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}}">
+            <CollectionViewSource.SortDescriptions>
+                <componentModel:SortDescription PropertyName="Source" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <ObjectDataProvider ObjectInstance="{x:Type Colors}" 
+                            MethodName="GetProperties" 
+                            x:Key="ColorsProperties" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.65*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.33*"/>
+            <ColumnDefinition Width="0.33*"/>
+            <ColumnDefinition Width="0.33*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Name="grpNames" Header="Font name" Margin="2">
+            <ListBox Name="lstFonts" ItemsSource="{Binding Source={StaticResource SortedItems}}"/>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="1" Name="grpWeight" Header="Font weight" Margin="2">
+            <ListBox Name="lstWeight">
+                <x:Static Member="FontWeights.Black"/>
+                <x:Static Member="FontWeights.Bold"/>
+                <x:Static Member="FontWeights.DemiBold"/>
+                <x:Static Member="FontWeights.ExtraBlack"/>
+                <x:Static Member="FontWeights.ExtraBold"/>
+                <x:Static Member="FontWeights.ExtraLight"/>
+                <x:Static Member="FontWeights.Heavy"/>
+                <x:Static Member="FontWeights.Light"/>
+                <x:Static Member="FontWeights.Medium"/>
+                <x:Static Member="FontWeights.Normal"/>
+                <x:Static Member="FontWeights.Regular"/>
+                <x:Static Member="FontWeights.SemiBold"/>
+                <x:Static Member="FontWeights.Thin"/>
+                <x:Static Member="FontWeights.UltraBlack"/>
+                <x:Static Member="FontWeights.UltraBold"/>
+                <x:Static Member="FontWeights.UltraLight"/>
+            </ListBox>
+        </GroupBox>
+        <GroupBox Name="grpStyle" Header="Font style" Grid.Row="1" Grid.Column="1" Margin="2">
+            <ListBox Name="lstStyle">
+                <x:Static Member="FontStyles.Normal"/>
+                <x:Static Member="FontStyles.Italic"/>
+                <x:Static Member="FontStyles.Oblique"/>
+            </ListBox>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="2" Name="grpSize" Header="Font size" Margin="2">
+            <ListBox Name="lstSizes" ItemsSource="{StaticResource Sizes}"/>
+        </GroupBox>
+        <GroupBox Name="grpStretch" Grid.Row="1" Grid.Column="2" Header="Font stretch" Margin="2">
+            <ListBox Name="lstStretch" Height="100">
+                <x:Static Member="FontStretches.Condensed"/>
+                <x:Static Member="FontStretches.Expanded"/>
+                <x:Static Member="FontStretches.ExtraCondensed"/>
+                <x:Static Member="FontStretches.ExtraExpanded"/>
+                <x:Static Member="FontStretches.Normal"/>
+                <x:Static Member="FontStretches.SemiCondensed"/>
+                <x:Static Member="FontStretches.SemiExpanded"/>
+                <x:Static Member="FontStretches.UltraCondensed"/>
+                <x:Static Member="FontStretches.UltraExpanded"/>
+            </ListBox>
+        </GroupBox>
+        <GroupBox Name="grpSample" Header="Sample" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="2">
+            <TextBlock Name="lblFontSample" 
+                   TextAlignment="Center" 
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Center"
+                   Text="The quick brown fox jumps over the lazy dog" 
+                   Padding="2,36,2,36"
+                   TextWrapping="Wrap"
+                   FontFamily="{Binding ElementName=lstFonts, Path=SelectedItem}"
+                   FontSize="{Binding ElementName=lstSizes, Path=SelectedItem}"
+                   FontStyle="{Binding ElementName=lstStyle, Path=SelectedItem}"
+                   FontWeight="{Binding ElementName=lstWeight, Path=SelectedItem}"
+                   FontStretch="{Binding ElementName=lstStretch, Path=SelectedItem}">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{Binding ElementName=cboColors, Path=SelectedValue}"/>
+                </TextBlock.Foreground>
+            </TextBlock>
+        </GroupBox>
+        <GroupBox Name="grpColors" Header="Color" Grid.Row="3" Grid.Column="0" Margin="2">
+            <ComboBox Name="cboColors" 
+                      SelectedValuePath="Name" 
+                      ItemsSource="{Binding Source={StaticResource ColorsProperties}}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="2,2,4,2" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </GroupBox>
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="cmdOK" Content="OK" Margin="4" MinWidth="75" IsDefault="True" MinHeight="23" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Click="cmdOK_Click"/>
+            <Button Name="cmdCancel" Content="Cancel" Margin="4" MinWidth="75" IsCancel="True" MinHeight="23" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</Window>

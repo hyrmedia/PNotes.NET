@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SQLiteWrapper</name>
+    </assembly>
+    <members>
+        <member name="T:SQLiteWrapper.SQLiteDataException">
+            <summary>
+            Represents error that occurs during SQLite operations
+            </summary>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataException.#ctor(System.Exception,System.String)">
+            <summary>
+            Initializes a new instance of SQLiteDataException
+            </summary>
+            <param name="baseException">Base exception</param>
+            <param name="sqliteMessage">Custom error message</param>
+        </member>
+        <member name="P:SQLiteWrapper.SQLiteDataException.SQLiteMessage">
+            <summary>
+            Gets or sets custom error message
+            </summary>
+        </member>
+        <member name="T:SQLiteWrapper.SQLiteParameterData">
+            <summary>
+            Represents SQLite parameter data
+            </summary>
+        </member>
+        <member name="P:SQLiteWrapper.SQLiteParameterData.ParameterRowVersion">
+            <summary>
+            Describes the version of System.Data.DataRow
+            </summary>
+        </member>
+        <member name="P:SQLiteWrapper.SQLiteParameterData.ParameterValue">
+            <summary>
+            Gets or set parameter value
+            </summary>
+        </member>
+        <member name="P:SQLiteWrapper.SQLiteParameterData.ParameterSize">
+            <summary>
+            Gets or set parameter size
+            </summary>
+        </member>
+        <member name="P:SQLiteWrapper.SQLiteParameterData.ParameterType">
+            <summary>
+            Gets or set parameter type
+            </summary>
+        </member>
+        <member name="P:SQLiteWrapper.SQLiteParameterData.ParameterSourceColumn">
+            <summary>
+            Gets or set parameter source column
+            </summary>
+        </member>
+        <member name="P:SQLiteWrapper.SQLiteParameterData.ParameterName">
+            <summary>
+            Gets or set parameter name
+            </summary>
+        </member>
+        <member name="T:SQLiteWrapper.SQLiteDataObject">
+            <summary>
+            Represents wrapper object for various SQLite operations
+            </summary>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of SQLiteDataObject object
+            </summary>
+            <param name="connectionString">Connection string</param>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.CheckAndCreateDatabase(System.String)">
+            <summary>
+            Static method which checks whether database file exists and creates it if necessary
+            </summary>
+            <param name="dbPath">Database file name</param>
+            <returns>Connection string for created/existing database</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.GetSchema(System.String)">
+            <summary>
+            Returns schema for specified collection
+            </summary>
+            <param name="collectionName">Collection name</param>
+            <returns>Schema for specified collection</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.GetScalar(System.String)">
+            <summary>
+            Executes SQL query and returns scalar value
+            </summary>
+            <param name="sqlQuery">SQL query</param>
+            <returns>Scalar value</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.GetScalarInTransaction(System.String)">
+            <summary>
+            Executes SQL query in transaction and returns scalar value
+            </summary>
+            <param name="sqlQuery">SQL query</param>
+            <returns>Scalar value</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.FillDataTable(System.String)">
+            <summary>
+            Fills DataTable object by executing SQL query and returns it
+            </summary>
+            <param name="sqlQuery">SQL query to execute</param>
+            <returns>DataTable object</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.CompactDatabase">
+            <summary>
+            Reclaims empty space and reduces the size of the database file
+            </summary>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.Execute(System.String)">
+            <summary>
+            Executes SQL query
+            </summary>
+            <param name="sqlQuery">SQL query to execute</param>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.ExecuteCommand(System.String,System.Collections.Generic.IEnumerable{SQLiteWrapper.SQLiteParameterData})">
+            <summary>
+            Executes command
+            </summary>
+            <param name="sqlQuery">SQL query to execute</param>
+            <param name="parameters">List of command's parameters data</param>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.ExecuteCommandInTransaction(System.String,System.Collections.Generic.IEnumerable{SQLiteWrapper.SQLiteParameterData})">
+            <summary>
+            Executes command in transaction
+            </summary>
+            <param name="sqlQuery">SQL query to execute</param>
+            <param name="parameters">List of command's parameters data</param>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.ExecuteInTransaction(System.String)">
+            <summary>
+            Executes SQL query in transaction
+            </summary>
+            <param name="sqlQuery">SQL query to execute</param>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.BeginTransaction">
+            <summary>
+            Begins transaction
+            </summary>
+            <returns>True if transaction started successfully, false otherwise</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.CommitTransaction">
+            <summary>
+            Commits transaction
+            </summary>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.RollbackTransaction">
+            <summary>
+            Rolls transaction back
+            </summary>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.TableExists(System.String)">
+            <summary>
+            Checks whether table with specified name exists in database
+            </summary>
+            <param name="tableName">Table name</param>
+            <returns>True if table with specified name exists in database, false otherwise</returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteDataObject.Dispose">
+            <summary>
+            Releases all resources used by SQLiteDataObject
+            </summary>
+        </member>
+        <member name="P:SQLiteWrapper.SQLiteDataObject.ConnectionString">
+            <summary>
+            Returns connection string of current connection
+            </summary>
+        </member>
+    </members>
+</doc>

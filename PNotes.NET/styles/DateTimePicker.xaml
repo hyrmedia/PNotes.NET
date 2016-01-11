@@ -1,0 +1,371 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:pnDateTimePicker="clr-namespace:PNDateTimePicker;assembly=PNDateTimePicker">
+
+    <ControlTemplate x:Key="DropDownButtonTemplate" TargetType="{x:Type Button}">
+        <Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0" />
+                        <VisualTransition GeneratedDuration="0:0:0.1"
+                                    To="MouseOver" />
+                        <VisualTransition GeneratedDuration="0:0:0.1"
+                                    To="Pressed" />
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundGradient" 
+                                                           Storyboard.TargetProperty="(Panel.Background)">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0"
+                                                        Value="{DynamicResource DateTimePickerButtonBackgroundHoverBrush}" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundGradient" 
+                                                               Storyboard.TargetProperty="(Panel.Background)">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" 
+                                                            Value="{DynamicResource DateTimePickerButtonBackgroundPressedBrush}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid Background="{DynamicResource DateTimePickerButtonBackgroundBrush}"
+                                  FlowDirection="LeftToRight"
+                                  HorizontalAlignment="Center"
+                                  Height="20"
+                                  Margin="0"
+                                  VerticalAlignment="Center"
+                                  Width="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="20*" />
+                </Grid.RowDefinitions>
+                <Border x:Name="Highlight"
+                                        BorderThickness="1"
+                                        Grid.ColumnSpan="4"
+                                        CornerRadius="0,0,1,1"
+                                        Margin="-1"
+                                        Opacity="1"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="4" 
+                                        BorderBrush="{DynamicResource DateTimePickerButtonBorderBrush}"/>
+                <Border x:Name="BackgroundBd"
+                                        BorderBrush="{DynamicResource DateTimePickerButtonBorderBrush}"
+                                        BorderThickness="1"
+                                        Grid.ColumnSpan="4"
+                                        CornerRadius=".5"
+                                        Margin="0,-1,0,0"
+                                        Opacity="1"
+                                        Grid.Row="1"
+                                        Grid.RowSpan="3" 
+                                        Background="{DynamicResource DateTimePickerButtonBackgroundBrush}" />
+                <Border x:Name="BackgroundGradient"
+                                        BorderBrush="{DynamicResource DateTimePickerButtonBorderBrush}"
+                                        BorderThickness="1"
+                                        Grid.ColumnSpan="4"
+                                        CornerRadius=".5"
+                                        Margin="0,-1,0,0"
+                                        Opacity="1"
+                                        Grid.Row="1"
+                                        Grid.RowSpan="3" 
+                                        Background="{DynamicResource DateTimePickerButtonBackgroundBrush}"/>
+                <Rectangle Grid.ColumnSpan="4"
+                                           Grid.RowSpan="1"
+                                           StrokeThickness="1"
+                                           Stroke="{DynamicResource DateTimePickerBorderBrush}"
+                                           Fill="{DynamicResource DateTimePickerButtonUpperBackgroundBrush}"/>
+                <Path Fill="{DynamicResource DateTimePickerButtonPictureBrush}" 
+                                      Grid.Row="1" 
+                                      Grid.Column="0" 
+                                      Grid.RowSpan="3" 
+                                      Grid.ColumnSpan="4" 
+                                      HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center" 
+                                      RenderTransformOrigin="0.5,0.5" 
+                                      Margin="4,3,4,3" 
+                                      Stretch="Fill" 
+                                      Data="{DynamicResource Number15Geometry}" />
+                <Ellipse Grid.ColumnSpan="4"
+                                         Fill="{DynamicResource DateTimePickerButtonEllipseBrush}"
+                                         HorizontalAlignment="Center"
+                                         Height="3"
+                                         StrokeThickness="0"
+                                         VerticalAlignment="Center"
+                                         Width="3" />
+                <!--<Border x:Name="DisabledVisual"
+                                        BorderBrush="#B2FFFFFF"
+                                        BorderThickness="1"
+                                        Grid.ColumnSpan="4"
+                                        CornerRadius="0,0,.5,.5"
+                                        Opacity="0"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="4" />-->
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type pnDateTimePicker:DateTimePicker}">
+        <Setter Property="MinHeight" Value="21"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Once"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="{DynamicResource DateTimePickerBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource NormalTextBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DateTimePickerBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pnDateTimePicker:DateTimePicker}">
+                    <Border x:Name="PART_Border" Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{DynamicResource CommonCornerRadius}"
+                            TextBlock.Foreground="{TemplateBinding Foreground}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="PART_Panel" 
+                                        Grid.Column="0" 
+                                        Orientation="Horizontal" 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center">
+                            </StackPanel>
+                            <Border x:Name="empty" 
+                                    Grid.Column="0" 
+                                    Background="{TemplateBinding Background}"
+                                    Visibility="Collapsed"/>
+                            <Border x:Name="strike" Grid.Column="0" BorderBrush="{DynamicResource DateTimePickerStrikeBrush}" BorderThickness="0,0,0,0.7" Height="1" Visibility="Hidden" VerticalAlignment="Center" Margin="16,0,16,0"/>
+                            <Border x:Name="PART_NullBorder" 
+                                    Grid.Column="0"
+                                    Background="{TemplateBinding Background}"
+                                    Visibility="Collapsed"/>
+                            <Button x:Name="PART_NowButton"
+                                    Grid.Column="1"
+                                    Focusable="False"
+                                    Height="17"
+                                    Padding="1,0,1,0"
+                                    Margin="2,0,2,0"
+                                    VerticalAlignment="Center"
+                                    Content="Now"
+                                    Visibility="Collapsed"/>
+                            <Button x:Name="PART_Button" 
+                                    Grid.Column="2"
+                                    Width="19"
+                                    Height="19"
+                                    Focusable="False"
+                                    Template="{StaticResource DropDownButtonTemplate}"/>
+                            <Rectangle x:Name="rect" 
+                                       Grid.Column="2" 
+                                       Fill="#A5FFFFFF" 
+                                       Grid.Row="0" 
+                                       Width="19" 
+                                       Height="19" 
+                                       Opacity="1" 
+                                       Visibility="Hidden"/>
+                            <Grid x:Name="PART_DisabledVisual" 
+                                  Grid.ColumnSpan="3" 
+                                  Grid.Column="0" 
+                                  IsHitTestVisible="False" 
+                                  Opacity="0" 
+                                  Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <!--<Rectangle Grid.Column="0" Fill="#A5FFFFFF" RadiusY="1" Grid.Row="0" RadiusX="1"/>-->
+                                <!--<Rectangle Grid.Column="1" Fill="#A5FFFFFF" Height="18" Margin="3,0,3,0" RadiusY="1" Grid.Row="0" RadiusX="1" Width="19"/>-->
+                                <Popup x:Name="PART_Popup" 
+                                       AllowsTransparency="True" 
+                                       Placement="Bottom"
+                                       PlacementTarget="{Binding ElementName=PART_Border}" 
+                                       StaysOpen="False"
+                                       HorizontalOffset="0"
+                                       PopupAnimation="Scroll">
+                                    <Calendar x:Name="PART_Calendar"
+                                              SelectionMode="SingleDate"/>
+                                </Popup>
+                                <Popup x:Name="PART_InfoPopup"
+                                       AllowsTransparency="True"
+                                       Placement="Top"
+                                       VerticalOffset="-1"
+                                       PlacementTarget="{Binding ElementName=PART_Border}"
+                                       StaysOpen="False"
+                                       PopupAnimation="Slide">
+                                    <Border x:Name="PART_InfoBorder" 
+                                            Padding="2"
+                                            BorderBrush="{DynamicResource DateTimePickerBorderBrush}" 
+                                            BorderThickness="1" 
+                                            CornerRadius="5"
+                                            Background="{DynamicResource DateTimePickerDropDownBackgroundBrush}">
+                                        <Grid x:Name="PART_InfoGrid"/>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsNowButtonVisible" Value="true">
+                            <Setter Property="Visibility"
+                                    TargetName="PART_NowButton"
+                                    Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsOpen"
+                                 SourceName="PART_Popup"
+                                 Value="true">
+                            <Setter Property="Width"
+                                    TargetName="PART_Calendar">
+                                <Setter.Value>
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=pnDateTimePicker:DateTimePicker}" Mode="OneWay"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                                 SourceName="PART_Button"
+                                 Value="true">
+                            <Setter TargetName="PART_Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource DateTimePickerBorderHoverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource DisabledTextBrush}"/>
+                            <Setter TargetName="rect"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Format" Value="ShortTime">
+                            <Setter TargetName="PART_Button"
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
+                            <Setter TargetName="rect"
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Format" Value="LongTime">
+                            <Setter TargetName="PART_Button"
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
+                            <Setter TargetName="rect"
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Status" Value="Error">
+                            <Setter TargetName="PART_Border"
+                                    Property="Background">
+                                <Setter.Value>
+                                    <Binding Path="ErrorBackground" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=pnDateTimePicker:DateTimePicker}" Mode="OneWay"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="Status" Value="DayOff">
+                            <Setter TargetName="PART_Border"
+                                    Property="Background">
+                                <Setter.Value>
+                                    <Binding Path="DayOffBackground" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=pnDateTimePicker:DateTimePicker}" Mode="OneWay"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="PART_Panel" Property="TextBlock.Foreground">
+                                <Setter.Value>
+                                    <Binding Path="DayOffForeground" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=pnDateTimePicker:DateTimePicker}" Mode="OneWay"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="Status" Value="Significant">
+                            <Setter TargetName="PART_Border"
+                                    Property="Background">
+                                <Setter.Value>
+                                    <Binding Path="SignificantDateBackground" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=pnDateTimePicker:DateTimePicker}" Mode="OneWay"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="PART_Panel" Property="TextBlock.Foreground">
+                                <Setter.Value>
+                                    <Binding Path="SignificantDateForeground" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=pnDateTimePicker:DateTimePicker}" Mode="OneWay"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="PART_InfoPopup"
+                                    Property="IsOpen"
+                                    Value="true"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Format" Value="ShortDate"/>
+                                <Condition Property="IsBlackoutDate" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="strike"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Format" Value="LongDate"/>
+                                <Condition Property="IsBlackoutDate" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="strike"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Format" Value="ShortDateAndShortTime"/>
+                                <Condition Property="IsBlackoutDate" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="strike"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Format" Value="ShortDateAndLongTime"/>
+                                <Condition Property="IsBlackoutDate" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="strike"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Format" Value="LongDateAndShortTime"/>
+                                <Condition Property="IsBlackoutDate" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="strike"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Format" Value="LongDateAndLongTime"/>
+                                <Condition Property="IsBlackoutDate" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="strike"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEmpty" Value="true">
+                            <Setter TargetName="PART_NullBorder"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

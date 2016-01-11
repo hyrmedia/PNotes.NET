@@ -1,0 +1,78 @@
+﻿<Window x:Class="PNotes.NET.WndContacts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:pnipBox="clr-namespace:PNIPBox;assembly=PNIPBox"
+        Title="WndContacts" 
+        Style="{DynamicResource CustomWindowStyle}"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        Height="320" 
+        Width="300"
+        Name="DlgContacts"
+        TextElement.FontFamily="{Binding FontFamily}"
+        TextElement.FontSize="{Binding FontSize}"
+        TextElement.FontStretch="{Binding FontStretch}"
+        TextElement.FontStyle="{Binding FontStyle}"
+        TextElement.FontWeight="{Binding FontWeight}"
+        Loaded="DlgContacts_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Name="lblContactName" Margin="4" Text="Contact name"/>
+        <TextBox Name="txtContactName" Grid.Row="1" Margin="4" HorizontalAlignment="Stretch" TextChanged="txtContactName_TextChanged"/>
+        <RadioButton Name="optUseCompName" Grid.Row="2" Margin="4" Content="Use computer name" Checked="optUseCompName_Checked" Unchecked="optUseCompName_Unchecked"/>
+        <DockPanel Grid.Row="3" HorizontalAlignment="Stretch">
+            <Button Name="cmdCompNames" Margin="4" DockPanel.Dock="Right" IsEnabled="{Binding IsChecked, ElementName=optUseCompName}" Click="cmdCompNames_Click">
+                <Image Source="{DynamicResource searchweb}"/>
+            </Button>
+            <TextBox Name="txtCompName" Margin="4" IsEnabled="{Binding IsChecked, ElementName=optUseCompName}" TextChanged="txtCompName_TextChanged"/>
+        </DockPanel>
+        <RadioButton Name="optUseAddress" Grid.Row="4" Margin="4" Content="Use IP address" VerticalAlignment="Center" Checked="optUseAddress_Checked" Unchecked="optUseAddress_Unchecked"/>
+        <pnipBox:IpBox Name="ipaAddress" Grid.Row="5" Margin="4" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="{Binding IsChecked, ElementName=optUseAddress}" FieldChanged="ipaAddress_FieldChanged">
+            <pnipBox:IpBox.Width>
+                <Binding Path="ActualWidth" ElementName="DlgContacts" Converter="{StaticResource SizeRelateConverter}">
+                    <Binding.ConverterParameter>
+                        <sys:Double>0.7</sys:Double>
+                    </Binding.ConverterParameter>
+                </Binding>
+            </pnipBox:IpBox.Width>
+        </pnipBox:IpBox>
+        <TextBlock Name="lblGroups" Grid.Row="6" Margin="4" Text="Groups" VerticalAlignment="Center"/>
+        <ComboBox Name="cboGroups" Grid.Row="7" Margin="4" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <ComboBox.Width>
+                <Binding Path="ActualWidth" ElementName="DlgContacts" Converter="{StaticResource SizeRelateConverter}">
+                    <Binding.ConverterParameter>
+                        <sys:Double>0.7</sys:Double>
+                    </Binding.ConverterParameter>
+                </Binding>
+            </ComboBox.Width>
+        </ComboBox>
+        <Grid Grid.Row="8" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="cmdOK" Content="OK" Margin="4" MinWidth="75" IsEnabled="False" IsDefault="True" MinHeight="23" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Click="cmdOK_Click"/>
+            <Button Name="cmdCancel" Content="Cancel" Margin="4" MinWidth="75" IsCancel="True" MinHeight="23" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
+        <Popup Name="popComps" Grid.Row="3" IsOpen="False" AllowsTransparency="True" Placement="Bottom" VerticalOffset="1" PlacementTarget="{Binding ElementName=txtCompName}" Width="{Binding ElementName=txtCompName, Path=ActualWidth}" PopupAnimation="Slide" StaysOpen="False" Opened="popComps_Opened">
+            <Border Background="{Binding ElementName=txtCompName, Path=Background}" BorderBrush="{Binding ElementName=txtCompName, Path=BorderBrush}" BorderThickness="1" CornerRadius="3">
+                <StackPanel>
+                    <TextBlock Name="DlgLocalComps" Text="Local computers" Margin="4"/>
+                    <ListBox Name="lstComps" MaxHeight="120" Margin="4" MouseDoubleClick="lstComps_MouseDoubleClick" PreviewKeyDown="lstComps_PreviewKeyDown"/>
+                </StackPanel>
+            </Border>
+        </Popup>
+    </Grid>
+</Window>

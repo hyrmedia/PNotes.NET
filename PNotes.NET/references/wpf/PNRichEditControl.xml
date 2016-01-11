@@ -1,0 +1,559 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNRichEditControl</name>
+    </assembly>
+    <members>
+        <member name="T:PNRichEdit.REParaSpace">
+            <summary>
+            Specifies paragraph point for adding/removing space
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REParaSpace.Before">
+            <summary>
+            Space before paragraph
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REParaSpace.After">
+            <summary>
+            Space after paragraph
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.RELineSpacing">
+            <summary>
+            Specifies line spacing type
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RELineSpacing.Undefined">
+            <summary>
+            Space type undefined
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RELineSpacing.Single">
+            <summary>
+            Single space
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RELineSpacing.OneAndHalf">
+            <summary>
+            One-and-half space
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RELineSpacing.Double">
+            <summary>
+            Double space
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RELineSpacing.Triple">
+            <summary>
+            Triple space
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.RENumbering">
+            <summary>
+            Bullets numbering types
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumbering.PFN_NONE">
+            <summary>
+            no bullets
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumbering.PFN_BULLET">
+            <summary>
+            simple bullets
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumbering.PFN_ARABIC">
+            <summary>
+            arabic numbers
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumbering.PFN_LCLETTER">
+            <summary>
+            lower case letters
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumbering.PFN_UCLETTER">
+            <summary>
+            upper case letters
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumbering.PFN_LCROMAN">
+            <summary>
+            lower case roman numbers
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumbering.PFN_UCROMAN">
+            <summary>
+            upper case roman numbers
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.RENumberingStyle">
+            <summary>
+            Bullets numbering styles
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumberingStyle.PFNS_PAREN">
+            <summary>
+            one side parentheses
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumberingStyle.PFNS_PARENS">
+            <summary>
+            two sides parentheses
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumberingStyle.PFNS_PERIOD">
+            <summary>
+            period
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumberingStyle.PFNS_PLAIN">
+            <summary>
+            plain
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.RENumberingStyle.PFNS_NONUMBER">
+            <summary>
+            no number
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.REFDecorationStyle">
+            <summary>
+            Font decoration styles
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationStyle.CFE_NONE">
+            <summary>
+            no decoration
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationStyle.CFE_BOLD">
+            <summary>
+            bold
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationStyle.CFE_ITALIC">
+            <summary>
+            italic
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationStyle.CFE_UNDERLINE">
+            <summary>
+            underline
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationStyle.CFE_STRIKEOUT">
+            <summary>
+            strikeout
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationStyle.CFE_SUBSCRIPT">
+            <summary>
+            subscript
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationStyle.CFE_SUPERSCRIPT">
+            <summary>
+            superscript
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.REFDecorationMask">
+            <summary>
+            Font decoration masks
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationMask.CFM_BOLD">
+            <summary>
+            bold
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationMask.CFM_ITALIC">
+            <summary>
+            italic
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationMask.CFM_UNDERLINE">
+            <summary>
+            underline
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationMask.CFM_STRIKEOUT">
+            <summary>
+            strikeout
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationMask.CFM_SUBSCRIPT">
+            <summary>
+            subscript
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.REFDecorationMask.CFM_SUPERSCRIPT">
+            <summary>
+            superscript
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.PNRichEditBox">
+            <summary>
+            Represents a class inherited from Windows.RichTextBox
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.#ctor">
+            <summary>
+            Creates new instance of PNRichEditBox
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Processes Windows messages
+            </summary>
+            <param name="m">The Windows Message to process</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the OnMouseUp event
+            </summary>
+            <param name="mevent">A MouseEventArgs that contains the event data</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetMargins(System.Int16)">
+            <summary>
+            Sets left and right margins size of PNRichEditBox
+            </summary>
+            <param name="marginSize">Margin size</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetParagraphSpacing(PNRichEdit.REParaSpace,System.Int32)">
+            <summary>
+            Sets paragraph spacing of PNRichEditBox
+            </summary>
+            <param name="para">Paragraph side</param>
+            <param name="space">Space applied (in points, will be multiplied by 20 to get twips)</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetLineSpacing(PNRichEdit.RELineSpacing)">
+            <summary>
+            Sets line spacing of PNRichEditBox
+            </summary>
+            <param name="spacing">Line spacing type</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.GetLineSpacing">
+            <summary>
+            Gets line spacing of PNRichEditBox
+            </summary>
+            <returns>Line spacing of PNRichEditBox</returns>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.GetParagraphSpacing">
+            <summary>
+            Gets dictionary with values specified whether PNRichEditBox paragraph has space before and/or after
+            </summary>
+            <returns>Dictionary with values specified whether PNRichEditBox paragraph has space before and/or after</returns>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.CurrentBulletStyle">
+            <summary>
+            Gets current bullet style of PNRichEditBox
+            </summary>
+            <returns>Current bullet style of PNRichEditBox</returns>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.ClearBullets">
+            <summary>
+            Clears all bullets from PNRichEditBox
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetBullets(PNRichEdit.RENumbering,PNRichEdit.RENumberingStyle)">
+            <summary>
+            Sets bullets on PNRichEditBox using selected type, style and default indent (400 twips)
+            </summary>
+            <param name="numbering">Numbering type</param>
+            <param name="style">Bullets style</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetBullets(PNRichEdit.RENumbering,PNRichEdit.RENumberingStyle,System.Int16)">
+            <summary>
+            Sets bullets on PNRichEditBox using selected type, style and indent
+            </summary>
+            <param name="numbering">Numbering type</param>
+            <param name="style">Bullets style</param>
+            <param name="indent">Bullets indent (in twips)</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetIndent(System.Int32)">
+            <summary>
+            Sets paragraph indent
+            </summary>
+            <param name="indent">Paragraph indent (negative to decrease)</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetFontSize(System.Int32)">
+            <summary>
+            Sets font size of PNRichEditBox
+            </summary>
+            <param name="size">Font size</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.GetTextWidth(System.Int32,System.Int32)">
+            <summary>
+            Gets text width for specified positions
+            </summary>
+            <param name="start">Starting position of text</param>
+            <param name="end">Ending position of text</param>
+            <returns>Text width for specified positions</returns>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.GetFontSize">
+            <summary>
+            Gets current font size of PNRichEditBox
+            </summary>
+            <returns>Current font size</returns>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.GetFontName">
+            <summary>
+            Gets current font name of PNRichEditBox
+            </summary>
+            <returns>Current font name</returns>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetFontByFont(PNStaticFonts.LOGFONT)">
+            <summary>
+            Sets PNRichEditBox font using exact copy of logFont parameter
+            </summary>
+            <param name="logFont">Fonts.LOGFONT</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetFontByName(PNStaticFonts.LOGFONT)">
+            <summary>
+            Sets PNRichEditBox font using font name of logFont parameter
+            </summary>
+            <param name="logFont">Fonts.LOGFONT</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.SetFontDecoration(PNRichEdit.REFDecorationMask,PNRichEdit.REFDecorationStyle)">
+            <summary>
+            Sets PNRichEditBox font decoration
+            </summary>
+            <param name="mask">Decoration mask</param>
+            <param name="style">Decoration style</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.GetFontDecoration">
+            <summary>
+            Gets PNRichEditBox font decoration
+            </summary>
+            <returns>PNRichEditBox font decoration</returns>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.RemoveHighlightColor">
+            <summary>
+            Removes highlighting from PNRichEditBox
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.Print(System.String)">
+            <summary>
+            Prints content of PNRichEditBox
+            </summary>
+            <param name="name">The name of document</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.PrintToBitmap(System.Drawing.Bitmap)">
+            <summary>
+            Prints visible portion of PNRichEditBox to bitmap
+            </summary>
+            <param name="bitmap">Bitmap to print to</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.InsertImage(System.Drawing.Image)">
+            <summary>
+            Insert image into PNRichEditBox
+            </summary>
+            <param name="image">Image to insert</param>
+        </member>
+        <member name="F:PNRichEdit.PNRichEditBox.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PNRichEdit.PNRichEditBox.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="E:PNRichEdit.PNRichEditBox.PNREActivatedByMouse">
+            <summary>
+            Occurs when control is activated by mouse
+            </summary>
+        </member>
+        <member name="P:PNRichEdit.PNRichEditBox.CheckSpellingAutomatically">
+            <summary>
+            Specifies whether spell checking should be performed automatically
+            </summary>
+        </member>
+        <member name="P:PNRichEdit.PNRichEditBox.CreateParams">
+            <summary>
+            Gets the required creation parameters when the control handle is created
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.PNREActivatedByMouseEventHandler">
+            <summary>
+            PNREActivatedByMouse event handler
+            </summary>
+            <param name="sender">PNRichEditBox control generated the event</param>
+            <param name="e">PNREActivatedByMouseEventArgs</param>
+        </member>
+        <member name="T:PNRichEdit.PNREActivatedByMouseEventArgs">
+            <summary>
+            Represents agrument for PNREActivatedByMouse event
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.PNREActivatedByMouseEventArgs.#ctor(System.Drawing.Point)">
+            <summary>
+            Creates new instance of PNREActivatedByMouseEventArgs
+            </summary>
+            <param name="position">Cursor position in client coordinates</param>
+        </member>
+        <member name="P:PNRichEdit.PNREActivatedByMouseEventArgs.Position">
+            <summary>
+            Cursor position in client coordinates
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.Printing">
+            <summary>
+            Represents class for printing content of PNRichEditBox
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.Printing.#ctor(PNRichEdit.PNRichEditBox)">
+            <summary>
+            Creates new instance of Printing class
+            </summary>
+            <param name="edit">PNRichEditBox to print</param>
+        </member>
+        <member name="M:PNRichEdit.Printing.PrintToBitmap(System.Drawing.Bitmap)">
+            <summary>
+            Prints visible portion of PNRichEditBox to bitmap
+            </summary>
+            <param name="bitmap">Bitmap to print to</param>
+        </member>
+        <member name="M:PNRichEdit.Printing.PrintRichTextContents(System.String)">
+            <summary>
+            Prints content of PNRichEditBox
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.Printing.FormatRange(System.Boolean,System.Drawing.Printing.PrintPageEventArgs,System.Int32,System.Int32)">
+            <summary>
+            Calculate or render the contents of our RichTextBox for printing
+            </summary>
+            <param name="measureOnly">If true, only the calculation is performed,
+            otherwise the text is rendered as well</param>
+            <param name="e">The PrintPageEventArgs object from the
+            PrintPage event</param>
+            <param name="charFrom">Index of first character to be printed</param>
+            <param name="charTo">Index of last character to be printed</param>
+            <returns>(Index of last character that fitted on the
+            page) + 1</returns>
+        </member>
+        <member name="M:PNRichEdit.Printing.HundredthInchToTwips(System.Int32)">
+            <summary>
+            Convert between 1/100 inch (unit used by the .NET framework)
+            and twips (1/1440 inch, used by Win32 API calls)
+            </summary>
+            <param name="n">Value in 1/100 inch</param>
+            <returns>Value in twips</returns>
+        </member>
+        <member name="M:PNRichEdit.Printing.FormatRangeDone">
+            <summary>
+            Free cached data from rich edit control after printing
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.Spellchecking">
+            <summary>
+            Represents static class for spell checking using NHunspell library
+            </summary>
+        </member>
+        <member name="F:PNRichEdit.Spellchecking.PNRE_DELIMITERS">
+            <summary>
+            Delimiters for spell checking and splitting text into tokens
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.SetLocalization(System.Xml.Linq.XElement)">
+            <summary>
+            Sets localization strings
+            </summary>
+            <param name="xe">XElement with required strings</param>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.HunspellInit(System.String,System.String)">
+            <summary>
+            Initializes Hunspell object
+            </summary>
+            <param name="pathDic">DIC file path</param>
+            <param name="pathAff">AFF file path</param>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.HuspellStop">
+            <summary>
+            Dispose Hunspell object
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.GetSuggestions(System.String)">
+            <summary>
+            Gets list of Huspell suggestions
+            </summary>
+            <param name="word">Word to get suggestions for</param>
+            <returns>List of Huspell suggestions</returns>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.CheckRESpellingOnRightClick(System.Windows.Forms.RichTextBox)">
+            <summary>
+            Performs spell checking on right mouse click on RichTextBox control and shows list of suggestions if underlining word is not correct
+            </summary>
+            <param name="edit">RichTextBox control to perform spell checking for</param>
+            <returns>True if underlining word is not correct and list of suggestions is shown, other wise - false</returns>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.CheckRESpellingAutomatically(System.Windows.Forms.RichTextBox,System.Drawing.Graphics)">
+            <summary>
+            Automatically checks spelling for RichTextBox control and underlines misspelled words
+            </summary>
+            <param name="edit">RichTextBox control to perform spell checking for</param>
+            <param name="g">Graphics object to draw wavy line on (for misspelled words)</param>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.drawWavyLine(System.Drawing.Graphics,System.Drawing.Point,System.Drawing.Point)">
+            <summary>
+            Draws wavy line on given Graphics object using two points
+            </summary>
+            <param name="g">Graphics object to draw on</param>
+            <param name="pt1">Start point</param>
+            <param name="pt2">End point</param>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.CheckRESpelling(System.Windows.Forms.RichTextBox,System.String)">
+            <summary>
+            Checks spelling for given RichTextBox control and shows results in dialog
+            </summary>
+            <param name="edit">RichTextBox control to perform spell checking for</param>
+            <param name="caption">Optional text to show in dialog caption, usually the name of document, may be empty string</param>
+            <returns>True if the is any word for checking, false otherwise</returns>
+        </member>
+        <member name="M:PNRichEdit.Spellchecking.AddToDictionary(System.String)">
+            <summary>
+            Adds word to custom dictionary
+            </summary>
+            <param name="word">Word to add</param>
+        </member>
+        <member name="P:PNRichEdit.Spellchecking.ColorUnderlining">
+            <summary>
+            Gets or sets spellchecking underliining color
+            </summary>
+        </member>
+        <member name="P:PNRichEdit.Spellchecking.Initialized">
+            <summary>
+            Gets value specified whether Hunspell object has been initialized
+            </summary>
+        </member>
+        <member name="T:PNRichEdit.WndSpelling">
+            <summary>
+            Interaction logic for WndSpelling.xaml
+            </summary>
+            <summary>
+            WndSpelling
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.WndSpelling.#ctor">
+            <summary>
+            Creates new instance of WndSpelling
+            </summary>
+        </member>
+        <member name="M:PNRichEdit.WndSpelling.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PNContacts</name>
+    </assembly>
+    <members>
+        <member name="F:PNContacts.DlgAuth.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PNContacts.DlgAuth.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PNContacts.DlgAuth.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:PNContacts.GContacts">
+            <summary>
+            Represents class for retrieving contacts information (full name/primary e-mail address) from Google
+            </summary>
+        </member>
+        <member name="M:PNContacts.GContacts.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Creates new instance of GContacts
+            </summary>
+            <param name="clientId">Client Id of calling application</param>
+            <param name="clientsecret">Client secret of calling application</param>
+            <param name="appName">Application name</param>
+        </member>
+        <member name="M:PNContacts.GContacts.Authenticate">
+            <summary>
+            Authenticates client on Google server and retrieves access and refres tokens
+            </summary>
+            <returns>True if authentication was successfull, false otherwise</returns>
+        </member>
+        <member name="M:PNContacts.GContacts.RefreshAccessToken">
+            <summary>
+            Refreshes access token
+            </summary>
+            <returns>True if access token has been refreshed successfully, false otherwise</returns>
+        </member>
+        <member name="M:PNContacts.GContacts.GetContacts">
+            <summary>
+            Gets list of full name/primary e-mail address pairs of contacts
+            </summary>
+            <returns>List of full name/primary e-mail address pairs of contacts, where item1 of entry represents full name and item2 - e-mail address</returns>
+        </member>
+        <member name="P:PNContacts.GContacts.AccessToken">
+            <summary>
+            Access token
+            </summary>
+        </member>
+        <member name="P:PNContacts.GContacts.RefreshToken">
+            <summary>
+            Refresh token
+            </summary>
+        </member>
+        <member name="P:PNContacts.GContacts.TokenExpiry">
+            <summary>
+            Access token expiration
+            </summary>
+        </member>
+        <member name="P:PNContacts.GContacts.TokenType">
+            <summary>
+            Token type
+            </summary>
+        </member>
+        <member name="T:PNContacts.PNContactsException">
+            <summary>
+            Represents custom exception
+            </summary>
+        </member>
+        <member name="P:PNContacts.PNContactsException.AdditionalInfo">
+            <summary>
+            Gets additional exception information
+            </summary>
+        </member>
+    </members>
+</doc>
